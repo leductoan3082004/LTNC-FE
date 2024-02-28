@@ -6,7 +6,10 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      colors: {}
+      colors: {
+        mainBg: '#fff',
+        textBaseColor: '#ccc'
+      }
     },
     screens: {
       mobileSmall: '320px',

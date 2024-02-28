@@ -1,34 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useContext } from 'react'
+import useRouteElements from './useRouteElements'
+import { AppContext } from './contexts/app.context'
+import LoadingPage from './components/LoadingPage'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { loadingPage } = useContext(AppContext)
+
+  const routeElements = useRouteElements()
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div
+      className='text-textBaseColor bg-mainBg flex flex-col justify-between h-full min-h-full'
+      style={{
+        minHeight: 'inherit'
+      }}
+    >
+      {routeElements}
+      <ToastContainer limit={3} />
+      {loadingPage && <LoadingPage />}
+    </div>
   )
 }
 
