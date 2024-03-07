@@ -1,6 +1,6 @@
 import { AxiosError, isAxiosError as checkAxiosError, HttpStatusCode } from 'axios'
-import { floor } from 'lodash'
 import moment from 'moment'
+import { floor } from 'lodash'
 
 export function isAxiosError<T>(error: unknown): error is AxiosError<T> {
   return checkAxiosError(error)

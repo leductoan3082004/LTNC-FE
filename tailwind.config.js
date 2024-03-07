@@ -8,7 +8,31 @@ module.exports = {
     extend: {
       colors: {
         mainBg: '#fff',
-        textBaseColor: '#ccc'
+        textBaseColor: '#ccc',
+
+        //? WEB COLORS
+        webColor100: '#CAF0F8',
+        webColor200: '#ADE8F4',
+        webColor300: '#90E0EF',
+        webColor400: '#48CAE4',
+        webColor500: '#00B4D8',
+        webColor600: '#0096C7',
+        webColor700: '#0077B6',
+        webColor800: '#023E8A',
+        webColor900: '#03045E',
+
+        //? TEXT
+        lightText: '#EEEEEE',
+        darkText: '#111111',
+        primaryText: '#0096C7',
+        primaryTextUnHover: '#00B4D8',
+        alertRed: '#ff0f0f',
+        successGreen: '#4bb543',
+        inforBlue: '#0096c7',
+
+        //? INTERACTING
+        unhoverBg: '#48CAE4',
+        hoveringBg: '#00B4D8'
       }
     },
     screens: {
