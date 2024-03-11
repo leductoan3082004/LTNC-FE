@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import HomePageAfterLogin from './pages/HomePage/pages/HomePageAfterLogin'
 import HomePageBeforeLogin from './pages/HomePage/pages/HomePageBeforeLogin'
+import CourseList from './pages/CourseList'
 
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -33,15 +34,15 @@ export default function useRouteElements() {
       )
     },
     {
-      path: mainPath.calendar,
+      path: mainPath.courseList,
       element: (
         <MainLayout>
-          <HomePageAfterLogin />
+          <CourseList />
         </MainLayout>
       )
     },
     {
-      path: mainPath.classList,
+      path: mainPath.calendar,
       element: (
         <MainLayout>
           <HomePageBeforeLogin />
