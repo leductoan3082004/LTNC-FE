@@ -3,39 +3,50 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function MainFooter() {
   return (
-    <div>
+    <div className='pt-40'>
 
-      <div className='container gap-5 flex'>
+      <div className='container gap-5 flex text-darkText'>
           <div className='w-1/2 h-full'>
-            <div className='text-3xl text-darkText font-semibold'>Liên Hệ</div>
+            <div className='text-3xl font-semibold'>Liên Hệ</div>
             <img src='' alt=''></img>
           </div>
-          <div className='w-1/2 h-full inline-block'>
+          <div className='w-1/2 h-full inline-block '>
             <div className='flex'>
-              <div>
+              <div className='items-center text-2xl px-4 rounded-full bg-darkText p-3 font-bold text-lightText'>
                 <FontAwesomeIcon icon={faEnvelope} />
               </div>
-              <div className='inline-block'>
-                <div className=''>Công tác - dịch vụ</div>
-                <div className=''>defuniversity@defuni.edu.vn</div>
+              <div className='inline-block pl-4'>
+                <div className='font-semibold text-xl text-darkText py-1'>Công tác - dịch vụ</div>
+                <div className='text-darkText text-sm'>defuniversity@defuni.edu.vn</div>
               </div>
             </div>
-            <div className='flex'>
-              <div>
+            <div className='flex pt-12'>
+              <div className='items-center text-2xl px-4 rounded-full bg-darkText p-3 font-bold text-lightText'>
                 <FontAwesomeIcon icon={faEnvelope} />
               </div>
-              <div className='inline-block'>
-                <div className=''>Công tác - dịch vụ</div>
-                <div className=''>defuniversity@defuni.edu.vn</div>
+              <div className='inline-block pl-4'>
+                <div className='font-semibold text-xl py-1'>Quản lý sinh viên</div>
+                <div className='text-darkText'>quanlysinhvien@defuni.edu.vn</div>
               </div>
             </div>
-            <div className='flex'>
-              <div>
+            <div className='flex pt-12'>
+              <div className='items-center text-2xl px-4 rounded-full bg-darkText p-3 font-bold text-lightText'>
                 <FontAwesomeIcon icon={faPhone} />
               </div>
-              <div className='inline-block'>
-                <div className=''>Công tác - dịch vụ</div>
-                <div className=''>defuniversity@defuni.edu.vn</div>
+              <div className='inline-block pl-4'>
+                <div className='font-semibold text-xl py-1'>Số điện thoại dịch vụ</div>
+                <div className='text-darkText'>0868712144</div>
+              </div>
+            </div>
+
+
+
+            <div className='py-10 text-darkText'>
+              <div className='font-bold'>WORKING HOURS</div>
+              <div>
+                <div>Thứ hai - Thứ 6: 08:00 -19:30</div>
+                <div>Thứ bảy: 10:00 - 16:30</div>
+                <div>Chủ nhật: 10:00 - 16:30</div>
               </div>
             </div>
           </div>
