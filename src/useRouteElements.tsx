@@ -7,9 +7,6 @@ import MainLayout from './layouts/MainLayout'
 import NotFound from './components/NotFound'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
-import HomePageAfterLogin from './pages/HomePage/pages/HomePageAfterLogin'
-import HomePageBeforeLogin from './pages/HomePage/pages/HomePageBeforeLogin'
-import CourseList from './pages/CourseList'
 import CourseRoutes from './routes/courseRoutes'
 
 function RejectedRoute() {
@@ -43,14 +40,7 @@ export default function useRouteElements() {
       ),
       children: [CourseRoutes]
     },
-    {
-      path: mainPath.calendar,
-      element: (
-        <MainLayout>
-          <HomePageBeforeLogin />
-        </MainLayout>
-      )
-    },
+
     {
       path: '',
       element: <RejectedRoute />,

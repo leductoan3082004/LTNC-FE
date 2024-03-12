@@ -1,15 +1,19 @@
-import React from 'react'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import mainPath from 'src/constants/path'
+import { CourseContext } from 'src/contexts/course.context'
 
 interface Props {
   year: number
 }
 
 export default function CourseSortingtByYear({ year }: Props) {
+  const { setAcademicYear } = useContext(CourseContext)
+
   //! HANDLE CHOOSE YEAR
   const navigate = useNavigate()
   const handleSelectYear = () => {
+    setAcademicYear(year.toString())
     navigate({ pathname: `${mainPath.courseList}/${year}` })
   }
 

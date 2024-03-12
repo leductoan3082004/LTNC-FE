@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function CourseListByYear() {
-  return <div>CourseListByYear</div>
+  return <div className='w-full'>CourseListByYear</div>
 }
