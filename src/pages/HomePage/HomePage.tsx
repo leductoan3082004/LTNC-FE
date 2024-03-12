@@ -1,5 +1,21 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
+import MainFooter from 'src/components/MainFooter'
+import { AppContext } from 'src/contexts/app.context'
+import HomePageBeforeLogin from './HomePageBeforeLogin'
+import HomePageAfterLogin from './HomePageAfterLogin'
 export default function HomePage() {
-  return <div>HomePage</div>
+
+
+  
+const {isAuthenticated} = useContext(AppContext)
+
+
+
+
+
+  return (
+    <div>
+        {!isAuthenticated && <HomePageBeforeLogin />}
+    </div>
+  )
 }
