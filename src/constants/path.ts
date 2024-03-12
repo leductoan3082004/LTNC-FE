@@ -8,4 +8,8 @@ const mainPath = {
 } as const
 export default mainPath
 
+export const coursePath = {
+  courseListByYear: '/courses/:year'
+} as const
+
 export const adminPath = {} as const
