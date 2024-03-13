@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import mainPath from 'src/constants/path'
 import { CourseContext } from 'src/contexts/course.context'
+import { generateCourseId } from 'src/utils/course.utils'
 
 interface Props {
   year: number
@@ -10,11 +11,17 @@ interface Props {
 export default function CourseSortingtByYear({ year }: Props) {
   const { setAcademicYear } = useContext(CourseContext)
 
-  //! HANDLE CHOOSE YEAR
   const navigate = useNavigate()
+  //! HANDLE CHOOSE YEAR
   const handleSelectYear = () => {
     setAcademicYear(year.toString())
     navigate({ pathname: `${mainPath.courseList}/${year}` })
+  }
+
+  //! HANDLE CHOOSE COURSE
+  const chooseCourse = (courseName: string, id: string) => () => {
+    setAcademicYear(year.toString())
+    navigate({ pathname: `${mainPath.courseList}/${year}/${generateCourseId({ course: courseName, id: id })}` })
   }
 
   return (
@@ -33,6 +40,7 @@ export default function CourseSortingtByYear({ year }: Props) {
           .fill(0)
           .map((_, index) => (
             <button
+              onClick={chooseCourse(`Lập trình nâng cao 0${index}`, `${index}`)}
               className='border-b last:border-none py-4 border-primaryText/80 hover:text-primaryText text-lg desktop:text-xl uppercase text-darkText text-start'
               key={index}
             >
