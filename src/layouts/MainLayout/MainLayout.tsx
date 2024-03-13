@@ -16,7 +16,7 @@ export default function MainLayout({ children }: Props) {
       <div className='fixed z-10 w-full'>
         <MainHeader />
       </div>
-      <div className='pt-12 tablet:pt-14 '>{children}</div>
+      <div className='pt-12 desktop:pt-16 '>{children}</div>
       <div className=''>
         <MainFooter />
       </div>
