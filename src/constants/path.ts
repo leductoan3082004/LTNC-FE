@@ -9,7 +9,8 @@ const mainPath = {
 export default mainPath
 
 export const coursePath = {
-  courseListByYear: '/courses/:year'
+  courseListByYear: '/courses/:year',
+  courseDetail: '/courses/:courseId'
 } as const
 
 export const personalPath = {

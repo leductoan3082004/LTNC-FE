@@ -25,18 +25,19 @@ export default function CourseSortingtByYear({ year }: Props) {
       >
         {`Năm học: ${year}`}
       </button>
-      <div className='px-8 tablet:px-16 desktop:px-32 '>
-        <div className='border-t-2 border-primaryText'></div>
+      <div className='w-full flex justify-center'>
+        <div className='border-t-2 border-primaryText w-6/12 desktop:w-4/12'></div>
       </div>
-      <div className=''>
+      <div className='flex flex-col'>
         {Array(5)
           .fill(0)
           .map((_, index) => (
-            <div className='border-b last:border-none py-4 border-primaryText/80' key={index}>
-              <button className='w-full text-start text-lg desktop:text-xl uppercase text-darkText hover:text-primaryText'>
-                Lập trình nâng cao
-              </button>
-            </div>
+            <button
+              className='border-b last:border-none py-4 border-primaryText/80 hover:text-primaryText text-lg desktop:text-xl uppercase text-darkText text-start'
+              key={index}
+            >
+              Lập trình nâng cao
+            </button>
           ))}
       </div>
     </div>
