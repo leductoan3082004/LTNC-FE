@@ -3,7 +3,8 @@ import { useLocation } from 'react-router-dom'
 import LoadingRing from 'src/components/LoadingRing'
 import mainPath from 'src/constants/path'
 import { CourseContext } from 'src/contexts/course.context'
-import ClassroomInCourseDetail from './children/ClassroomInCourseDetail'
+import ClassroomInCourseDetail from './components/ClassroomInCourseDetail'
+import CourseDescription from './components/CourseDescription'
 
 const loading = false
 
@@ -30,9 +31,11 @@ export default function CourseDetail() {
       )}
       {!loading && (
         <div className='grid grid-cols-12 gap-2'>
-          <div className='col-span-7'></div>
+          <div className='col-span-7'>
+            <CourseDescription />
+          </div>
           <div className='col-span-5'>
-            <div className='border p-4 border-black/40 rounded-lg sticky top-4 space-y-4'>
+            <div className='border p-4 border-black/40 rounded-lg sticky top-16 desktop:top-20 space-y-4'>
               <p className='w-full text-center font-semibold uppercase text-lg desktop:text-xl'>Danh sách lớp học</p>
               <div className='grid grid-cols-1 desktop:grid-cols-2 gap-4'>
                 {Array(5)

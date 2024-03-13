@@ -33,7 +33,7 @@ export default function MainHeader() {
 
   return (
     <div
-      className='w-full bg-webColor700 h-12 desktop:h-16 justify-center items-center'
+      className='w-full bg-webColor700 h-full justify-center items-center text-lightText'
       style={{ minHeight: 'inherit' }}
     >
       <div className='container flex h-full'>
@@ -42,7 +42,7 @@ export default function MainHeader() {
             src='https://media.istockphoto.com/id/517188688/vi/anh/phong-c%E1%BA%A3nh-n%C3%BAi-non.jpg?s=612x612&w=0&k=20&c=WWWaejSo6EWGZMZSK7QK6LCfwd0rL2KB3ImCX2VkW4A='
             alt=''
           />
-          <div className='uppercase text-lg desktop:text-xl  flex items-center font-bold'>LTNC</div>
+          <div className='uppercase text-lg desktop:text-2xl flex items-center font-bold'>LTNC</div>
         </div>
 
         <div className='w-1/2 flex items-center justify-center'>
