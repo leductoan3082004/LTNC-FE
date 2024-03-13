@@ -12,4 +12,9 @@ export const coursePath = {
   courseListByYear: '/courses/:year'
 } as const
 
+export const personalPath = {
+  profile: '/personal/profile',
+  score: '/personal/score'
+} as const
+
 export const adminPath = {} as const

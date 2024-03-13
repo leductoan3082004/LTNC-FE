@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import mainPath from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
+import PersonalPopover from './PersonalPopover'
 
 export default function MainHeader() {
   const { isAuthenticated } = useContext(AppContext)
@@ -66,7 +67,7 @@ export default function MainHeader() {
         </div>
 
         <div className='w-1/4 flex justify-end items-center '>
-          {!isAuthenticated && (
+          {isAuthenticated && (
             <NavLink
               to={mainPath.login}
               className='text-lightText flex h-[70%] rounded-lg items-center space-x-2 px-6 hover:bg-hoveringBg desktop:text-lg'
@@ -75,7 +76,7 @@ export default function MainHeader() {
               <p className='uppercase font-semibold mt-1'>Đăng nhập</p>
             </NavLink>
           )}
-          {isAuthenticated && <div className=''>Tài khoản</div>}
+          {!isAuthenticated && <PersonalPopover />}
         </div>
       </div>
     </div>
