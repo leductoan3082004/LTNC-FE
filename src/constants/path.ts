@@ -15,6 +15,7 @@ export const coursePath = {
 
 export const personalPath = {
   profile: '/personal/profile',
+  account: '/personal/account',
   score: '/personal/score'
 } as const
 

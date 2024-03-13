@@ -8,6 +8,7 @@ import NotFound from './components/NotFound'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import CourseRoutes from './routes/courseRoutes'
+import PersonalRoutes from './routes/personalRoutes'
 
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -39,6 +40,15 @@ export default function useRouteElements() {
         </MainLayout>
       ),
       children: [CourseRoutes]
+    },
+    {
+      path: mainPath.personal,
+      element: (
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      ),
+      children: [PersonalRoutes]
     },
 
     {
