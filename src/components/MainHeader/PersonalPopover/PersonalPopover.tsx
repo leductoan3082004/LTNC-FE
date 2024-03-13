@@ -30,12 +30,16 @@ export default function PersonalPopover() {
           renderPopover={
             <div className='py-2 desktop:text-lg space-y-2 text-darkText min-w-40 rounded-md shadow-lg bg-webColor100 overflow-hidden'>
               <div className=''>
-                <NavLink to={personalPath.profile} className={itemStyle}>
+                <NavLink to={mainPath.personal} className={itemStyle}>
                   Hồ sơ
                 </NavLink>
 
                 <NavLink to={personalPath.score} className={itemStyle}>
                   Điểm
+                </NavLink>
+
+                <NavLink to={personalPath.account} className={itemStyle}>
+                  Tài khoản
                 </NavLink>
               </div>
               <div className='w-full border-t border-black/20'></div>

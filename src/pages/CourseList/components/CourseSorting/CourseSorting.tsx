@@ -2,6 +2,8 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { range } from 'lodash'
 import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import mainPath from 'src/constants/path'
 import { CourseContext } from 'src/contexts/course.context'
 // import './CourseSorting.css'
 
@@ -9,9 +11,11 @@ export default function CourseSorting() {
   const { academicYear, setAcademicYear } = useContext(CourseContext)
 
   //! HANDLE SELECT YEAR
+  const navigate = useNavigate()
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value: valueFromSelector } = event.target
     setAcademicYear(valueFromSelector)
+    navigate({ pathname: `${mainPath.courseList}/${valueFromSelector}` })
   }
 
   return (
