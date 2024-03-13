@@ -1,11 +1,21 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import LoadingSection from 'src/components/LoadingSection'
+import mainPath from 'src/constants/path'
 import { CourseContext } from 'src/contexts/course.context'
 
 const boo = false
 
 export default function CourseListByYear() {
-  const { academicYear } = useContext(CourseContext)
+  const { academicYear, setCoursePathList } = useContext(CourseContext)
+
+  //! SET PATH LIST
+  useEffect(() => {
+    setCoursePathList([
+      { pathName: 'Khóa học', url: mainPath.courseList },
+      { pathName: `Năm học ${academicYear}`, url: `${mainPath.courseList}/${academicYear}` }
+    ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
