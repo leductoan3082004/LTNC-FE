@@ -20,7 +20,7 @@ export default function MainHeader() {
     {
       name: 'KHÓA HỌC',
       path: mainPath.courseList
-    }
+    },
   ]
 
   return (

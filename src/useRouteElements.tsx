@@ -7,6 +7,7 @@ import MainLayout from './layouts/MainLayout'
 import NotFound from './components/NotFound'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
+import Personal from './pages/Personal'
 
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -34,6 +35,11 @@ export default function useRouteElements() {
       path: '',
       element: <RejectedRoute />,
       children: [{ path: mainPath.login, element: <LoginPage /> }]
+    },
+    {
+      path: '',
+      element: <RejectedRoute />,
+      children: [{ path: mainPath.personal, element: <Personal /> }]
     },
     {
       path: '*',
