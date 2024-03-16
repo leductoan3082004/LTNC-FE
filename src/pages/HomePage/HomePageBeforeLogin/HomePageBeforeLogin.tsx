@@ -7,7 +7,6 @@ export default function HomePageBeforeLogin() {
   return (
         <div className='flex flex-col h-full justify-between shrink-0 '>
             <div className='container h-full flex gap-x-3'>
-
                 <div className=' w-1/2 h-full'>
                         <div className ='pb-5 pl-5 pt-96 text-6xl text-darkText '>WELCOME TO DEF</div>
 

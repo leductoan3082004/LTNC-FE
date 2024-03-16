@@ -42,6 +42,8 @@ export default function PersonalProfile() {
         <div className="border h-9 flex items-center py-4 font-bold font-sans text-darkText pl-16">
           Thông tin cá nhân
         </div>
+
+
         <div className='border pt-10 items-center justify-center'>
           <div className='items-center justify-center flex pb-10 relative'>
           <FontAwesomeIcon className='h-10 absolute ml-40 text-darkText mt-32 boder rounded-full border-4 bg-green-500' icon={faCamera} />
@@ -56,6 +58,9 @@ export default function PersonalProfile() {
             ))}
           </div>
         </div>
+
+
+        
       </div>
     </div>
     
