@@ -7,6 +7,8 @@ import MainLayout from './layouts/MainLayout'
 import NotFound from './components/NotFound'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
+import CourseRoutes from './routes/courseRoutes'
+import PersonalRoutes from './routes/personalRoutes'
 import Personal from './pages/Personal'
 
 function RejectedRoute() {
@@ -32,14 +34,28 @@ export default function useRouteElements() {
       )
     },
     {
-      path: '',
-      element: <RejectedRoute />,
-      children: [{ path: mainPath.login, element: <LoginPage /> }]
+      path: mainPath.courseList,
+      element: (
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      ),
+      children: [CourseRoutes]
     },
+    {
+      path: mainPath.personal,
+      element: (
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      ),
+      children: [PersonalRoutes]
+    },
+
     {
       path: '',
       element: <RejectedRoute />,
-      children: [{ path: mainPath.personal, element: <Personal /> }]
+      children: [{ path: mainPath.login, element: <LoginPage /> }]
     },
     {
       path: '*',
