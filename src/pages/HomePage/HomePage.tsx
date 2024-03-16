@@ -15,7 +15,7 @@ const {isAuthenticated} = useContext(AppContext)
 
   return (
     <div>
-        {!isAuthenticated && <HomePageBeforeLogin />}
+        {!isAuthenticated && <HomePageBeforeLogin/>}
     </div>
   )
 }
