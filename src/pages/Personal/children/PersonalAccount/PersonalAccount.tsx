@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faEye, faEyeSlash, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
+import PersonalAccount from '.';
 export default function PersonalProfile() {
 
   const [isNotHidden, setIsNotHidden] = useState(false);
@@ -57,7 +59,7 @@ export default function PersonalProfile() {
                 </div>
               )}
             </div>
-            <div className='flex items-center py-3 text-darkText'>
+            <div className='flex items-center py-3 text-darkText pt-8'>
               <div className='w-1/4'></div>
               <div className='flex cursor-pointer' onClick={handlePasswordClick} aria-hidden='true'>
                 {!isChangePassWord && <div className='border rounded-md border-webColor600 w-5 h-5'></div>}
@@ -73,11 +75,18 @@ export default function PersonalProfile() {
             {isChangePassWord && menus.map((menu, index) => (
               <div key={index} className='flex items-center py-3 text-darkText bg-webColor200'>
                 <div className='w-1/4 text-right pr-4'>{menu.name}</div>
-                <input className='border rounded-md border-webColor600 w-3/5 h-10 pt-2 px-4 bg-webColor200'></input>
+                <input className='border rounded-md border-webColor600 w-3/5 h-10 px-4 bg-webColor200'></input>
               </div>
             ))}
+            <div className='flex py-8'>
+              <div className='w-1/4'></div>
+              <a href='../../personal/account' className='border rounded-lg flex px-5 py-3'>
+                <FontAwesomeIcon icon={faFloppyDisk} />
+                <div className='pl-3'>Lưu</div>
+              </a>
+            </div>
             <div>
-              
+
             </div>
           </div>
         </div>
