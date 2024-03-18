@@ -1,21 +1,25 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCamera, faEyeSlash, faUser } from '@fortawesome/free-solid-svg-icons'
-import { NavLink } from 'react-router-dom';
+import { faCheck, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 export default function PersonalProfile() {
 
   const [isNotHidden, setIsNotHidden] = useState(false);
-  const handleClick = () => {
+  const handleHiddenClick = () => {
     setIsNotHidden(!isNotHidden);
+  };
+  const [isChangePassWord, setIsChangePassWord] = useState(false);
+  const handlePasswordClick = () => {
+    setIsChangePassWord(!isChangePassWord);
   };
   const [menus] = useState([
     {
-      name: "Tên đăng nhập: ",
-      infor: "Dungdo"
+      name: "Mật Khẩu cũ: ",
     },
     {
-      name: "Mật khẩu: ",
-      infor: "**************"
+      name: "Mật khẩu mới: ",
+    },
+    {
+      name: "Xác nhận mật khẩu: ",
     },
   ]);
 
@@ -23,7 +27,7 @@ export default function PersonalProfile() {
   return (
     <div className='items-center justify-center py-10 bg-webColor200'>
       <div className='container'>
-        <div className="border h-9 flex items-center py-4 font-bold font-sans text-darkText pl-16">
+        <div className="border h-9 flex items-center py-4 font-bold font-sans text-darkText pl-16 ">
           Tài Khoản
         </div>
 
@@ -32,16 +36,48 @@ export default function PersonalProfile() {
           <div>
             <div className='flex items-center py-3 text-darkText'>
               <div className='w-1/4 text-right pr-4'>Tên đăng nhập: </div>
-              <div className='border rounded-md border-webColor600 w-3/5 h-10 pt-2 px-4'>Dungdo</div>
+              <div className='border rounded-md border-webColor600 w-3/5 h-10 pt-2.5 px-4'>Dungdo</div>
             </div>
             <div className='flex items-center py-3 text-darkText'>
               <div className='w-1/4 text-right pr-4'>Mật khẩu: </div>
-              <div className='flex border rounded-md border-webColor600 w-3/5 h-10 pt-2 pl-4 items-center'>
-                <div className='w-11/12'>******</div>
-                <div className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer' onClick={handleClick} aria-hidden='true'>
-                  <FontAwesomeIcon icon={faEyeSlash} />
+              {isNotHidden && (
+                <div className='flex border rounded-md border-webColor600 w-3/5 h-10 pt-2 pl-4 items-center'>
+                  <div className='w-11/12'>************</div>
+                  <div className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer' onClick={handleHiddenClick} aria-hidden='true'>
+                    <FontAwesomeIcon icon={faEyeSlash} />
+                  </div>
                 </div>
+              )}
+              {!isNotHidden && (
+                <div className='flex border rounded-md border-webColor600 w-3/5 h-10 pt-2 pl-4 items-center'>
+                  <div className='w-11/12 pb-2'>dungkhongsuy</div>
+                  <div className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer' onClick={handleHiddenClick} aria-hidden='true'>
+                    <FontAwesomeIcon icon={faEye} />
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className='flex items-center py-3 text-darkText'>
+              <div className='w-1/4'></div>
+              <div className='flex cursor-pointer' onClick={handlePasswordClick} aria-hidden='true'>
+                {!isChangePassWord && <div className='border rounded-md border-webColor600 w-5 h-5'></div>}
+                {isChangePassWord && (
+                  <div className='flex relative'>
+                    <div className='border rounded-md border-webColor600 bg-webColor600 w-5 h-5'></div>
+                    <FontAwesomeIcon className='absolute pl-0.5 pt-0.5' icon={faCheck} />
+                  </div>
+                )}
+                <div className='pl-3'>Thay đổi mật khẩu</div>
               </div>
+            </div>
+            {isChangePassWord && menus.map((menu, index) => (
+              <div key={index} className='flex items-center py-3 text-darkText bg-webColor200'>
+                <div className='w-1/4 text-right pr-4'>{menu.name}</div>
+                <input className='border rounded-md border-webColor600 w-3/5 h-10 pt-2 px-4 bg-webColor200'></input>
+              </div>
+            ))}
+            <div>
+              
             </div>
           </div>
         </div>
