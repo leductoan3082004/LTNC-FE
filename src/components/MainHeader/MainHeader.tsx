@@ -35,7 +35,7 @@ export default function MainHeader() {
       <div className='container w-full flex text-1xl'>
 
         <div className='w-1/4 flex justify-start h-14'>
-          <img className='h-full pr-3' src='https://i.ibb.co/T41xQpn/def.png' alt='' />
+          <img className='h-full pr-3' src='/images/HCMCUT_logo.png' alt='' />
 
 
           <div className='flex text-center items-center ml-27 text-lightText'>
