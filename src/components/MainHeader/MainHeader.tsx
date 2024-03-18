@@ -1,62 +1,79 @@
-import { useViewport } from 'src/hooks/useViewport'
-import React, { useState } from 'react'
-import mainPath from 'src/constants/path'
-import {Link, NavLink} from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import classNames from 'classnames'
+import { useContext } from 'react'
+import { NavLink } from 'react-router-dom'
+import mainPath from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
-
+import PersonalPopover from './PersonalPopover'
 
 export default function MainHeader() {
-  const viewport = useViewport()
-  const isSmall = viewport.width < 768
-  //? Style
-  const popoverStyle = 'border border-black/20 rounded-lg min-w-52 py-3 px-2 text-sm dekstop:text-base'
-  const wrapperStyle = 'text-darkText font-medium flex flex-col space-y-1'
-  const itemStyle =
-    'tablet:hover:text-white hover:text-black px-4 tablet:px-3 py-1.5 duration-200 tablet:hover:bg-primaryBlueHovering/80 tablet:rounded-md'
-    const [menus] = useState ([
-      {
-          name: 'TRANG CHỦ',
-          path: mainPath.home,
-      },
-      {
-          name: 'TÀI KHOẢN',
-          path: mainPath.personal,
-      },
-      {
-          name: 'KHÓA HỌC',
-          path: mainPath.courseList,
-      },
-    ]);
+  const { isAuthenticated } = useContext(AppContext)
+
+  const menus = [
+    {
+      name: 'TRANG CHỦ',
+      path: mainPath.home
+    },
+    {
+      name: 'THỜI KHÓA BIỂU',
+      path: mainPath.calendar
+    },
+    {
+      name: 'KHÓA HỌC',
+      path: mainPath.courseList
+    },
+    {
+      name: 'LỚP HỌC',
+      path: mainPath.classList
+    }
+  ]
+
+  //! STYLES
+
   return (
-    <div className='w-full bg-webColor700 flex flex-col h-14 justify-between shrink-0 min-h-full' style={{ minHeight: 'inherit' }}>
-      
-      <div className='container w-full flex text-1xl'>
+    <div
+      className='w-full bg-webColor700 h-full justify-center items-center text-lightText'
+      style={{ minHeight: 'inherit' }}
+    >
+      <div className='container flex h-full'>
+        <div className='w-1/4 flex space-x-2 py-2 justify-start'>
+          <img src='https://i.ibb.co/T41xQpn/def.png' alt='' />
+          <div className='uppercase text-lg desktop:text-2xl flex items-center font-bold'>LTNC</div>
+        </div>
 
-        <div className='w-1/4 flex justify-start h-14'>
-          <img className='h-full pr-3' src='/images/HCMCUT_logo.png' alt='' />
-
-
-          <div className='flex text-center items-center ml-27 text-lightText'>
-            LTNC-FE
+        <div className='w-1/2 flex items-center justify-center'>
+          <div className='grid grid-cols-4 shrink-0 h-[70%] gap-2'>
+            {menus.map((menu, index) => (
+              <NavLink
+                key={index}
+                to={menu.path}
+                className={({ isActive }) =>
+                  classNames(
+                    'text-lightText justify-center rounded-lg col-span-1 relative flex items-center font-medium desktop:text-lg px-6 hover:bg-hoveringBg',
+                    {
+                      'bg-hoveringBg': isActive
+                    }
+                  )
+                }
+              >
+                {menu.name}
+              </NavLink>
+            ))}
           </div>
         </div>
 
-
-        <div className="w-1/2 flex items-center justify-center">
-              <div className="grid grid-cols-3 gap-x-6 max-w-7x1">
-                  {menus.map((menu, index) => (
-                    <NavLink key={index} to={menu.path} className='text-lightText flex space-x-2 py-4 px-6 hover:bg-hoveringBg shrink'>{menu.name}</NavLink>
-                  ))}
-              </div>
-        </div> 
-
-        <div className='w-1/4 flex items-center justify-end'>
-              <NavLink to={mainPath.login} className='text-lightText flex space-x-2 py-4 px-6 hover:bg-hoveringBg shrink'>
+        <div className='w-1/4 flex justify-end items-center '>
+          {isAuthenticated && (
+            <NavLink
+              to={mainPath.login}
+              className='text-lightText flex h-[70%] rounded-lg items-center space-x-2 px-6 hover:bg-hoveringBg desktop:text-lg'
+            >
               <FontAwesomeIcon icon={faUser} />
-                <p className='uppercase font-semibold'>Acount</p>
-              </NavLink>
+              <p className='uppercase font-semibold mt-1'>Đăng nhập</p>
+            </NavLink>
+          )}
+          {!isAuthenticated && <PersonalPopover />}
         </div>
       </div>
     </div>

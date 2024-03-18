@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div
-      className='text-textBaseColor bg-mainBg flex flex-col justify-between h-full min-h-full'
+      className='text-darkText bg-mainBg flex flex-col justify-between h-full min-h-full'
       style={{
         minHeight: 'inherit'
       }}
