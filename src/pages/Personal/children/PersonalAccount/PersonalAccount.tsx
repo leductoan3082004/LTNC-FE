@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faEye, faEyeSlash, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
-import PersonalAccount from '.';
 export default function PersonalProfile() {
 
-  const [isNotHidden, setIsNotHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const handleHiddenClick = () => {
-    setIsNotHidden(!isNotHidden);
+    setIsHidden(!isHidden);
   };
   const [isChangePassWord, setIsChangePassWord] = useState(false);
   const handlePasswordClick = () => {
@@ -42,7 +40,7 @@ export default function PersonalProfile() {
             </div>
             <div className='flex items-center py-3 text-darkText'>
               <div className='w-1/4 text-right pr-4'>Mật khẩu: </div>
-              {isNotHidden && (
+              {!isHidden && (
                 <div className='flex border rounded-md border-webColor600 w-3/5 h-10 pt-2 pl-4 items-center'>
                   <div className='w-11/12'>************</div>
                   <div className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer' onClick={handleHiddenClick} aria-hidden='true'>
@@ -50,7 +48,7 @@ export default function PersonalProfile() {
                   </div>
                 </div>
               )}
-              {!isNotHidden && (
+              {isHidden && (
                 <div className='flex border rounded-md border-webColor600 w-3/5 h-10 pt-2 pl-4 items-center'>
                   <div className='w-11/12 pb-2'>dungkhongsuy</div>
                   <div className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer' onClick={handleHiddenClick} aria-hidden='true'>
@@ -75,12 +73,12 @@ export default function PersonalProfile() {
             {isChangePassWord && menus.map((menu, index) => (
               <div key={index} className='flex items-center py-3 text-darkText bg-webColor200'>
                 <div className='w-1/4 text-right pr-4'>{menu.name}</div>
-                <input className='border rounded-md border-webColor600 w-3/5 h-10 px-4 bg-webColor200'></input>
+                <input className='border rounded-md border-webColor600 w-3/5 h-10 px-4 bg-webColor200 '></input>
               </div>
             ))}
             <div className='flex py-8'>
               <div className='w-1/4'></div>
-              <a href='../../personal/account' className='border rounded-lg flex px-5 py-3'>
+              <a href='../../personal/account' className='border rounded-lg text-darkText flex px-5 py-3 border-webColor600 bg-webColor600 hover:bg-webColor500'>
                 <FontAwesomeIcon icon={faFloppyDisk} />
                 <div className='pl-3'>Lưu</div>
               </a>
