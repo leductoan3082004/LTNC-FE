@@ -19,4 +19,5 @@ export const personalPath = {
   score: '/personal/score'
 } as const
 
+
 export const adminPath = {} as const
