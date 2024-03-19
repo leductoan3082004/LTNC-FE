@@ -71,21 +71,22 @@ export default function PersonalProfile() {
               </div>
             </div>
             {isChangePassWord && menus.map((menu, index) => (
-              <div key={index} className='flex items-center py-3 text-darkText bg-webColor200'>
-                <div className='w-1/4 text-right pr-4'>{menu.name}</div>
-                <input className='border rounded-md border-webColor600 w-3/5 h-10 px-4 bg-webColor200 '></input>
-              </div>
-            ))}
+                <div key={index} className='flex items-center py-3 text-darkText bg-webColor200'>
+                  <div className='w-1/4 text-right pr-4'>{menu.name}</div>
+                  <input className='border rounded-md border-webColor600 w-3/5 h-10 px-4 bg-webColor200 '></input>
+                </div>
+              ))}
             <div className='flex py-8'>
               <div className='w-1/4'></div>
-              <a href='../../personal/account' className='border rounded-lg text-darkText flex px-5 py-3 border-webColor600 bg-webColor600 hover:bg-webColor500'>
+              <a
+                href='../../personal/account'
+                className='border rounded-lg text-darkText flex px-5 py-3 border-webColor600 bg-webColor600 hover:bg-webColor500'
+              >
                 <FontAwesomeIcon icon={faFloppyDisk} />
                 <div className='pl-3'>Lưu</div>
               </a>
             </div>
-            <div>
-
-            </div>
+            <div></div>
           </div>
         </div>
 
