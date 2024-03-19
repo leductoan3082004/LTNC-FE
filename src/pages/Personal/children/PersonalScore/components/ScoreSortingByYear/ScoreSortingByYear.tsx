@@ -7,7 +7,7 @@ interface Props {
   year: number
 }
 
-export default function CourseSortingtByYear({ year }: Props) {
+export default function ScoreSortingtByYear({ year }: Props) {
   const { setAcademicYear } = useContext(PersonalscoreContext)
 
   const navigate = useNavigate()
@@ -26,7 +26,6 @@ export default function CourseSortingtByYear({ year }: Props) {
   return (
     <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
       <button
-        onClick={handleSelectYear}
         className='py-2 flex justify-center items-center w-full hover:text-primaryText uppercase text-lg desktop:text-2xl font-semibold shrink-0 '
       >
         {`Năm học: ${year}`}
@@ -38,13 +37,37 @@ export default function CourseSortingtByYear({ year }: Props) {
         {Array(5)
           .fill(0)
           .map((_, index) => (
-            <button
-              onClick={chooseYear()}
-              className='border-b last:border-none py-4 border-primaryText/80 hover:text-primaryText text-lg desktop:text-xl uppercase text-darkText text-start'
+            <div
+              className='border-b last:border-none py-4 border-primaryText/80  text-lg desktop:text-xl uppercase text-darkText text-start'
               key={index}
             >
-              Lập trình nâng cao
-            </button>
+              <div className='overflow-x-auto'>
+                <table className='table-auto w-full'>
+                  <thead>
+                    <tr>
+                      <th className="px-4 py-2">ID</th>
+                      <th className="px-4 py-2">Name</th>
+                      <th className="px-4 py-2">Age</th>
+                      <th className="px-4 py-2">Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className='border px-4 py-2'>1</td>
+                      <td className='border px-4 py-2'>John Doe</td>
+                      <td className="border px-4 py-2">30</td>
+                      <td className="border px-4 py-2">john@example.com</td>
+                    </tr>
+                    <tr>
+                      <td className="border px-4 py-2">2</td>
+                      <td className="border px-4 py-2">Jane Doe</td>
+                      <td className="border px-4 py-2">25</td>
+                      <td className="border px-4 py-2">jane@example.com</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           ))}
       </div>
     </div>

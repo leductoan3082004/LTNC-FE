@@ -12,7 +12,7 @@ export default function ScoreByYear() {
   //! HANDLE CHOOSE COURSE
   const navigate = useNavigate()
   const chooseCourse = (courseName: string) => () => {
-    navigate({ pathname: `${mainPath.courseList}/${academicYear}/${courseName}` })
+    navigate({ pathname: `${mainPath.personal}/${academicYear}/${courseName}` })
   }
 
   return (
@@ -31,8 +31,33 @@ export default function ScoreByYear() {
                 onClick={chooseCourse(index.toString())}
                 className='border-b last:border-none py-4 border-primaryText/80 hover:text-primaryText text-lg desktop:text-xl uppercase text-darkText text-start'
                 key={index}
-              >
-                Lập trình nâng cao
+              ><div className="overflow-x-auto">
+              <table className="table-auto w-full">
+                <thead>
+                  <tr>
+                    <th className="px-4 py-2">ID</th>
+                    <th className="px-4 py-2">Name</th>
+                    <th className="px-4 py-2">Age</th>
+                    <th className="px-4 py-2">Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border px-4 py-2">1</td>
+                    <td className="border px-4 py-2">John Doe</td>
+                    <td className="border px-4 py-2">30</td>
+                    <td className="border px-4 py-2">john@example.com</td>
+                  </tr>
+                  <tr>
+                    <td className="border px-4 py-2">2</td>
+                    <td className="border px-4 py-2">Jane Doe</td>
+                    <td className="border px-4 py-2">25</td>
+                    <td className="border px-4 py-2">jane@example.com</td>
+                  </tr>
+                  {/* Add more rows as needed */}
+                </tbody>
+              </table>
+            </div>
               </button>
             ))}
       </div>

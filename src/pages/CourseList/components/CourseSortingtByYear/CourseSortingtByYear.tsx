@@ -8,7 +8,7 @@ interface Props {
   year: number
 }
 
-export default function ScoreSortingtByYear({ year }: Props) {
+export default function CourseSortingtByYear({ year }: Props) {
   const { setAcademicYear } = useContext(CourseContext)
 
   const navigate = useNavigate()

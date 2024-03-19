@@ -14,7 +14,7 @@ export default function ScoreSorting() {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value: valueFromSelector } = event.target
     setAcademicYear(valueFromSelector)
-    navigate({ pathname: `${mainPath.courseList}/${valueFromSelector}` })
+    navigate({ pathname: `${mainPath.personal}/${valueFromSelector}` })
   }
 
   return (

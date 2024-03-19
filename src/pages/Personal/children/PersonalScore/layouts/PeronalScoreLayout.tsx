@@ -1,4 +1,5 @@
-import ScoreSorting from "../components/ScoreSorting"
+import ScoreSorting from '../components/ScoreSorting'
+
 interface Props {
   children?: React.ReactNode
 }
