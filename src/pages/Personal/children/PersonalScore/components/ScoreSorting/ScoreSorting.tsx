@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { range } from 'lodash'
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import mainPath from 'src/constants/path'
+import {personalPath} from 'src/constants/path'
 import { PersonalscoreContext } from 'src/contexts/personalscore.context' 
 
 export default function ScoreSorting() {
@@ -14,7 +14,7 @@ export default function ScoreSorting() {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value: valueFromSelector } = event.target
     setAcademicYear(valueFromSelector)
-    navigate({ pathname: `${mainPath.personal}/${valueFromSelector}` })
+    navigate({ pathname: `${personalPath.score}/${valueFromSelector}` })
   }
 
   return (

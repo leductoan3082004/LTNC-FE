@@ -9,7 +9,6 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import CourseRoutes from './routes/courseRoutes'
 import PersonalRoutes from './routes/personalRoutes'
-import Personal from './pages/Personal'
 
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -51,7 +50,6 @@ export default function useRouteElements() {
       ),
       children: [PersonalRoutes]
     },
-
     {
       path: '',
       element: <RejectedRoute />,

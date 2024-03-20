@@ -3,16 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function MainFooter() {
   return (
-<<<<<<< HEAD
-    <div className='pt-40'>
-
-      <div className='container gap-5 flex text-darkText'>
-          <div className='w-1/2 h-full'>
-            <div className='text-3xl font-semibold'>Liên Hệ</div>
-            <img src='' alt=''></img>
-          </div>
-          <div className='w-1/2 h-full inline-block '>
-=======
     <div className='mt-10 border-none bg-blue-100'>
       <div className='pt-10 pb-10 container gap-5 flex text-darkText'>
         <div className='w-7/12 h-full'>
@@ -22,7 +12,6 @@ export default function MainFooter() {
             </div>
           </div>
           <div className='pt-20 w-5/12 h-full inline-block '>
->>>>>>> pages/homepage
             <div className='flex'>
               <div className='items-center text-2xl px-4 rounded-full bg-darkText p-3 font-bold text-lightText'>
                 <FontAwesomeIcon icon={faEnvelope} />

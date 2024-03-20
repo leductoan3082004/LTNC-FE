@@ -12,7 +12,7 @@ const initialCourseContext: PersonalscoreContextInterface = {
 
 export const PersonalscoreContext = createContext<PersonalscoreContextInterface>(initialCourseContext)
 
-export const CourseProvider = ({ children }: { children: React.ReactNode }) => {
+export const PersonalScoreProvider = ({ children }: { children: React.ReactNode }) => {
   const [academicYear, setAcademicYear] = useState<string>(initialCourseContext.academicYear)
 
   return (

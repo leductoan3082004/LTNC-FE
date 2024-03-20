@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import mainPath from 'src/constants/path'
+import {personalPath} from 'src/constants/path'
 import { PersonalscoreContext } from 'src/contexts/personalscore.context' 
 
 interface Props {
@@ -14,18 +14,19 @@ export default function ScoreSortingtByYear({ year }: Props) {
   //! HANDLE CHOOSE YEAR
   const handleSelectYear = () => {
     setAcademicYear(year.toString())
-    navigate({ pathname: `${mainPath.personal}/${year}` })
+    navigate({ pathname: `${personalPath.score}/${year}` })
   }
 
   //! HANDLE CHOOSE COURSE
   const chooseYear = () => () => {
     setAcademicYear(year.toString())
-    navigate({ pathname: `${mainPath.personal}/${year}/$` })
+    navigate({ pathname: `${personalPath.score}/${year}/$` })
   }
 
   return (
     <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
       <button
+        onClick={handleSelectYear}
         className='py-2 flex justify-center items-center w-full hover:text-primaryText uppercase text-lg desktop:text-2xl font-semibold shrink-0 '
       >
         {`Năm học: ${year}`}
@@ -37,11 +38,12 @@ export default function ScoreSortingtByYear({ year }: Props) {
         {Array(5)
           .fill(0)
           .map((_, index) => (
-            <div
-              className='border-b last:border-none py-4 border-primaryText/80  text-lg desktop:text-xl uppercase text-darkText text-start'
+            <button
+              onClick={chooseYear()}
+              className='border-b last:border-none py-4 border-primaryText/80 hover:text-primaryText text-lg desktop:text-xl uppercase text-darkText text-start'
               key={index}
             >
-              <div className='overflow-x-auto'>
+              <div className="overflow-x-auto">
                 <table className='table-auto w-full'>
                   <thead>
                     <tr>
@@ -54,7 +56,7 @@ export default function ScoreSortingtByYear({ year }: Props) {
                   <tbody>
                     <tr>
                       <td className='border px-4 py-2'>1</td>
-                      <td className='border px-4 py-2'>John Doe</td>
+                      <td className="border px-4 py-2">John Doe</td>
                       <td className="border px-4 py-2">30</td>
                       <td className="border px-4 py-2">john@example.com</td>
                     </tr>
@@ -66,8 +68,8 @@ export default function ScoreSortingtByYear({ year }: Props) {
                     </tr>
                   </tbody>
                 </table>
-              </div>
             </div>
+            </button>
           ))}
       </div>
     </div>

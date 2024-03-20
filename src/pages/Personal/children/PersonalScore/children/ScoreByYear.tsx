@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LoadingSection from 'src/components/LoadingSection'
-import mainPath from 'src/constants/path'
+import { personalPath } from 'src/constants/path'
 import { PersonalscoreContext } from 'src/contexts/personalscore.context' 
 
 const boo = false
@@ -12,7 +12,7 @@ export default function ScoreByYear() {
   //! HANDLE CHOOSE COURSE
   const navigate = useNavigate()
   const chooseCourse = (courseName: string) => () => {
-    navigate({ pathname: `${mainPath.personal}/${academicYear}/${courseName}` })
+    navigate({ pathname: `${personalPath}/${academicYear}/${courseName}` })
   }
 
   return (

@@ -61,11 +61,7 @@ export function SlideShow({ images }: ImageSliderProps) {
       </button>
       <button
         onClick={showNextImage}
-<<<<<<< HEAD
         className='items-center text-2xl px-4 bg-gradient-to-r from-sky-950 p-3 font-bold text-lightText absolute top-0 bottom-0 p-4 cursor-pointer transition-bg duration-100 ease-in-out right-0'
-=======
-        className='items-center text-2xl px-4 bg-gradi  ent-to-r from-sky-950 p-3 font-bold text-lightText absolute top-0 bottom-0 p-4 cursor-pointer transition-bg duration-100 ease-in-out right-0'
->>>>>>> pages/homepage
         aria-label='View Next Image'
       >
         <FontAwesomeIcon icon={faArrowRight}  aria-hidden />

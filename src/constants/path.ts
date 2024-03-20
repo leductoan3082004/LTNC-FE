@@ -19,5 +19,8 @@ export const personalPath = {
   score: '/personal/score'
 } as const
 
+export const ScorePath = {
+  ScoreByYear: '/score/:year',
+} as const
 
 export const adminPath = {} as const
