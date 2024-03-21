@@ -1,38 +1,35 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faEye, faEyeSlash, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 export default function PersonalProfile() {
-
-  const [isHidden, setIsHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState(false)
   const handleHiddenClick = () => {
-    setIsHidden(!isHidden);
-  };
-  const [isChangePassWord, setIsChangePassWord] = useState(false);
+    setIsHidden(!isHidden)
+  }
+  const [isChangePassWord, setIsChangePassWord] = useState(false)
   const handlePasswordClick = () => {
-    setIsChangePassWord(!isChangePassWord);
-  };
+    setIsChangePassWord(!isChangePassWord)
+  }
   const [menus] = useState([
     {
-      name: "Mật Khẩu cũ: ",
+      name: 'Mật Khẩu cũ: '
     },
     {
-      name: "Mật khẩu mới: ",
+      name: 'Mật khẩu mới: '
     },
     {
-      name: "Xác nhận mật khẩu: ",
-    },
-  ]);
-
+      name: 'Xác nhận mật khẩu: '
+    }
+  ])
 
   return (
-    <div className='items-center justify-center py-10 bg-webColor200'>
-      <div className='container'>
-        <div className="border h-9 flex items-center py-4 font-bold font-sans text-darkText pl-16 ">
+    <div className='items-center justify-center p-10 bg-webColor100'>
+      <div className='rounded-md border border-black/40 py-8'>
+        <div className=' uppercase text-2xl flex items-center font-bold font-sans text-darkText px-12 desktop:px-20 '>
           Tài Khoản
         </div>
 
-
-        <div className='border pt-10 items-center justify-center'>
+        <div className='mt-8 items-center justify-center'>
           <div>
             <div className='flex items-center py-3 text-darkText'>
               <div className='w-1/4 text-right pr-4'>Tên đăng nhập: </div>
@@ -40,20 +37,27 @@ export default function PersonalProfile() {
             </div>
             <div className='flex items-center py-3 text-darkText'>
               <div className='w-1/4 text-right pr-4'>Mật khẩu: </div>
+              <div className=''></div>
               {!isHidden && (
                 <div className='flex border rounded-md border-webColor600 w-3/5 h-10 pt-2 pl-4 items-center'>
                   <div className='w-11/12'>************</div>
-                  <div className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer' onClick={handleHiddenClick} aria-hidden='true'>
+                  <button
+                    className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer'
+                    onClick={handleHiddenClick}
+                  >
                     <FontAwesomeIcon icon={faEyeSlash} />
-                  </div>
+                  </button>
                 </div>
               )}
               {isHidden && (
                 <div className='flex border rounded-md border-webColor600 w-3/5 h-10 pt-2 pl-4 items-center'>
                   <div className='w-11/12 pb-2'>dungkhongsuy</div>
-                  <div className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer' onClick={handleHiddenClick} aria-hidden='true'>
+                  <button
+                    className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer'
+                    onClick={handleHiddenClick}
+                  >
                     <FontAwesomeIcon icon={faEye} />
-                  </div>
+                  </button>
                 </div>
               )}
             </div>
@@ -70,7 +74,8 @@ export default function PersonalProfile() {
                 <div className='pl-3'>Thay đổi mật khẩu</div>
               </div>
             </div>
-            {isChangePassWord && menus.map((menu, index) => (
+            {isChangePassWord &&
+              menus.map((menu, index) => (
                 <div key={index} className='flex items-center py-3 text-darkText bg-webColor200'>
                   <div className='w-1/4 text-right pr-4'>{menu.name}</div>
                   <input className='border rounded-md border-webColor600 w-3/5 h-10 px-4 bg-webColor200 '></input>
@@ -89,11 +94,7 @@ export default function PersonalProfile() {
             <div></div>
           </div>
         </div>
-
-
-
       </div>
     </div>
-
   )
 }
