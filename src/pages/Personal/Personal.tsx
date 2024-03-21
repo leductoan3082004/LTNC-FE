@@ -1,6 +1,6 @@
 import React from 'react'
-import PersonalProfile from './children/PersonalProfile'
+import PersonalAccount from './children/PersonalAccount'
 
 export default function Personal() {
-  return <PersonalProfile />
+  return <PersonalAccount />
 }

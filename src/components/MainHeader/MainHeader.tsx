@@ -37,8 +37,8 @@ export default function MainHeader() {
       style={{ minHeight: 'inherit' }}
     >
       <div className='container flex h-full'>
-        <div className='w-1/4 flex space-x-2 py-2 justify-start'>
-          <img src='https://i.ibb.co/T41xQpn/def.png' alt='' />
+        <div className=' w-1/4 flex space-x-2 py-2 justify-start '>
+           <img className='bg-slate-50 rounded h-12' src='\images\HCMCUT_logo.png' alt='logo' /> 
           <div className='uppercase text-lg desktop:text-2xl flex items-center font-bold'>LTNC</div>
         </div>
 
