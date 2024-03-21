@@ -1,99 +1,62 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faEye, faEyeSlash, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
+import { faAsterisk } from '@fortawesome/free-solid-svg-icons'
+import PersonalChangePassword from '../../components/PersonalChangePassword'
 export default function PersonalProfile() {
-
-  const [isHidden, setIsHidden] = useState(false);
-  const handleHiddenClick = () => {
-    setIsHidden(!isHidden);
-  };
-  const [isChangePassWord, setIsChangePassWord] = useState(false);
+  const [isChangePassWord, setIsChangePassWord] = useState(false)
   const handlePasswordClick = () => {
-    setIsChangePassWord(!isChangePassWord);
-  };
-  const [menus] = useState([
-    {
-      name: "Mật Khẩu cũ: ",
-    },
-    {
-      name: "Mật khẩu mới: ",
-    },
-    {
-      name: "Xác nhận mật khẩu: ",
-    },
-  ]);
-
+    setIsChangePassWord(!isChangePassWord)
+  }
 
   return (
-    <div className='items-center justify-center py-10 bg-webColor200'>
-      <div className='container'>
-        <div className="border h-9 flex items-center py-4 font-bold font-sans text-darkText pl-16 ">
-          Tài Khoản
-        </div>
+    <div className='items-center justify-center p-10 bg-webColor100'>
+      <div className='rounded-md border border-black/40 py-8'>
+        <div className=' uppercase text-2xl font-bold font-sans text-darkText text-center px-6'>Tài Khoản</div>
 
-
-        <div className='border pt-10 items-center justify-center'>
-          <div>
-            <div className='flex items-center py-3 text-darkText'>
-              <div className='w-1/4 text-right pr-4'>Tên đăng nhập: </div>
-              <div className='border rounded-md border-webColor600 w-3/5 h-10 pt-2.5 px-4'>Dungdo</div>
+        <div className='mt-8 px-8 desktop:px-20 items-center justify-center'>
+          <div className='space-y-4'>
+            <div className='flex items-center space-x-4 text-darkText'>
+              <div className='w-1/4 text-right'>Tên đăng nhập: </div>
+              <div className='border rounded-md border-webColor600 w-3/4 h-10 flex items-center px-4'>Dungdo</div>
             </div>
-            <div className='flex items-center py-3 text-darkText'>
-              <div className='w-1/4 text-right pr-4'>Mật khẩu: </div>
-              {!isHidden && (
-                <div className='flex border rounded-md border-webColor600 w-3/5 h-10 pt-2 pl-4 items-center'>
-                  <div className='w-11/12'>************</div>
-                  <div className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer' onClick={handleHiddenClick} aria-hidden='true'>
-                    <FontAwesomeIcon icon={faEyeSlash} />
+            <div className='flex items-center space-x-4 text-darkText'>
+              <div className='w-1/4 text-right'>Mật khẩu: </div>
+              <div className='flex border rounded-md border-webColor600 w-3/4 h-10 px-4 items-center'>
+                <div className='flex items-center justify-between w-full'>
+                  <div className='flex space-x-0.5 text-xs'>
+                    {Array(8)
+                      .fill(0)
+                      .map((_, index) => (
+                        <FontAwesomeIcon key={index} icon={faAsterisk} />
+                      ))}
                   </div>
                 </div>
-              )}
-              {isHidden && (
-                <div className='flex border rounded-md border-webColor600 w-3/5 h-10 pt-2 pl-4 items-center'>
-                  <div className='w-11/12 pb-2'>dungkhongsuy</div>
-                  <div className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer' onClick={handleHiddenClick} aria-hidden='true'>
-                    <FontAwesomeIcon icon={faEye} />
-                  </div>
-                </div>
-              )}
-            </div>
-            <div className='flex items-center py-3 text-darkText pt-8'>
-              <div className='w-1/4'></div>
-              <div className='flex cursor-pointer' onClick={handlePasswordClick} aria-hidden='true'>
-                {!isChangePassWord && <div className='border rounded-md border-webColor600 w-5 h-5'></div>}
-                {isChangePassWord && (
-                  <div className='flex relative'>
-                    <div className='border rounded-md border-webColor600 bg-webColor600 w-5 h-5'></div>
-                    <FontAwesomeIcon className='absolute pl-0.5 pt-0.5' icon={faCheck} />
-                  </div>
-                )}
-                <div className='pl-3'>Thay đổi mật khẩu</div>
+                {/* {!isHidden && (
+                    <div className='flex items-center w-full justify-between'>
+                      <p className=''>dungkhongsuy</p>
+                      <button className='items-center justify-center flex cursor-pointer' onClick={handleHiddenClick}>
+                        <FontAwesomeIcon icon={faEye} />
+                      </button>
+                    </div>
+                  )} */}
               </div>
             </div>
-            {isChangePassWord && menus.map((menu, index) => (
-                <div key={index} className='flex items-center py-3 text-darkText bg-webColor200'>
-                  <div className='w-1/4 text-right pr-4'>{menu.name}</div>
-                  <input className='border rounded-md border-webColor600 w-3/5 h-10 px-4 bg-webColor200 '></input>
-                </div>
-              ))}
-            <div className='flex py-8'>
-              <div className='w-1/4'></div>
-              <a
-                href='../../personal/account'
-                className='border rounded-lg text-darkText flex px-5 py-3 border-webColor600 bg-webColor600 hover:bg-webColor500'
-              >
-                <FontAwesomeIcon icon={faFloppyDisk} />
-                <div className='pl-3'>Lưu</div>
-              </a>
-            </div>
-            <div></div>
           </div>
+
+          <div className='flex items-center justify-center w-full mt-12 text-darkText '>
+            {isChangePassWord && <p className='uppercase font-medium text-lg desktop:text-xl'>ĐỔI MẬT KHẨU</p>}
+            {!isChangePassWord && (
+              <button
+                className='flex items-center justify-center py-2 px-4 rounded-md bg-unhoverBg hover:bg-hoveringBg'
+                onClick={handlePasswordClick}
+              >
+                Đổi mật khẩu
+              </button>
+            )}
+          </div>
+          {isChangePassWord && <PersonalChangePassword setIsChangePassWord={setIsChangePassWord} />}
         </div>
-
-
-
       </div>
     </div>
-
   )
 }
