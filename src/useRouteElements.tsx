@@ -51,7 +51,6 @@ export default function useRouteElements() {
       ),
       children: [PersonalRoutes]
     },
-
     {
       path: '',
       element: <RejectedRoute />,

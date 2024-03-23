@@ -38,6 +38,7 @@ export default function PersonalProfile() {
     }
   ]
 
+
   return (
     <div className='items-center justify-center py-10 bg-webColor200'>
       <div className='container'>
@@ -60,29 +61,35 @@ export default function PersonalProfile() {
                   <div className='h-1/2 pt-1 px-2'>
                     <div className='px-3 flex w-full pt-2 hover:border hover: rounded-lg hover:bg-gray-100 hover:h-10'>
                       <FontAwesomeIcon className='pr-3' icon={faUser} />
+
                       <NavLink to={'....'} className='pr-20'>
                         Xem ảnh đại diện
                       </NavLink>
+
                     </div>
                   </div>
                   <div className='h-1/2 px-2'>
                     <div className='px-3 flex pt-2 hover:border hover: rounded-lg hover:bg-gray-100 hover:h-10'>
                       <FontAwesomeIcon className='pr-3 ' icon={faUser} />
+
                       <NavLink to={'....'} className='pr-20'>
                         Chọn ảnh đại diện
                       </NavLink>
+
                     </div>
                   </div>
                 </div>
               )}
             </div>
             <div>
+
               <img
                 className='rounded-full h-48 border-4'
                 src='https://media.dolenglish.vn/PUBLIC/MEDIA/2b2f1391-7dcd-4d41-b1eb-2273c8cd00de.jpg'
                 alt=''
               ></img>
             </div>
+
           </div>
           <div>
             {menus.map((menu, index) => (
@@ -95,5 +102,6 @@ export default function PersonalProfile() {
         </div>
       </div>
     </div>
+
   )
 }
