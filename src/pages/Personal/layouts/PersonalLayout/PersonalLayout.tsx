@@ -13,7 +13,7 @@ export default function PersonalLayout({ children }: Props) {
           <PersonalNavBar />
         </div>
         <div className='col-span-9'>
-          <div className='p-4'>{children}</div>
+          <div className='px-4'>{children}</div>
         </div>
       </div>
     </div>

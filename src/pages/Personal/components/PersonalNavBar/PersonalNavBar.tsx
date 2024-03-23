@@ -7,7 +7,7 @@ export default function PersonalNavBar() {
   const navlinkClassname = 'px-4 py-4 text-lg uppercase font-medium hover:text-primaryText'
 
   return (
-    <div className='sticky top-16 desktop:top-20 flex flex-col overflow-hidden rounded-lg border bg-webColor100 border-black/60'>
+    <div className='sticky top-16 desktop:top-20 flex flex-col overflow-hidden rounded-lg border bg-black/5 border-black/60'>
       <NavLink
         to={mainPath.personal}
         end

@@ -2,7 +2,6 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import mainPath from 'src/constants/path'
 import { SlideShow } from 'src/components/SlideShow/Slideshow'
-
 const Slides = [
   { url: '/images/Slide_5.jpg', alt: 'Slide 5' },
   ]
