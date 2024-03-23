@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faEye, faEyeSlash, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 export default function PersonalProfile() {
-
+  
   const [isHidden, setIsHidden] = useState(false);
   const handleHiddenClick = () => {
     setIsHidden(!isHidden);
@@ -42,19 +42,19 @@ export default function PersonalProfile() {
               <div className='w-1/4 text-right pr-4'>Mật khẩu: </div>
               {!isHidden && (
                 <div className='flex border rounded-md border-webColor600 w-3/5 h-10 pt-2 pl-4 items-center'>
-                  <div className='w-11/12'>************</div>
+                <div className='w-11/12'>************</div>
                   <div className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer' onClick={handleHiddenClick} aria-hidden='true'>
                     <FontAwesomeIcon icon={faEyeSlash} />
                   </div>
                 </div>
-              )}
+                )}
               {isHidden && (
-                <div className='flex border rounded-md border-webColor600 w-3/5 h-10 pt-2 pl-4 items-center'>
-                  <div className='w-11/12 pb-2'>dungkhongsuy</div>
-                  <div className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer' onClick={handleHiddenClick} aria-hidden='true'>
-                    <FontAwesomeIcon icon={faEye} />
+                    <div className='flex border rounded-md border-webColor600 w-3/5 h-10 pt-2 pl-4 items-center'>
+                      <div className='w-11/12 pb-2'>dungkhongsuy</div>
+                      <div className='w-1/12 items-center justify-end pl-3 pb-1 cursor-pointer' onClick={handleHiddenClick} aria-hidden='true'>
+                        <FontAwesomeIcon icon={faEye} />
+                      </div>
                   </div>
-                </div>
               )}
             </div>
             <div className='flex items-center py-3 text-darkText pt-8'>
@@ -70,12 +70,12 @@ export default function PersonalProfile() {
                 <div className='pl-3'>Thay đổi mật khẩu</div>
               </div>
             </div>
-            {isChangePassWord && menus.map((menu, index) => (
+{isChangePassWord && menus.map((menu, index) => (
                 <div key={index} className='flex items-center py-3 text-darkText bg-webColor200'>
                   <div className='w-1/4 text-right pr-4'>{menu.name}</div>
                   <input className='border rounded-md border-webColor600 w-3/5 h-10 px-4 bg-webColor200 '></input>
-                </div>
-              ))}
+          </div>
+))}
             <div className='flex py-8'>
               <div className='w-1/4'></div>
               <a

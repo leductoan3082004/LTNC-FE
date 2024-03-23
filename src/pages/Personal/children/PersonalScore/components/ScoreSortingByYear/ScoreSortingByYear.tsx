@@ -45,7 +45,7 @@ export default function ScoreSortingtByYear({ year }: Props) {
               .map((_, index) => (
                 <tr key={index}>
                   <td className='border border-black px-4 py-2 text-center text-lg'>{index + 1}</td>
-                  <td className='border border-black px-4 py-2 text-center'>Lập trình nâng cao</td>
+                  <td className='border border-black px-4 py-2 text-center '>Lập trình nâng cao</td>
                   <td className='border border-black px-4 py-2 text-center'>CO1010</td>
                   <td className='border border-black px-4 py-2 text-center'>3</td>
                   <td className='border border-black px-4 py-2 text-center'>9</td>
