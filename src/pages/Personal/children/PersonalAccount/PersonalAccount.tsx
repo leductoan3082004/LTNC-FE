@@ -1,8 +1,7 @@
-
 import { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAsterisk } from '@fortawesome/free-solid-svg-icons'
+
 import PersonalChangePassword from '../../components/PersonalChangePassword'
+
 export default function PersonalProfile() {
   const [isChangePassWord, setIsChangePassWord] = useState(false)
   const handlePasswordClick = () => {
@@ -15,10 +14,12 @@ export default function PersonalProfile() {
         <div className=' uppercase text-2xl font-bold font-sans text-darkText text-center px-6'>Tài Khoản</div>
 
         <div className='mt-8 px-8 desktop:px-20 items-center justify-center'>
-          <div className='space-y-4'>
+          {/* <div className='space-y-4'>
             <div className='flex items-center space-x-4 text-darkText'>
-              <div className='w-1/4 text-right'>Tên đăng nhập: </div>
-              <div className='border rounded-md border-webColor600 w-3/4 h-10 flex items-center px-4'>Dungdo</div>
+              <div className='w-1/4 text-right'>Vai trò: </div>
+              <div className='border rounded-md border-webColor600 w-3/4 h-10 flex items-center px-4'>
+                {userRoles[profile.role]}
+              </div>
             </div>
             <div className='flex items-center space-x-4 text-darkText'>
               <div className='w-1/4 text-right'>Mật khẩu: </div>
@@ -32,17 +33,9 @@ export default function PersonalProfile() {
                       ))}
                   </div>
                 </div>
-                {/* {!isHidden && (
-                    <div className='flex items-center w-full justify-between'>
-                      <p className=''>dungkhongsuy</p>
-                      <button className='items-center justify-center flex cursor-pointer' onClick={handleHiddenClick}>
-                        <FontAwesomeIcon icon={faEye} />
-                      </button>
-                    </div>
-                  )} */}
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className='flex items-center justify-center w-full mt-12 text-darkText '>
             {isChangePassWord && <p className='uppercase font-medium text-lg desktop:text-xl'>ĐỔI MẬT KHẨU</p>}

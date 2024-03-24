@@ -1,6 +1,6 @@
 import { useState, createContext } from 'react'
 import { User } from 'src/types/user.type'
-import { getAccessTokenFromLS, getProfileFromLS } from 'src/utils/auth'
+import { clearLS, getAccessTokenFromLS, getProfileFromLS } from 'src/utils/auth'
 
 interface AppContextInterface {
   isAuthenticated: boolean
@@ -9,7 +9,7 @@ interface AppContextInterface {
   setLoadingPage: React.Dispatch<React.SetStateAction<boolean>>
   profile: User | null
   setProfile: React.Dispatch<React.SetStateAction<User | null>>
-  logoutFunction: () => void
+  handleLogout: () => void
 }
 
 const initialAppContext: AppContextInterface = {
@@ -19,7 +19,7 @@ const initialAppContext: AppContextInterface = {
   setLoadingPage: () => null,
   profile: getProfileFromLS(),
   setProfile: () => null,
-  logoutFunction: () => null
+  handleLogout: () => null
 }
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext)
@@ -29,9 +29,10 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [loadingPage, setLoadingPage] = useState<boolean>(initialAppContext.loadingPage)
   const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
 
-  const logoutFunction = () => {
+  const handleLogout = () => {
     setIsAuthenticated(false)
     setProfile(null)
+    clearLS()
   }
 
   return (
@@ -43,7 +44,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         setLoadingPage,
         profile,
         setProfile,
-        logoutFunction
+        handleLogout
       }}
     >
       {children}
