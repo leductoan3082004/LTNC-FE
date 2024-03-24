@@ -1,19 +1,23 @@
-import { Suspense } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Suspense, useContext } from 'react'
+import { Navigate, Outlet } from 'react-router-dom'
 import LoadingPage from 'src/components/LoadingPage'
-import { personalPath } from 'src/constants/path'
+import mainPath, { personalPath } from 'src/constants/path'
+import { AppContext } from 'src/contexts/app.context'
 import PersonalAccount from 'src/pages/Personal/children/PersonalAccount'
 import PersonalProfile from 'src/pages/Personal/children/PersonalProfile'
 import PersonalScore from 'src/pages/Personal/children/PersonalScore'
 import PersonalLayout from 'src/pages/Personal/layouts/PersonalLayout'
 
 function PersonalRoute() {
-  return (
+  const { isAuthenticated } = useContext(AppContext)
+  return isAuthenticated ? (
     <Suspense fallback={<LoadingPage />}>
       <PersonalLayout>
         <Outlet />
       </PersonalLayout>
     </Suspense>
+  ) : (
+    <Navigate to={mainPath.login} />
   )
 }
 
