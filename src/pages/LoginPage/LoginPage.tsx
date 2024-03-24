@@ -5,56 +5,58 @@ import { LoginSchema, loginSchema } from 'src/utils/rules'
 import { useMutation } from '@tanstack/react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretLeft } from '@fortawesome/free-solid-svg-icons'
-import authApi from 'src/apis/auth.api'
-import { Fragment, useContext } from 'react'
+import { useContext } from 'react'
 import { AppContext } from 'src/contexts/app.context'
-import { getAccessTokenFromLS, setProfileToLS } from 'src/utils/auth'
-import axios from 'axios'
-import { FULL_API_URL } from 'src/utils/http'
+import { setProfileToLS } from 'src/utils/auth'
 import { Link, useNavigate } from 'react-router-dom'
 import { isAxiosBadRequestError } from 'src/utils/utils'
 import { ErrorRespone } from 'src/types/utils.type'
 import { HttpStatusMessage } from 'src/constants/httpStatusMessage'
 import Button from 'src/components/Button'
 import mainPath from 'src/constants/path'
-import MainHeader from 'src/components/MainHeader'
 import MainFooter from 'src/components/MainFooter'
+import userApi from 'src/apis/user.api'
 
 type FormData = LoginSchema
 
 export default function LoginPage() {
   //! CONTEXT
-  const { setIsAuthenticated } = useContext(AppContext)
+  const { setIsAuthenticated, setProfile } = useContext(AppContext)
 
-  //! HANDLE LOGIN
+  //! LOGIN FORM
   const {
     register,
     handleSubmit,
     setError,
-    getValues,
-    setValue,
     formState: { errors }
   } = useForm<FormData>({
     resolver: yupResolver(loginSchema)
   })
 
-  const loginAccountMutation = useMutation({
-    mutationFn: (body: FormData) => authApi.loginAccount(body)
+  const loginMutation = useMutation({
+    mutationFn: (body: FormData) => userApi.login(body)
+  })
+  const getProfileMutation = useMutation({
+    mutationFn: userApi.getProfile
   })
   const navigate = useNavigate()
 
+  //! HANDLE LOGIN
   const onSubmit = handleSubmit((data) => {
-    loginAccountMutation.mutate(data, {
+    loginMutation.mutate(data, {
       onSuccess: () => {
         setIsAuthenticated(true)
-        const token = getAccessTokenFromLS()
-        const headers = {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-        axios.get(`${FULL_API_URL}auth/`, { headers }).then((response) => {
+        // const token = getAccessTokenFromLS()
+        // const headers = {
+        //   Authorization: `Bearer ${token}`,
+        //   'Content-Type': 'application/json'
+        // }
+        // axios.get(`${FULL_API_URL}user/`, { headers }).then((response) => {
+        //   setProfileToLS(response.data.data)
+        // })
+        getProfileMutation.mutateAsync().then((response) => {
           setProfileToLS(response.data.data)
-          setProfileToLS(response.data.data)
+          setProfile(response.data.data)
         })
 
         navigate(-1)
@@ -145,8 +147,8 @@ export default function LoginPage() {
                   <Button
                     className='lg:py-3 flex w-full items-center justify-center py-2 uppercase'
                     type='submit'
-                    isLoading={loginAccountMutation.isPending}
-                    disabled={loginAccountMutation.isPending}
+                    isLoading={loginMutation.isPending}
+                    disabled={loginMutation.isPending}
                   >
                     Đăng nhập
                   </Button>

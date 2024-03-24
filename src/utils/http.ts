@@ -3,7 +3,7 @@ import { clearLS, getAccessTokenFromLS, setAccessTokenToLS } from './auth'
 import { toast } from 'react-toastify'
 import { ErrorRespone } from 'src/types/utils.type'
 
-const API_URL = 'https://nckh.hareta.online/'
+const API_URL = 'https://ltnc-be.hareta.online/'
 const VERSION = 'v1/'
 export const FULL_API_URL = API_URL.concat(VERSION)
 
@@ -35,7 +35,7 @@ class Http {
     this.instance.interceptors.response.use(
       (response) => {
         const { url } = response.config
-        if (url === '/login') {
+        if (url === 'user/login') {
           const accessToken = response.data.data.token
           if (accessToken !== undefined) {
             this.accessToken = accessToken
