@@ -38,7 +38,7 @@ export default function MainHeader() {
     >
       <div className='container flex h-full'>
         <div className=' w-1/4 flex space-x-2 py-2 justify-start '>
-           <img className='bg-slate-50 rounded h-12' src='\images\HCMCUT_logo.png' alt='logo' /> 
+          <img className='bg-slate-50 rounded h-12' src='\images\HCMCUT_logo.png' alt='logo' />
           <div className='uppercase text-lg desktop:text-2xl flex items-center font-bold'>LTNC</div>
         </div>
 
@@ -64,7 +64,7 @@ export default function MainHeader() {
         </div>
 
         <div className='w-1/4 flex justify-end items-center '>
-          {isAuthenticated && (
+          {!isAuthenticated && (
             <NavLink
               to={mainPath.login}
               className='text-lightText flex h-[70%] rounded-lg items-center space-x-2 px-6 hover:bg-hoveringBg desktop:text-lg'
@@ -73,7 +73,7 @@ export default function MainHeader() {
               <p className='uppercase font-semibold mt-1'>Đăng nhập</p>
             </NavLink>
           )}
-          {!isAuthenticated && <PersonalPopover />}
+          {isAuthenticated && <PersonalPopover />}
         </div>
       </div>
     </div>

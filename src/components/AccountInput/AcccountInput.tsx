@@ -55,6 +55,25 @@ export default function AccountInput({
             {svgData}
           </svg>
         </span>
+
+        <input
+          type={visible ? 'text' : `${type}`}
+          id={inputId}
+          className={
+            'peer h-full w-full border-none bg-transparent text-lg text-primaryText outline-none duration-200 disabled:text-brownColor dark:text-haretaColor dark:caret-haretaColor autofill:dark:text-haretaColor dark:disabled:text-haretaColor ' +
+            (isPasswordInput ? 'md:pr-20 pr-14' : 'md:pr-12 pr-9')
+          }
+          disabled={disabled}
+          autoComplete={autoComplete}
+          required={required}
+          {...register(name, rules)}
+        />
+        <label
+          htmlFor={inputId}
+          className='absolute left-0 top-1/2 -translate-y-1/2 cursor-text select-none text-base font-medium text-darkText/60 duration-200 peer-valid:top-[-5px] peer-valid:text-sm peer-focus:top-[-5px] peer-focus:text-sm peer-disabled:top-[-5px] peer-disabled:text-sm peer-autofill:top-[-5px] peer-autofill:text-sm'
+        >
+          {labelName}
+        </label>
         {isPasswordInput && (
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
           <button
@@ -90,24 +109,6 @@ export default function AccountInput({
             )}
           </button>
         )}
-        <input
-          type={visible ? 'text' : `${type}`}
-          id={inputId}
-          className={
-            'peer h-full w-full border-none bg-transparent text-lg text-primaryText outline-none duration-200 disabled:text-brownColor dark:text-haretaColor dark:caret-haretaColor autofill:dark:text-haretaColor dark:disabled:text-haretaColor ' +
-            (isPasswordInput ? 'md:pr-20 pr-14' : 'md:pr-12 pr-9')
-          }
-          disabled={disabled}
-          autoComplete={autoComplete}
-          required={required}
-          {...register(name, rules)}
-        />
-        <label
-          htmlFor={inputId}
-          className='absolute left-0 top-1/2 -translate-y-1/2 cursor-text select-none text-base font-medium text-darkText/60 duration-200 peer-valid:top-[-5px] peer-valid:text-sm peer-focus:top-[-5px] peer-focus:text-sm peer-disabled:top-[-5px] peer-disabled:text-sm peer-autofill:top-[-5px] peer-autofill:text-sm'
-        >
-          {labelName}
-        </label>
       </div>
       <div className={'mt-1 min-h-[1.25rem] text-sm text-alertRed ' + (notifyMessage ? 'hidden' : '')}>
         {errorMessage}
