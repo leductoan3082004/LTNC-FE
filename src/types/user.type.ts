@@ -1,4 +1,4 @@
-import { Paging } from './paing.type'
+import { Paging } from './paging.type'
 
 export interface User {
   _id: string

@@ -8,6 +8,7 @@ export default function AdminStudentList() {
   //! GET USER LIST
   const userListQueryConfig = useUserListQueryConfig()
   const config = { ...userListQueryConfig, role: 0 }
+
   const { data: userListData } = useQuery({
     queryKey: ['user_list', config],
     queryFn: () => userApi.getUserList(config)

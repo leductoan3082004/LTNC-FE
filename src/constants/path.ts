@@ -31,5 +31,7 @@ export const adminPath = {
   teacherList: '/admin/users/teachers',
   createUser: '/admin/users/create',
   courses: '/admin/courses',
+  courseDetail: '/admin/courses/:courseId',
+  createCourse: '/admin/courses/create',
   classes: '/admin/classes'
 } as const

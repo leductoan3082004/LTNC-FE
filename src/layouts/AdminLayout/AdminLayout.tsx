@@ -20,6 +20,11 @@ const userMenu: NavigateItem[] = [
   { name: 'Tạo tài khoản', url: adminPath.createUser }
 ]
 
+const courseMenu: NavigateItem[] = [
+  { name: 'Danh sách khóa học', url: adminPath.courses },
+  { name: 'Tạo khóa học', url: adminPath.createCourse }
+]
+
 export default function AdminLayout({ children }: Props) {
   return (
     <div className='grid grid-cols-12 gap-2'>
@@ -50,7 +55,7 @@ export default function AdminLayout({ children }: Props) {
           <div className='w-full'>
             <p className='font-medium pl-2 uppercase'>Quản lý khóa học</p>
             <div className='mt-2 w-full'>
-              {userMenu.map((item, index) => (
+              {courseMenu.map((item, index) => (
                 <NavLink
                   key={index}
                   className={({ isActive }) =>
