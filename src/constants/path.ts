@@ -27,6 +27,9 @@ export const ScorePath = {
 export const adminPath = {
   mainPage: '/admin',
   users: '/admin/users',
+  studentList: '/admin/users/students',
+  teacherList: '/admin/users/teachers',
+  createUser: '/admin/users/create',
   courses: '/admin/courses',
   classes: '/admin/classes'
 } as const
