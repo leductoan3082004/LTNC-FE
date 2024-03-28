@@ -5,9 +5,12 @@ import mainPath, { adminPath } from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
 import AdminLayout from 'src/layouts/AdminLayout'
 import AdminPages from 'src/pages/AdminPages'
+import AdminUserManagement from 'src/pages/AdminPages/children/AdminUserManagement'
+import AdminUserLayout from 'src/pages/AdminPages/layouts/AdminUserLayout/AdminUserLayout'
 
 function ProtectedAdminRoute() {
-  const { isAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, profile } = useContext(AppContext)
+
   return isAuthenticated ? (
     <Suspense fallback={<LoadingPage />}>
       <AdminLayout>
@@ -19,6 +22,14 @@ function ProtectedAdminRoute() {
   )
 }
 
+function AdminUserRoute() {
+  return (
+    <AdminUserLayout>
+      <Outlet />
+    </AdminUserLayout>
+  )
+}
+
 const AdminRoutes = {
   path: '',
   element: <ProtectedAdminRoute />,
@@ -26,11 +37,13 @@ const AdminRoutes = {
     { path: '', element: <AdminPages /> },
     {
       path: adminPath.users,
-      element: (
-        <AdminPostManagementLayout>
-          <AdminPostManagement />
-        </AdminPostManagementLayout>
-      )
+      element: <AdminUserRoute />,
+      children: [
+        {
+          path: adminPath.users,
+          element: <AdminUserManagement />
+        }
+      ]
     }
   ]
 }
