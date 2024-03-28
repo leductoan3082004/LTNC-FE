@@ -7,8 +7,8 @@ import MainLayout from './layouts/MainLayout'
 import NotFound from './components/NotFound'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
-import CourseRoutes from './routes/courseRoutes'
-import PersonalRoutes from './routes/personalRoutes'
+import CourseRoutes from './routes/courseRoute'
+import PersonalRoutes from './routes/personalRoute'
 
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
