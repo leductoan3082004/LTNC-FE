@@ -17,6 +17,7 @@ const handleConfirmPasswordYup = (refString: string) => {
     .oneOf([yup.ref(refString)], 'Mật khẩu không khớp')
 }
 
+//! YUP
 export const loginSchema = yup.object({
   username: yup.string().required('Bạn phải điền tên đăng nhập'),
   password: yup.string().required('Bạn phải điền mật khẩu')

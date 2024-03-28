@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import AccountInput from 'src/components/AccountInput'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { LoginSchema, loginSchema } from 'src/utils/rules'
+import { LoginSchema, loginSchema } from 'src/rules/auth.rule'
 import { useMutation } from '@tanstack/react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretLeft } from '@fortawesome/free-solid-svg-icons'
@@ -15,7 +15,7 @@ import { HttpStatusMessage } from 'src/constants/httpStatusMessage'
 import Button from 'src/components/Button'
 import mainPath from 'src/constants/path'
 import MainFooter from 'src/components/MainFooter'
-import userApi from 'src/apis/user.api'
+import userApi from 'src/apis/auth.api'
 
 type FormData = LoginSchema
 
