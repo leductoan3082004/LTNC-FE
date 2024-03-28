@@ -14,7 +14,7 @@ import AdminUserLayout from 'src/pages/AdminPages/layouts/AdminUserLayout/AdminU
 function ProtectedAdminRoute() {
   const { isAuthenticated, profile } = useContext(AppContext)
 
-  return isAuthenticated ? (
+  return isAuthenticated && profile && profile.role == 2 ? (
     <Suspense fallback={<LoadingPage />}>
       <AdminLayout>
         <Outlet />

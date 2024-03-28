@@ -1,3 +1,4 @@
+import { UserList, UserListConfig } from 'src/types/user.type'
 import http from 'src/utils/http'
 
 const URL = 'user'
@@ -12,6 +13,9 @@ interface NewUserForm {
 }
 
 const userApi = {
+  getUserList(params: UserListConfig) {
+    return http.get<UserList>(`${URL}/`, { params })
+  },
   createUser(body: NewUserForm) {
     return http.post(`${URL}`, body)
   }

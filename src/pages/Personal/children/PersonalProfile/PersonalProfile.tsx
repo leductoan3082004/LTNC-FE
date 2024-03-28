@@ -3,15 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCamera, faUser } from '@fortawesome/free-solid-svg-icons'
 import { AppContext } from 'src/contexts/app.context'
 import LoadingRing from 'src/components/LoadingRing'
-
-const generateMSSV = (id: string) => {
-  let MSSV = ''
-  for (let c of id) {
-    if (c >= '0' && c <= '9') MSSV = c + MSSV
-    if (MSSV.length == 6) return MSSV
-  }
-  return ''
-}
+import { generateID } from 'src/utils/utils'
 
 export default function PersonalProfile() {
   const [isAvatar, setIsAvatar] = useState(false)
@@ -32,7 +24,7 @@ export default function PersonalProfile() {
   const Infos = [
     {
       name: 'MSSV: ',
-      infor: generateMSSV(profile._id)
+      infor: generateID(profile._id)
     },
     {
       name: 'Họ và tên: ',

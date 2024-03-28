@@ -37,3 +37,12 @@ export const showSuccessDialog = (setIsOpen: React.Dispatch<React.SetStateAction
     setIsOpen(false)
   }, time || 1500)
 }
+
+export const generateID = (id: string) => {
+  let MSSV = ''
+  for (const c of id) {
+    if (c >= '0' && c <= '9') MSSV = c + MSSV
+    if (MSSV.length == 6) return MSSV
+  }
+  return ''
+}
