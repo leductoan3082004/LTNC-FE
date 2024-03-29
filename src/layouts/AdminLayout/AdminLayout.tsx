@@ -97,7 +97,7 @@ export default function AdminLayout({ children }: Props) {
           </div>
         </div>
       </div>
-      <div className='col-span-8 p-4'>{children}</div>
+      <div className='col-span-9 p-4'>{children}</div>
     </div>
   )
 }

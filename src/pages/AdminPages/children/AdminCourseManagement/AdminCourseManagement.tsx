@@ -16,8 +16,8 @@ function CourseCard({ course }: { course: Course }) {
       content: course.credit
     },
     {
-      title: 'Miêu tả',
-      content: course.description
+      title: 'Số lớp',
+      content: course.limit
     }
   ]
 
@@ -56,7 +56,7 @@ export default function AdminCourseManagement() {
 
       {!courseListData && <LoadingSection />}
 
-      <div className='grid grid-cols-4 gap-4'>
+      <div className='grid grid-cols-3 gap-4'>
         {courseList &&
           courseList.map((course) => (
             <div key={course._id} className='col-span-1'>

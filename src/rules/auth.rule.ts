@@ -1,17 +1,17 @@
 import * as yup from 'yup'
 
 //! SUPPORT FUNCTIONS
-const handlePasswordYup = () => {
+export const handlePasswordYup = () => {
   return yup
     .string()
-    .required('Bạn phải điền mật khẩu')
+    .required('Yêu cầu điền mật khẩu')
     .min(8, 'Độ dài mật khẩu phải từ 8 đến 16 ký tự')
     .max(16, 'Độ dài mật khẩu phải từ 8 đến 16 ký tự')
 }
-const handleConfirmPasswordYup = (refString: string) => {
+export const handleConfirmPasswordYup = (refString: string) => {
   return yup
     .string()
-    .required('Bạn phải xác nhận mật khẩu')
+    .required('Yêu cầu xác nhận mật khẩu')
     .min(8, 'Độ dài mật khẩu phải từ 8 đến 16 ký tự')
     .max(16, 'Độ dài mật khẩu phải từ 8 đến 16 ký tự')
     .oneOf([yup.ref(refString)], 'Mật khẩu không khớp')
