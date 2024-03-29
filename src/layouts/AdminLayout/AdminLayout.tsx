@@ -35,6 +35,7 @@ export default function AdminLayout({ children }: Props) {
             <div className='mt-2 w-full'>
               {userMenu.map((item, index) => (
                 <NavLink
+                  end
                   key={index}
                   className={({ isActive }) =>
                     classNames('flex py-2 w-full border-t border-black/10 hover:bg-hoveringBg', {
@@ -57,6 +58,7 @@ export default function AdminLayout({ children }: Props) {
             <div className='mt-2 w-full'>
               {courseMenu.map((item, index) => (
                 <NavLink
+                  end
                   key={index}
                   className={({ isActive }) =>
                     classNames('flex py-2 w-full border-t border-black/10 hover:bg-hoveringBg', {
@@ -79,6 +81,7 @@ export default function AdminLayout({ children }: Props) {
             <div className='mt-2 w-full'>
               {userMenu.map((item, index) => (
                 <NavLink
+                  end
                   key={index}
                   className={({ isActive }) =>
                     classNames('flex py-2 w-full border-t border-black/10 hover:bg-hoveringBg', {

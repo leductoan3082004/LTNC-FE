@@ -5,20 +5,13 @@ import { useFormContext } from 'react-hook-form'
 import Input from 'src/components/Input'
 import { userRoles } from 'src/constants/userRoles'
 import { AdminCreateUserSchema } from 'src/rules/user.rule'
+import ErrorSection from '../ErrorSection'
 
 type FormData = AdminCreateUserSchema
 
 interface Props {
   role: number
   setRole: React.Dispatch<React.SetStateAction<number>>
-}
-
-function ErrorSection({ errorMessage }: { errorMessage?: string }) {
-  return (
-    <div className='grid grid-cols-4 gap-1 col-span-4'>
-      <div className='col-start-2 col-end-5 mt-0.5 min-h-[1.25rem] text-sm text-alertRed'>{errorMessage}</div>
-    </div>
-  )
 }
 
 export default function AdminCreateUserForm({ role, setRole }: Props) {
@@ -51,7 +44,6 @@ export default function AdminCreateUserForm({ role, setRole }: Props) {
         errorClassName='hidden'
         register={register}
         name='username'
-        errorMessage={errors?.username?.message}
         autoComplete='false'
         errorSection={<ErrorSection errorMessage={errors.username?.message} />}
       >
@@ -69,7 +61,6 @@ export default function AdminCreateUserForm({ role, setRole }: Props) {
         errorClassName='hidden'
         register={register}
         name='password'
-        errorMessage={errors?.password?.message}
         autoComplete='false'
         errorSection={<ErrorSection errorMessage={errors.password?.message} />}
       >
@@ -87,7 +78,6 @@ export default function AdminCreateUserForm({ role, setRole }: Props) {
         errorClassName='hidden'
         register={register}
         name='name'
-        errorMessage={errors?.name?.message}
         autoComplete='false'
         errorSection={<ErrorSection errorMessage={errors.name?.message} />}
       >
@@ -105,7 +95,6 @@ export default function AdminCreateUserForm({ role, setRole }: Props) {
         errorClassName='hidden'
         register={register}
         name='phone'
-        errorMessage={errors?.phone?.message}
         autoComplete='false'
         errorSection={<ErrorSection errorMessage={errors.phone?.message} />}
       >
@@ -123,7 +112,6 @@ export default function AdminCreateUserForm({ role, setRole }: Props) {
         errorClassName='hidden'
         register={register}
         name='address'
-        errorMessage={errors?.address?.message}
         autoComplete='false'
         errorSection={<ErrorSection errorMessage={errors.address?.message} />}
       >
