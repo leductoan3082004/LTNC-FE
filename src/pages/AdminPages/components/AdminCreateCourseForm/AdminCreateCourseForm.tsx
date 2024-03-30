@@ -44,7 +44,7 @@ export default function AdminCreateCourseForm() {
       error: errors.limit,
       errorMessage: errors.limit?.message,
       name: 'limit',
-      title: 'Tên lớp'
+      title: 'Số lớp'
     },
     {
       error: errors.attendance_ratio,

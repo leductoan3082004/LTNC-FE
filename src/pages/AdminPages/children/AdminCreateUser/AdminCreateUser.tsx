@@ -89,7 +89,7 @@ export default function AdminCreateUser() {
   }
 
   return (
-    <div className='rounded-lg bg-webColor200 p-4'>
+    <div>
       <p className='text-xl uppercase font-bold text-primaryText w-full text-center'>TẠO TÀI KHOẢN MỚI</p>
       <div className='py-4 px-20 w-full'>
         <div className='border-t border-white'></div>

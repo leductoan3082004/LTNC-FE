@@ -66,11 +66,11 @@ export default function LoginPage() {
           console.log(error)
           const formError = error.response?.data
           if (formError) {
-            const errorRespone = HttpStatusMessage.find(({ error_key }) => error_key === formError.error_key)
-            if (errorRespone) {
-              console.log(errorRespone.error_message)
+            const errorMessage = HttpStatusMessage.get(formError.error_key)
+            if (errorMessage) {
+              console.log(errorMessage)
               setError('username', {
-                message: errorRespone.error_message,
+                message: errorMessage,
                 type: 'Server'
               })
               setError('password', {

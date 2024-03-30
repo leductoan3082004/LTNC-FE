@@ -5,12 +5,14 @@ import mainPath, { adminPath } from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
 import AdminLayout from 'src/layouts/AdminLayout'
 import AdminPages from 'src/pages/AdminPages'
+import AdminClassDetail from 'src/pages/AdminPages/children/AdminClassDetail'
+import AdminCourseDetail from 'src/pages/AdminPages/children/AdminCourseDetail'
 import AdminCourseManagement from 'src/pages/AdminPages/children/AdminCourseManagement'
+import AdminCreateClass from 'src/pages/AdminPages/children/AdminCreateClass'
 import AdminCreateCourse from 'src/pages/AdminPages/children/AdminCreateCourse'
 import AdminCreateUser from 'src/pages/AdminPages/children/AdminCreateUser'
 import AdminStudentList from 'src/pages/AdminPages/children/AdminStudentList'
 import AdminTeacherList from 'src/pages/AdminPages/children/AdminTeacherList'
-import AdminUserManagement from 'src/pages/AdminPages/children/AdminUserManagement'
 import AdminCourseLayout from 'src/pages/AdminPages/layouts/AdminCourseLayout'
 import AdminUserLayout from 'src/pages/AdminPages/layouts/AdminUserLayout/AdminUserLayout'
 
@@ -76,8 +78,26 @@ const AdminRoutes = {
           element: <AdminCourseManagement />
         },
         {
+          path: adminPath.courseDetail,
+          element: <AdminCourseDetail />
+        },
+        {
           path: adminPath.createCourse,
           element: <AdminCreateCourse />
+        }
+      ]
+    },
+    {
+      path: adminPath.classes,
+      element: <AdminCourseRoute />,
+      children: [
+        {
+          path: adminPath.classDetail,
+          element: <AdminClassDetail />
+        },
+        {
+          path: adminPath.createClass,
+          element: <AdminCreateClass />
         }
       ]
     }

@@ -20,9 +20,10 @@ const userMenu: NavigateItem[] = [
   { name: 'Tạo tài khoản', url: adminPath.createUser }
 ]
 
-const courseMenu: NavigateItem[] = [
+const courseAndClassMenu: NavigateItem[] = [
   { name: 'Danh sách khóa học', url: adminPath.courses },
-  { name: 'Tạo khóa học', url: adminPath.createCourse }
+  { name: 'Tạo khóa học', url: adminPath.createCourse },
+  { name: 'Tạo lớp học', url: adminPath.createClass }
 ]
 
 export default function AdminLayout({ children }: Props) {
@@ -54,32 +55,9 @@ export default function AdminLayout({ children }: Props) {
           </div>
 
           <div className='w-full'>
-            <p className='font-medium pl-2 uppercase'>Quản lý khóa học</p>
+            <p className='font-medium pl-2 uppercase'>Khóa học & Lớp học</p>
             <div className='mt-2 w-full'>
-              {courseMenu.map((item, index) => (
-                <NavLink
-                  end
-                  key={index}
-                  className={({ isActive }) =>
-                    classNames('flex py-2 w-full border-t border-black/10 hover:bg-hoveringBg', {
-                      'bg-hoveringBg': isActive
-                    })
-                  }
-                  to={item.url}
-                >
-                  <div className='pl-4 flex space-x-2 items-center'>
-                    <FontAwesomeIcon icon={faChevronRight} className='text-xs' />
-                    <p className=''>{item.name}</p>
-                  </div>
-                </NavLink>
-              ))}
-            </div>
-          </div>
-
-          <div className='w-full'>
-            <p className='font-medium pl-2 uppercase'>Quản lý lớp học</p>
-            <div className='mt-2 w-full'>
-              {userMenu.map((item, index) => (
+              {courseAndClassMenu.map((item, index) => (
                 <NavLink
                   end
                   key={index}
@@ -100,7 +78,9 @@ export default function AdminLayout({ children }: Props) {
           </div>
         </div>
       </div>
-      <div className='col-span-9 p-4'>{children}</div>
+      <div className='col-span-9 p-4'>
+        <div className='rounded-lg bg-webColor200 p-4'>{children}</div>
+      </div>
     </div>
   )
 }

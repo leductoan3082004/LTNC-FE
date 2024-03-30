@@ -15,7 +15,7 @@ export default function AdminTeacherList() {
   const userList = userListData?.data.data || null
 
   return (
-    <div className='rounded-lg bg-webColor200 p-4'>
+    <div>
       <p className='w-full text-center font-semibold desktop:text-xl uppercase text-primaryText'>Danh sách giáo viên</p>
 
       <div className='py-4 px-20 w-full'>

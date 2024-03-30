@@ -78,6 +78,7 @@ export default function AccountInput({
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
           <button
             className='md:right-10 absolute right-8 top-1/2 translate-y-[-40%] hover:cursor-pointer'
+            type='button'
             onClick={() => setVisible(!visible)}
           >
             {visible && (

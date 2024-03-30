@@ -112,7 +112,7 @@ export default function AdminCreateCourse() {
 
   return (
     <div className='rounded-lg bg-webColor200 p-4'>
-      <p className='text-xl uppercase font-bold text-primaryText w-full text-center'>TẠO TÀI KHOẢN MỚI</p>
+      <p className='text-xl uppercase font-bold text-primaryText w-full text-center'>Tạo khóa học</p>
       <div className='py-4 px-20 w-full'>
         <div className='border-t border-white'></div>
       </div>
