@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import CustomJoditEditor from 'src/components/CustomJoditEditor'
 import Input from 'src/components/Input'

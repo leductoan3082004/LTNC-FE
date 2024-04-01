@@ -3,15 +3,11 @@ import LoadingRing from 'src/components/LoadingRing'
 
 import AdminCourseInfo from '../../components/AdminCourseInfo'
 import { AdminContext } from 'src/contexts/admin.context'
-import LoadingSection from 'src/components/LoadingSection'
 import AdminUpdateCourse from '../../components/AdminUpdateCourse'
-
-const loading = false
 
 export default function AdminCourseDetail() {
   //! Declare stats
   const [editingMode, setEditingMode] = useState<boolean>(false)
-  const [updateCourseSuccess, setUpdateCourseSuccess] = useState<boolean>(false)
 
   //! GET COURSE
   const { currentCourse } = useContext(AdminContext)
@@ -28,9 +24,7 @@ export default function AdminCourseDetail() {
         <div className='w-full space-y-4'>
           {!editingMode && <AdminCourseInfo course={currentCourse} />}
 
-          {editingMode && (
-            <AdminUpdateCourse setEditingMode={setEditingMode} setSuccessDialogOpen={setUpdateCourseSuccess} />
-          )}
+          {editingMode && <AdminUpdateCourse currentCourse={currentCourse} setEditingMode={setEditingMode} />}
 
           <div className='w-full flex justify-end'>
             {!editingMode && (

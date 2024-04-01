@@ -23,7 +23,6 @@ export default function AdminCreateCourse() {
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   //! USE FORM
-
   const [startTime, setStartTime] = useState<Date>(currentDate)
   const [endTime, setEndTime] = useState<Date>(currentDate)
   const methods = useForm<FormData>({
@@ -50,7 +49,7 @@ export default function AdminCreateCourse() {
     setValue('end_time', endTime)
   }, [endTime, setValue])
 
-  //! Create user
+  //! Create course
   const queryClient = useQueryClient()
   const createUserMutation = useMutation({
     mutationFn: courseApi.createCourse
@@ -72,14 +71,13 @@ export default function AdminCreateCourse() {
         end_time: formatTimeToSeconds(data.end_time?.getTime() as number)
       }
 
-      console.log(createBody)
       createUserMutation.mutate(createBody, {
         onSuccess: () => {
           setError(false)
           reset()
           setStartTime(currentDate)
           setEndTime(currentDate)
-          queryClient.invalidateQueries({ queryKey: ['user_list'] })
+          queryClient.invalidateQueries({ queryKey: ['course_list'] })
         },
         onError: (error) => {
           if (isAxiosBadRequestError<ErrorRespone>(error)) {
