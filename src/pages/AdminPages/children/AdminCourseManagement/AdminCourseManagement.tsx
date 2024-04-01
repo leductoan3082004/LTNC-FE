@@ -1,14 +1,17 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import LoadingSection from 'src/components/LoadingSection'
 import { adminPath } from 'src/constants/path'
+import { AdminContext } from 'src/contexts/admin.context'
 import useCourseListQueryConfig from 'src/hooks/useCourseListQueryConfig'
 import { Course } from 'src/types/course.type'
 import { generateCourseId } from 'src/utils/course.utils'
 
 function CourseCard({ course }: { course: Course }) {
+  const { setCurrentCourse } = useContext(AdminContext)
+
   const infos = [
     {
       title: 'Khóa học',
@@ -27,17 +30,21 @@ function CourseCard({ course }: { course: Course }) {
   //! HANDLE ENTER ITEM
   const navigate = useNavigate()
   const handleClickItem = () => {
+    setCurrentCourse(course)
     navigate({ pathname: `${adminPath.courses}/${generateCourseId({ course: course.course_name, id: course._id })}` })
   }
 
   return (
-    <button className='rounded-md w-full items-center justify-center p-4 space-y-4 bg-webColor100 hover:bg-webColor300'>
+    <button
+      onClick={handleClickItem}
+      className='rounded-md w-full items-center justify-center p-4 space-y-4 bg-webColor100 hover:bg-webColor300'
+    >
       <div className='space-y-2'>
         {infos.map((info, index) => (
-          <button key={index} onClick={handleClickItem} className='grid grid-cols-4 gap-2 text-left items-center'>
+          <div key={index} className='grid grid-cols-4 gap-2 text-left items-center'>
             <span className='col-span-1 opacity-70 text-sm'>{info.title}</span>
             <span className='col-span-3 '>{info.content}</span>
-          </button>
+          </div>
         ))}
       </div>
     </button>

@@ -14,8 +14,8 @@ export interface Course {
   lab_ratio: number
   midterm_ratio: number
   final_ratio: number
-  start_time: string
-  end_time: string
+  start_time: number
+  end_time: number
 }
 
 export interface CourseList {

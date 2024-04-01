@@ -13,9 +13,11 @@ export const adminCreateCourseSchema = yup.object({
   final_ratio: yup.number().required('Yêu cầu điền % điểm cuối kì'),
   start_time: yup
     .date()
+    .required('Yêu cầu điền thời gian mở đăng ký')
     .min(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()), 'Thời gian không hợp lệ'),
   end_time: yup
     .date()
+    .required('Yêu cầu điền thời gian đóng đăng ký')
     .min(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()), 'Thời gian không hợp lệ')
 })
 export type AdminCreateCourseSchema = yup.InferType<typeof adminCreateCourseSchema>
@@ -29,3 +31,18 @@ export const courseTimeSchema = yup.object({
     .min(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()), 'Thời gian không hợp lệ')
 })
 export type CourseTimeSchema = yup.InferType<typeof courseTimeSchema>
+
+export const adminUpdateCourseSchema = yup.object({
+  course_id: yup.string().required('Bắt buộc điền ID khóa học'),
+  course_name: yup.string().default(''),
+  description: yup.string().default(''),
+  credit: yup.number().default(0),
+  limit: yup.number().default(0),
+  attendance_ratio: yup.number().default(0),
+  lab_ratio: yup.number().default(0),
+  midterm_ratio: yup.number().default(0),
+  final_ratio: yup.number().default(0),
+  start_time: yup.number().default(currentDate.getTime()),
+  end_time: yup.number().default(currentDate.getTime())
+})
+export type AdminUpdateCourseSchema = yup.InferType<typeof adminUpdateCourseSchema>

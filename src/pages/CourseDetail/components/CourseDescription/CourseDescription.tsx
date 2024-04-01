@@ -1,7 +1,12 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { CourseContext } from 'src/contexts/course.context'
+import DOMPurify from 'dompurify'
 
-export default function CourseDescription() {
+interface Props {
+  description: string
+}
+
+export default function CourseDescription({ description }: Props) {
   const { academicYear } = useContext(CourseContext)
 
   return (
@@ -14,16 +19,12 @@ export default function CourseDescription() {
           <span className='opacity-60'>Năm học:</span>
           <span className='text-primaryText'>{academicYear}</span>
         </div>
-        <p className=''>
-          Trước tiên sinh viên sẽ được giới thiệu về mục tiêu của môn học, quan hệ của nó với các môn học khác trong
-          chương trình đào tạo. Sau đó, sinh viên sẽ được học các kỹ thuật lập trình nâng cao sử dụng ngôn ngữ lập trình
-          bậc cao C++ để giải quyết các bài toán cụ thể trên máy t nh, đồng thời sinh viên cũng học phong cách lập trình
-          chuyên nghiệp, lập trình nhóm, kiểm thử và gỡ r i chương trình. Lý thuyết chung về Lập trình nâng cao bao gồm
-          các khái niệm cơ bản và kỹ thuật lập trình nâng cao được thể hiện trong C++, các kiểu cấu trúc dữ liệu thông
-          dụng như mảng, cấu trúc, lớp, hàm, con trỏ, danh sách liên kết và cách thức lập trình nhóm. Sinh viên cũng
-          được hướng dẫn thực hành để có thể lập trình nhóm và xây dựng, gỡ r i và kiểm thử chương trình dựa trên ngôn
-          ngữ bậc cao C++.
-        </p>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(description)
+          }}
+          className='overflow-visible'
+        />
       </div>
     </div>
   )

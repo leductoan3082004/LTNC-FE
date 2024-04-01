@@ -2,6 +2,7 @@ import { Suspense, useContext } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import LoadingPage from 'src/components/LoadingPage'
 import mainPath, { adminPath } from 'src/constants/path'
+import { AdminProvider } from 'src/contexts/admin.context'
 import { AppContext } from 'src/contexts/app.context'
 import AdminLayout from 'src/layouts/AdminLayout'
 import AdminPages from 'src/pages/AdminPages'
@@ -20,11 +21,13 @@ function ProtectedAdminRoute() {
   const { isAuthenticated, profile } = useContext(AppContext)
 
   return isAuthenticated && profile && profile.role == 2 ? (
-    <Suspense fallback={<LoadingPage />}>
-      <AdminLayout>
-        <Outlet />
-      </AdminLayout>
-    </Suspense>
+    <AdminLayout>
+      <AdminProvider>
+        <Suspense fallback={<LoadingPage />}>
+          <Outlet />
+        </Suspense>
+      </AdminProvider>
+    </AdminLayout>
   ) : (
     <Navigate to={mainPath.login} />
   )
