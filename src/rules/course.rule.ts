@@ -42,7 +42,7 @@ export const adminUpdateCourseSchema = yup.object({
   lab_ratio: yup.number().default(0),
   midterm_ratio: yup.number().default(0),
   final_ratio: yup.number().default(0),
-  start_time: yup.number().default(currentDate.getTime()),
-  end_time: yup.number().default(currentDate.getTime())
+  start_time: yup.date().default(currentDate),
+  end_time: yup.date().default(currentDate)
 })
 export type AdminUpdateCourseSchema = yup.InferType<typeof adminUpdateCourseSchema>

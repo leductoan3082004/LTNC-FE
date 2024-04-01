@@ -4,16 +4,17 @@ import LoadingRing from 'src/components/LoadingRing'
 import AdminCourseInfo from '../../components/AdminCourseInfo'
 import { AdminContext } from 'src/contexts/admin.context'
 import LoadingSection from 'src/components/LoadingSection'
+import AdminUpdateCourse from '../../components/AdminUpdateCourse'
 
 const loading = false
 
 export default function AdminCourseDetail() {
   //! Declare stats
   const [editingMode, setEditingMode] = useState<boolean>(false)
+  const [updateCourseSuccess, setUpdateCourseSuccess] = useState<boolean>(false)
 
   //! GET COURSE
   const { currentCourse } = useContext(AdminContext)
-  console.log(currentCourse)
 
   return (
     <Fragment>
@@ -25,7 +26,12 @@ export default function AdminCourseDetail() {
       )}
       {currentCourse && (
         <div className='w-full space-y-4'>
-          <AdminCourseInfo course={currentCourse} />
+          {!editingMode && <AdminCourseInfo course={currentCourse} />}
+
+          {editingMode && (
+            <AdminUpdateCourse setEditingMode={setEditingMode} setSuccessDialogOpen={setUpdateCourseSuccess} />
+          )}
+
           <div className='w-full flex justify-end'>
             {!editingMode && (
               <button

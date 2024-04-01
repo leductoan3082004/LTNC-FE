@@ -1,20 +1,14 @@
 import classNames from 'classnames'
 import { Fragment } from 'react'
-import { Controller, FieldError, useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import Input from 'src/components/Input'
 import { AdminCreateCourseSchema } from 'src/rules/course.rule'
 import ErrorSection from '../ErrorSection'
 import DateSelect from 'src/components/DateSelect'
 import CustomJoditEditor from 'src/components/CustomJoditEditor'
+import { InputField } from 'src/types/utils.type'
 
 type FormData = AdminCreateCourseSchema
-
-interface InputField {
-  error: FieldError | undefined
-  errorMessage: string | undefined
-  name: string
-  title: string
-}
 
 export default function AdminCreateCourseForm() {
   //! Use form context
