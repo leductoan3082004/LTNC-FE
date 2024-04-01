@@ -9,6 +9,9 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import CourseRoutes from './routes/courseRoutes'
 import PersonalRoutes from './routes/personalRoutes'
+import ClassList from './pages/ClassList'
+import Calendar from './pages/Calendar'
+import ClassesRoutes from './routes/classesRoutes'
 
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -49,6 +52,25 @@ export default function useRouteElements() {
         </MainLayout>
       ),
       children: [PersonalRoutes]
+    },
+    {
+      path: mainPath.classList,
+      element: (
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      ),
+      children: [ClassesRoutes]
+      
+    },
+    {
+      path: mainPath.calendar,
+      element: (
+        <MainLayout>
+          <Calendar />
+        </MainLayout>
+      ),
+      
     },
     {
       path: '',

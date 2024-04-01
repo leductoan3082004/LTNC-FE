@@ -19,20 +19,20 @@ export default function CourseSorting() {
   }
 
   return (
-    <div className='space-x-2 flex text-darkText rounded-lg py-2 px-6 bg-webColor200'>
-      <span className='uppercase font-medium text-lg shrink-0 items-center flex'>Lọc theo năm học:</span>
+    <div className='flex px-6 py-2 space-x-2 rounded-lg text-darkText bg-webColor200'>
+      <span className='flex items-center text-lg font-medium uppercase shrink-0'>Lọc theo năm học:</span>
 
       <label className='relative '>
-        <span className='absolute top-1/2 right-2 -translate-y-1/2 text-primaryText pointer-events-none'>
+        <span className='absolute -translate-y-1/2 pointer-events-none top-1/2 right-2 text-primaryText'>
           <FontAwesomeIcon icon={faCaretDown} />
         </span>
         <select
           onChange={handleChange}
           name='year'
-          className='px-4 text-primaryText h-10 appearance-none w-full ring-1 outline-none ring-primaryTextUnHover rounded-xl focus:ring-2 focus:ring-primaryText cursor-pointer hover:border-primaryBlue'
+          className='w-full h-10 px-4 outline-none appearance-none cursor-pointer text-primaryText ring-1 ring-primaryTextUnHover rounded-xl focus:ring-2 focus:ring-primaryText hover:border-primaryBlue'
           value={academicYear}
         >
-          <option disabled className='uppercase text-lg font-semibold'>
+          <option disabled className='text-lg font-semibold uppercase'>
             Năm học
           </option>
           {range(2024, 2028).map((year) => (

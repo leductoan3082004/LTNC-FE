@@ -26,7 +26,7 @@ export default function CourseDetail() {
       {loading && (
         <div className='h-[50vh] w-full flex flex-col items-center justify-center'>
           <LoadingRing />
-          <div className='font-medium opacity-80 uppercase text-xl'>Đang lấy thông tin khóa học</div>
+          <div className='text-xl font-medium uppercase opacity-80'>Đang lấy thông tin khóa học</div>
         </div>
       )}
       {!loading && (
@@ -35,9 +35,9 @@ export default function CourseDetail() {
             <CourseDescription />
           </div>
           <div className='col-span-5'>
-            <div className='border p-4 border-black/40 rounded-lg sticky top-16 desktop:top-20 space-y-4'>
-              <p className='w-full text-center font-semibold uppercase text-lg desktop:text-xl'>Danh sách lớp học</p>
-              <div className='grid grid-cols-1 desktop:grid-cols-2 gap-4'>
+            <div className='sticky p-4 space-y-4 border rounded-lg border-black/40 top-16 desktop:top-20'>
+              <p className='w-full text-lg font-semibold text-center uppercase desktop:text-xl'>Danh sách lớp học</p>
+              <div className='grid grid-cols-1 gap-4 desktop:grid-cols-2'>
                 {Array(5)
                   .fill(0)
                   .map((_, index) => (

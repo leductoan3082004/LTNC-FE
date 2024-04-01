@@ -25,15 +25,15 @@ export default function CourseSortingtByYear({ year }: Props) {
   }
 
   return (
-    <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
+    <div className='px-6 py-4 space-y-4 rounded-lg bg-webColor100 text-darkText'>
       <button
         onClick={handleSelectYear}
-        className='py-2 flex justify-center items-center w-full hover:text-primaryText uppercase text-lg desktop:text-2xl font-semibold shrink-0 '
+        className='flex items-center justify-center w-full py-2 text-lg font-semibold uppercase hover:text-primaryText desktop:text-2xl shrink-0 '
       >
         {`Năm học: ${year}`}
       </button>
-      <div className='w-full flex justify-center'>
-        <div className='border-t-2 border-primaryText w-6/12 desktop:w-4/12'></div>
+      <div className='flex justify-center w-full'>
+        <div className='w-6/12 border-t-2 border-primaryText desktop:w-4/12'></div>
       </div>
       <div className='flex flex-col'>
         {Array(5)
@@ -41,7 +41,7 @@ export default function CourseSortingtByYear({ year }: Props) {
           .map((_, index) => (
             <button
               onClick={chooseCourse(`Lập trình nâng cao 0${index}`, `${index}`)}
-              className='border-b last:border-none py-4 border-primaryText/80 hover:text-primaryText text-lg desktop:text-xl uppercase text-darkText text-start'
+              className='py-4 text-lg uppercase border-b last:border-none border-primaryText/80 hover:text-primaryText desktop:text-xl text-darkText text-start'
               key={index}
             >
               Lập trình nâng cao
