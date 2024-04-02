@@ -1,9 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
 import classroomApi from 'src/apis/classroom.api'
 import LoadingSection from 'src/components/LoadingSection'
 import DaysInWeekEnum from 'src/constants/daysInWeek'
+import { adminPath } from 'src/constants/path'
 import { Classromm } from 'src/types/classroom.type'
 import { Course } from 'src/types/course.type'
+import { generateClassroomId } from 'src/utils/classroom.utils'
 
 interface Props {
   course: Course
@@ -17,6 +20,12 @@ function ClassroomCard({ classroom, index }: { classroom: Classromm; index: numb
   const startTime = startTimestamp.getHours().toString() + ':' + startTimestamp.getMinutes().toString()
   const endTime = endTimestamp.getHours().toString() + ':' + endTimestamp.getMinutes().toString()
   const day = startTimestamp.getDay()
+
+  //! Handle enter classroom
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate({ pathname: `${adminPath.classes}/${generateClassroomId({ id: classroom._id })}` })
+  }
 
   return (
     <div className='bg-webColor100 rounded-md border border-black/20 py-2 px-3 space-y-3'>
@@ -47,7 +56,9 @@ function ClassroomCard({ classroom, index }: { classroom: Classromm; index: numb
       </div>
 
       <div className='w-full flex justify-center'>
-        <button className='bg-unhoverBg hover:bg-hoveringBg rounded-md py-1.5 px-3'>Đi tới lớp học</button>
+        <button onClick={handleClick} className='bg-unhoverBg hover:bg-hoveringBg rounded-md py-1.5 px-3'>
+          Đi tới lớp học
+        </button>
       </div>
     </div>
   )

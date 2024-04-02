@@ -1,4 +1,4 @@
-import { CourseList, CourseListConfig } from 'src/types/course.type'
+import { Course, CourseList, CourseListConfig } from 'src/types/course.type'
 import { SuccessRespone } from 'src/types/utils.type'
 import http from 'src/utils/http'
 
@@ -32,6 +32,9 @@ interface UpdateCourseForm {
 }
 
 const courseApi = {
+  getCourseById(courseId: string) {
+    return http.get<SuccessRespone<Course>>(`${URL}/${courseId}`)
+  },
   getCourseList(params: CourseListConfig) {
     return http.get<CourseList>(`${URL}/`, { params })
   },

@@ -19,7 +19,7 @@ export const removeSpecialCharacter = (str: string) =>
   str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, '')
 
 export const getIdFromUrl = (idString: string) => {
-  const arr = idString.split('-id:')
+  const arr = idString.split(':id:')
   return arr[arr.length - 1]
 }
 

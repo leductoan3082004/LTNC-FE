@@ -38,6 +38,6 @@ export const adminPath = {
 
   // Classes
   classes: '/admin/classes',
-  classDetail: '/admin/classes/:classId',
+  classDetail: '/admin/classes/:classroomId',
   createClass: '/admin/classes/create'
 } as const

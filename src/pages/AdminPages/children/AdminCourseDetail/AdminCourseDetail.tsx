@@ -1,8 +1,10 @@
-import { Fragment, useContext, useState } from 'react'
+import { Fragment, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import courseApi from 'src/apis/course.api'
+import { getIdFromUrl } from 'src/utils/utils'
 import LoadingRing from 'src/components/LoadingRing'
-
 import AdminCourseInfo from '../../components/AdminCourseInfo'
-import { AdminContext } from 'src/contexts/admin.context'
 import AdminUpdateCourse from '../../components/AdminUpdateCourse'
 import AdminClassroomList from '../../components/AdminClassroomList'
 
@@ -10,22 +12,28 @@ export default function AdminCourseDetail() {
   //! Declare stats
   const [editingMode, setEditingMode] = useState<boolean>(false)
 
-  //! GET COURSE
-  const { currentCourse } = useContext(AdminContext)
+  //! Get course detail
+  const pathname = useLocation().pathname
+  const courseId = getIdFromUrl(pathname)
+  const { data: courseData } = useQuery({
+    queryKey: ['admin_course_detail', courseId],
+    queryFn: () => courseApi.getCourseById(courseId)
+  })
+  const course = courseData?.data.data
 
   return (
     <Fragment>
-      {!currentCourse && (
+      {!course && (
         <div className='h-[50vh] w-full flex flex-col items-center justify-center'>
           <LoadingRing />
           <div className='font-medium opacity-80 uppercase text-xl'>Đang lấy thông tin khóa học</div>
         </div>
       )}
-      {currentCourse && (
+      {course && (
         <div className='w-full space-y-4'>
-          {!editingMode && <AdminCourseInfo course={currentCourse} />}
+          {!editingMode && <AdminCourseInfo course={course} />}
 
-          {editingMode && <AdminUpdateCourse currentCourse={currentCourse} setEditingMode={setEditingMode} />}
+          {editingMode && <AdminUpdateCourse currentCourse={course} setEditingMode={setEditingMode} />}
 
           <div className='w-full flex justify-end'>
             {!editingMode && (
@@ -38,7 +46,7 @@ export default function AdminCourseDetail() {
             )}
           </div>
           <div className='py-4'>
-            <AdminClassroomList course={currentCourse} />
+            <AdminClassroomList course={course} />
           </div>
         </div>
       )}
