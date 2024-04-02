@@ -11,11 +11,11 @@ import CourseListLayout from 'src/pages/CourseList/layouts/CourseListLayout'
 function CourseRoute() {
   return (
     <CourseProvider>
-      <Suspense fallback={<LoadingPage />}>
-        <CourseListLayout>
+      <CourseListLayout>
+        <Suspense fallback={<LoadingPage />}>
           <Outlet />
-        </CourseListLayout>
-      </Suspense>
+        </Suspense>
+      </CourseListLayout>
     </CourseProvider>
   )
 }

@@ -4,6 +4,7 @@ import LoadingRing from 'src/components/LoadingRing'
 import AdminCourseInfo from '../../components/AdminCourseInfo'
 import { AdminContext } from 'src/contexts/admin.context'
 import AdminUpdateCourse from '../../components/AdminUpdateCourse'
+import AdminClassroomList from '../../components/AdminClassroomList'
 
 export default function AdminCourseDetail() {
   //! Declare stats
@@ -35,6 +36,9 @@ export default function AdminCourseDetail() {
                 Chỉnh sửa
               </button>
             )}
+          </div>
+          <div className='py-4'>
+            <AdminClassroomList course={currentCourse} />
           </div>
         </div>
       )}

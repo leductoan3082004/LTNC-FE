@@ -6,7 +6,7 @@ import { AdminProvider } from 'src/contexts/admin.context'
 import { AppContext } from 'src/contexts/app.context'
 import AdminLayout from 'src/layouts/AdminLayout'
 import AdminPages from 'src/pages/AdminPages'
-import AdminClassDetail from 'src/pages/AdminPages/children/AdminClassDetail'
+import AdminClassroomDetail from 'src/pages/AdminPages/children/AdminClassroomDetail'
 import AdminCourseDetail from 'src/pages/AdminPages/children/AdminCourseDetail'
 import AdminCourseManagement from 'src/pages/AdminPages/children/AdminCourseManagement'
 import AdminCreateClass from 'src/pages/AdminPages/children/AdminCreateClass'
@@ -96,7 +96,7 @@ const AdminRoutes = {
       children: [
         {
           path: adminPath.classDetail,
-          element: <AdminClassDetail />
+          element: <AdminClassroomDetail />
         },
         {
           path: adminPath.createClass,
