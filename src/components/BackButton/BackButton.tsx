@@ -1,4 +1,4 @@
-import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ export default function BackButton({
 
   return (
     <button onClick={() => navigate(-1)} className={customClassname}>
-      <FontAwesomeIcon icon={faCircleArrowLeft} />
+      <FontAwesomeIcon icon={faAngleLeft} />
     </button>
   )
 }

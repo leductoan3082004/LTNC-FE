@@ -21,3 +21,10 @@ export interface InputField {
   name: string
   title: string
 }
+
+export interface JSONModel {
+  _id: string
+  status: number
+  created_at: string
+  updated_at: string
+}

@@ -1,18 +1,32 @@
 import { Paging } from './paging.type'
-
-export interface MemberInClassroom {
-  user_id: string
-  role: number
-  attendance: number
-  lab: number
-  midterm: number
-  final: number
-}
+import { JSONModel } from './utils.type'
 
 export interface TimeTable {
   id: string
   lesson_start: string
   lesson_end: string
+}
+
+export interface StudentScore {
+  attendance: number
+  lab: number
+  midterm: number
+  final: number
+}
+export interface MemberInClassroom extends StudentScore {
+  user_id: string
+  role: number
+}
+
+export interface Member extends JSONModel, StudentScore {
+  role: number
+  name: string
+  phone: string
+  address: string
+}
+
+export interface MemberList {
+  data: Member[]
 }
 
 export interface Classromm {
