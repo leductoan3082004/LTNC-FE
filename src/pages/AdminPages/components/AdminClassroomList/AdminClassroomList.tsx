@@ -1,6 +1,10 @@
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import classroomApi from 'src/apis/classroom.api'
+import DialogPopup from 'src/components/DialogPopup'
 import LoadingSection from 'src/components/LoadingSection'
 import DaysInWeekEnum from 'src/constants/daysInWeek'
 import { adminPath } from 'src/constants/path'
@@ -24,7 +28,7 @@ function ClassroomCard({ classroom, index }: { classroom: Classromm; index: numb
   //! Handle enter classroom
   const navigate = useNavigate()
   const handleClick = () => {
-    navigate({ pathname: `${adminPath.classes}/${generateClassroomId({ id: classroom._id })}` })
+    navigate({ pathname: `${adminPath.classrooms}/${generateClassroomId({ id: classroom._id })}` })
   }
 
   return (
@@ -73,6 +77,18 @@ export default function AdminClassroomList({ course }: Props) {
   })
   const classroomList = classroomListData?.data.data
 
+  //! Handle add classroom
+  const [cannotAddError, setCannotAddError] = useState<boolean>(false)
+  const navigate = useNavigate()
+
+  const addClassroom = () => {
+    if (classroomList?.length == course.limit) {
+      setCannotAddError(true)
+      return
+    }
+    navigate(adminPath.createClassroom)
+  }
+
   return (
     <div className='p-4 rounded-lg border space-y-4 border-black/20 bg-webColor100'>
       <p className='uppercase text-primaryText font-bold text-xl desktop:tetx-3xl text-center'>
@@ -88,7 +104,23 @@ export default function AdminClassroomList({ course }: Props) {
               <ClassroomCard classroom={classroom} index={index} />
             </div>
           ))}
+
+        <div className='col-span-1'>
+          <button
+            onClick={addClassroom}
+            className='bg-webColor100 w-full hover:bg-webColor200 rounded-md border border-black/20 py-2 px-3 space-y-4 min-h-40 '
+          >
+            <FontAwesomeIcon icon={faCirclePlus} className='text-4xl' />
+            <p className='text-xl uppercase font-medium'>Thêm lớp học</p>
+          </button>
+        </div>
       </div>
+
+      <DialogPopup handleClose={() => setCannotAddError(false)} isOpen={cannotAddError}>
+        <div className='w-60 h-40 flex items-center justify-center'>
+          <p className='text-alertRed uppercase font-medium text-2xl'>Vượt quá số lượng lớp học cho phép</p>
+        </div>
+      </DialogPopup>
     </div>
   )
 }

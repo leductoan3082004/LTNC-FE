@@ -9,7 +9,7 @@ import AdminPages from 'src/pages/AdminPages'
 import AdminClassroomDetail from 'src/pages/AdminPages/children/AdminClassroomDetail'
 import AdminCourseDetail from 'src/pages/AdminPages/children/AdminCourseDetail'
 import AdminCourseManagement from 'src/pages/AdminPages/children/AdminCourseManagement'
-import AdminCreateClass from 'src/pages/AdminPages/children/AdminCreateClass'
+import AdminCreateClassroom from 'src/pages/AdminPages/children/AdminCreateClassroom'
 import AdminCreateCourse from 'src/pages/AdminPages/children/AdminCreateCourse'
 import AdminCreateUser from 'src/pages/AdminPages/children/AdminCreateUser'
 import AdminStudentList from 'src/pages/AdminPages/children/AdminStudentList'
@@ -91,16 +91,16 @@ const AdminRoutes = {
       ]
     },
     {
-      path: adminPath.classes,
+      path: adminPath.classrooms,
       element: <AdminCourseRoute />,
       children: [
         {
-          path: adminPath.classDetail,
+          path: adminPath.classroomDetail,
           element: <AdminClassroomDetail />
         },
         {
-          path: adminPath.createClass,
-          element: <AdminCreateClass />
+          path: adminPath.createClassroom,
+          element: <AdminCreateClassroom />
         }
       ]
     }

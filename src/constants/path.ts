@@ -37,7 +37,7 @@ export const adminPath = {
   createCourse: '/admin/courses/create',
 
   // Classes
-  classes: '/admin/classes',
-  classDetail: '/admin/classes/:classroomId',
-  createClass: '/admin/classes/create'
+  classrooms: '/admin/classrooms',
+  classroomDetail: '/admin/classrooms/:classroomId',
+  createClassroom: '/admin/classrooms/create'
 } as const
