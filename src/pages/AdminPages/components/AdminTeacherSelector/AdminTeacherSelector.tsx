@@ -1,10 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
+import { useContext } from 'react'
 import userApi from 'src/apis/user.api'
 import LoadingSection from 'src/components/LoadingSection'
 import useUserListQueryConfig from 'src/hooks/usePostListQueryConfig'
-import AdminUserCard from '../../components/AdminUserCard'
+import AdminUserCard from '../AdminUserCard'
+import { AdminContext } from 'src/contexts/admin.context'
 
-export default function AdminTeacherList() {
+export default function AdminTeacherSelector() {
+  const { setCurrentTeacherId } = useContext(AdminContext)
+
   //! Get teacher list
   const userListQueryConfig = useUserListQueryConfig()
   const config = { ...userListQueryConfig, role: 1 }
@@ -14,18 +18,25 @@ export default function AdminTeacherList() {
   })
   const userList = userListData?.data.data || null
 
+  //! Handle select teacher
+  const handleClick = (teacherId: string) => () => {
+    setCurrentTeacherId(teacherId)
+  }
+
   return (
     <div>
-      <p className='w-full text-center font-semibold desktop:text-xl uppercase text-primaryText'>Danh sách giáo viên</p>
+      <p className='w-full text-center font-semibold desktop:text-xl uppercase text-primaryText'>Chọn giáo viên</p>
 
-      <div className='py-4 px-20 w-full'>
-        <div className='border-t border-white'></div>
+      <div className='py-4 px-20 desktop:px-32 w-full'>
+        <div className='border-t-2 border-white'></div>
       </div>
 
       {!userListData && <LoadingSection />}
 
       {!userList && userListData && (
-        <div className='py-4 h-20 text-center text-alertRed font-bold uppercase text-lg'>Danh sách trống</div>
+        <div className='py-4 h-20 text-center text-alertRed font-bold uppercase text-lg'>
+          Không có giáo viên nào khả dụng
+        </div>
       )}
 
       <div className='grid grid-cols-4 gap-4'>
@@ -33,7 +44,7 @@ export default function AdminTeacherList() {
           userList.length > 0 &&
           userList.map((user) => (
             <div key={user._id} className='col-span-1'>
-              <AdminUserCard user={user} />
+              <AdminUserCard user={user} handleClick={handleClick(user._id)} />
             </div>
           ))}
       </div>

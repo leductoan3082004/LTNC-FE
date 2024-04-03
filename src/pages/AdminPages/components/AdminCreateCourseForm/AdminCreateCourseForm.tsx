@@ -20,7 +20,7 @@ export default function AdminCreateCourseForm() {
     formState: { errors }
   } = useFormContext<FormData>()
 
-  //! FORM
+  //! Form fields
   const fields: InputField[] = [
     {
       error: errors.course_name,

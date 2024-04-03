@@ -20,6 +20,7 @@ export interface InputField {
   errorMessage: string | undefined
   name: string
   title: string
+  readonly?: boolean | false
 }
 
 export interface JSONModel {

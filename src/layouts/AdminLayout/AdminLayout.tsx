@@ -23,7 +23,7 @@ const userMenu: NavigateItem[] = [
 const courseAndClassMenu: NavigateItem[] = [
   { name: 'Danh sách khóa học', url: adminPath.courses },
   { name: 'Tạo khóa học', url: adminPath.createCourse },
-  { name: 'Tạo lớp học', url: adminPath.createClass }
+  { name: 'Tạo lớp học', url: adminPath.createClassroom }
 ]
 
 export default function AdminLayout({ children }: Props) {

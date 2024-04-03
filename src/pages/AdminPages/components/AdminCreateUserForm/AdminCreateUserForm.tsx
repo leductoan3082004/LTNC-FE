@@ -8,13 +8,11 @@ import { AdminCreateUserSchema } from 'src/rules/user.rule'
 import ErrorSection from '../ErrorSection'
 
 type FormData = AdminCreateUserSchema
-
 interface Props {
-  role: number
   setRole: React.Dispatch<React.SetStateAction<number>>
 }
 
-export default function AdminCreateUserForm({ role, setRole }: Props) {
+export default function AdminCreateUserForm({ setRole }: Props) {
   //! Use form context
   const {
     register,
@@ -24,7 +22,9 @@ export default function AdminCreateUserForm({ role, setRole }: Props) {
   const handleChooseRole = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value: valueFromSelector } = event.target
     for (const i in userRoles) {
-      if (userRoles[i] == valueFromSelector) setRole(+valueFromSelector)
+      if (userRoles[i] == valueFromSelector) {
+        setRole(+valueFromSelector)
+      }
     }
   }
 
@@ -131,7 +131,6 @@ export default function AdminCreateUserForm({ role, setRole }: Props) {
             onChange={handleChooseRole}
             name='year'
             className='text-primaryText appearance-none w-full outline-none cursor-pointer hover:border-primaryBlue'
-            value={userRoles[role]}
           >
             <option disabled className='uppercase text-lg font-semibold'>
               Vai trò

@@ -55,7 +55,7 @@ export default function AdminCourseManagement() {
   //! GET COURSE LIST
   const courseListQueryConfig = useCourseListQueryConfig()
   const { data: courseListData } = useQuery({
-    queryKey: ['course_list', courseListQueryConfig],
+    queryKey: ['admin_course_list', courseListQueryConfig],
     queryFn: () => courseApi.getCourseList(courseListQueryConfig),
     staleTime: 1000 * 60 * 3
   })

@@ -9,9 +9,31 @@ import { isAxiosBadRequestError } from 'src/utils/utils'
 import { ErrorRespone } from 'src/types/utils.type'
 import DialogPopup from 'src/components/DialogPopup'
 import LoadingRing from 'src/components/LoadingRing'
-import { reject } from 'lodash'
+import { random, reject } from 'lodash'
 
 type FormData = AdminCreateUserSchema
+
+const cities = [
+  'Hồ Chí Minh',
+  'Thủ Đức',
+  'Biên Hòa',
+  'Đà Lạt',
+  'Tân Phú',
+  'Vũng Tàu',
+  'Dĩ An',
+  'Bà Rịa',
+  'Long An',
+  'Cà Mau',
+  'Thuận An',
+  'Đà Nẵng',
+  'Bình Thuận',
+  'Cam Ranh',
+  'Nha Trang',
+  'Tây Uyên',
+  'Thủ Dầu Một',
+  'Cần Giờ',
+  'Bình Phước'
+]
 
 export default function AdminCreateUser() {
   const [role, setRole] = useState<number>(0)
@@ -42,6 +64,13 @@ export default function AdminCreateUser() {
     mutationFn: userApi.createUser
   })
 
+  //! FOR CREATING USER ONLY
+  // const [count, setCount] = useState<number>(201)
+
+  // useEffect(() => {
+  //   setValue('username', 'student' + count.toString())
+  // }, [count, setValue])
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onInvalid = (errors: any) => {
     console.log(errors)
@@ -52,18 +81,14 @@ export default function AdminCreateUser() {
     setExcuting(true)
 
     try {
-      const createBody: FormData = {
-        username: data.username,
-        password: data.password,
-        name: data.name,
-        phone: data.phone,
-        address: data.address,
-        role: role
-      }
-      createUserMutation.mutate(createBody, {
+      createUserMutation.mutate(data, {
         onSuccess: () => {
           setError(false)
-          reset()
+          // reset()
+          // setCount(count + 1)
+          setValue('phone', random(100000000, 999999999).toString())
+          setValue('address', cities[random(0, cities.length - 1)])
+
           setRole(0)
           queryClient.invalidateQueries({ queryKey: ['user_list'] })
         },
@@ -96,7 +121,7 @@ export default function AdminCreateUser() {
       </div>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit, onInvalid)} className='space-y-4 mt-4'>
-          <AdminCreateUserForm role={role} setRole={setRole} />
+          <AdminCreateUserForm setRole={setRole} />
           <div className='w-full flex justify-end'>
             <button
               className='rounded-lg bg-unhoverBg px-4 py-1 text-base hover:bg-hoveringBg lg:text-lg'

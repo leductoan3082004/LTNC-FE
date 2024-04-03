@@ -1,13 +1,14 @@
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import classroomApi from 'src/apis/classroom.api'
 import DialogPopup from 'src/components/DialogPopup'
 import LoadingSection from 'src/components/LoadingSection'
 import DaysInWeekEnum from 'src/constants/daysInWeek'
 import { adminPath } from 'src/constants/path'
+import { AdminContext } from 'src/contexts/admin.context'
 import { Classromm } from 'src/types/classroom.type'
 import { Course } from 'src/types/course.type'
 import { generateClassroomId } from 'src/utils/classroom.utils'
@@ -69,6 +70,8 @@ function ClassroomCard({ classroom, index }: { classroom: Classromm; index: numb
 }
 
 export default function AdminClassroomList({ course }: Props) {
+  const { setCurrentCourse } = useContext(AdminContext)
+
   //! Get class list in a course
   const courseId = course._id
   const { data: classroomListData } = useQuery({
@@ -86,6 +89,7 @@ export default function AdminClassroomList({ course }: Props) {
       setCannotAddError(true)
       return
     }
+    setCurrentCourse(course)
     navigate(adminPath.createClassroom)
   }
 

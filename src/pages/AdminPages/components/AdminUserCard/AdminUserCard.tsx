@@ -5,9 +5,15 @@ import { generateID } from 'src/utils/utils'
 
 interface Props {
   user: User
+  handleClick?: () => void
 }
 
-export default function AdminUserCard({ user }: Props) {
+export default function AdminUserCard({
+  user,
+  handleClick = () => {
+    return
+  }
+}: Props) {
   const infos = [
     {
       name: 'Tên',
@@ -20,7 +26,10 @@ export default function AdminUserCard({ user }: Props) {
   ]
 
   return (
-    <button className='rounded-md w-full items-center justify-center p-4 space-y-4 bg-webColor100 hover:bg-webColor300'>
+    <button
+      onClick={handleClick}
+      className='rounded-md w-full items-center justify-center p-4 space-y-4 bg-webColor100 hover:bg-webColor300'
+    >
       <div className='w-full flex justify-center'>
         <div className='flex bg-slate-300 rounded-full items-center justify-center p-4'>
           <FontAwesomeIcon icon={faUser} className='text-white h-10 w-10' />
