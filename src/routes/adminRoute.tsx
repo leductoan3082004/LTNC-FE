@@ -12,6 +12,7 @@ import AdminCourseManagement from 'src/pages/AdminPages/children/AdminCourseMana
 import AdminCreateClassroom from 'src/pages/AdminPages/children/AdminCreateClassroom'
 import AdminCreateCourse from 'src/pages/AdminPages/children/AdminCreateCourse'
 import AdminCreateUser from 'src/pages/AdminPages/children/AdminCreateUser'
+import AdminStudentDetail from 'src/pages/AdminPages/children/AdminStudentDetail'
 import AdminStudentList from 'src/pages/AdminPages/children/AdminStudentList'
 import AdminTeacherList from 'src/pages/AdminPages/children/AdminTeacherList'
 import AdminCourseLayout from 'src/pages/AdminPages/layouts/AdminCourseLayout'
@@ -61,6 +62,10 @@ const AdminRoutes = {
         {
           path: adminPath.studentList,
           element: <AdminStudentList />
+        },
+        {
+          path: adminPath.studentDetail,
+          element: <AdminStudentDetail />
         },
         {
           path: adminPath.teacherList,

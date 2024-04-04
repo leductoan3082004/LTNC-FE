@@ -1,21 +1,35 @@
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
-import { useLocation } from 'react-router-dom'
+import { useContext } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import classroomApi from 'src/apis/classroom.api'
 import BackButton from 'src/components/BackButton'
 import LoadingSection from 'src/components/LoadingSection'
-import { Member } from 'src/types/classroom.type'
-import { getIdFromUrl } from 'src/utils/utils'
+import { adminPath } from 'src/constants/path'
+import { AdminContext } from 'src/contexts/admin.context'
+import { DetailedMember } from 'src/types/member.type'
+import { generateNameId, getIdFromUrl } from 'src/utils/utils'
 
-function StudentCard({ student, index }: { student: Member; index: number }) {
+function StudentCard({ student, index }: { student: DetailedMember; index: number }) {
   const averageScore = student.attendance + student.lab + student.midterm + student.final
   const weak = averageScore < 4.0
   const normal = averageScore >= 4.0 && averageScore < 6.0
   const fine = averageScore >= 6.0 && averageScore < 8.0
   const good = averageScore >= 8.0
 
+  //! Handle click
+  const { setCurrentStudent } = useContext(AdminContext)
+  const navigate = useNavigate()
+  const handleClick = () => {
+    setCurrentStudent(student)
+    navigate({ pathname: `${adminPath.studentList}/${generateNameId({ name: student.name, id: student._id })}` })
+  }
+
   return (
-    <button className='flex py-3 px-4 border-b space-x-2 border-black/20 items-center shadow-sm rounded-md bg-webColor100 hover:bg-webColor300'>
+    <button
+      onClick={handleClick}
+      className='flex py-3 px-4 border-b space-x-2 border-black/20 items-center shadow-sm rounded-md bg-webColor100 hover:bg-webColor300'
+    >
       <span className='opacity-60 desktop:text-lg'>{index + 1}.</span>
       <div className='flex items-center grow justify-between'>
         <span className='font-medium desktop:text-lg'>{student.name}</span>

@@ -28,6 +28,7 @@ export const adminPath = {
   mainPage: '/admin',
   users: '/admin/users',
   studentList: '/admin/users/students',
+  studentDetail: '/admin/users/students/:studentId',
   teacherList: '/admin/users/teachers',
   createUser: '/admin/users/create',
 
