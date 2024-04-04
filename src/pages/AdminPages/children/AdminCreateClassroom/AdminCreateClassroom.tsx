@@ -12,7 +12,7 @@ type FormData = AdminCreateClassroomSchema
 const currentDate = new Date()
 
 export default function AdminCreateClassroom() {
-  const { currentCourse, currentTeacherId, setCurrentTeacherId } = useContext(AdminContext)
+  const { currentCourse, currentTeacherId, setCurrentTeacherId, canCreateClassroom } = useContext(AdminContext)
 
   //! Use form
   const methods = useForm<FormData>({
@@ -23,6 +23,9 @@ export default function AdminCreateClassroom() {
   useEffect(() => {
     setValue('teacher_id', currentTeacherId || '')
   }, [currentTeacherId, setValue])
+  useEffect(() => {
+    setValue('course_id', currentCourse?._id || '')
+  }, [currentCourse, setValue])
   // useEffect(() => {
   //   setValue('lesson_end', lessonEnd)
   // }, [lessonEnd, setValue])
@@ -38,7 +41,13 @@ export default function AdminCreateClassroom() {
           </div>
         )}
 
-        {currentCourse && (
+        {!canCreateClassroom && (
+          <p className='text-alertRed uppercase font-semibold desktop:text-xl text-center tracking-wide py-10'>
+            Số lớp học đã đạt tối đa
+          </p>
+        )}
+
+        {currentCourse && canCreateClassroom && (
           <FormProvider {...methods}>
             <form className='space-y-4'>
               <AdminCreateClassroomForm />

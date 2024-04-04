@@ -9,6 +9,8 @@ interface AdminContextInterface {
   setCurrentTeacherId: React.Dispatch<React.SetStateAction<string | null>>
   currentStudent: DetailedMember | null
   setCurrentStudent: React.Dispatch<React.SetStateAction<DetailedMember | null>>
+  canCreateClassroom: boolean
+  setCanCreateClassroom: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const initialAdminContext: AdminContextInterface = {
@@ -17,7 +19,9 @@ const initialAdminContext: AdminContextInterface = {
   currentTeacherId: null,
   setCurrentTeacherId: () => null,
   currentStudent: null,
-  setCurrentStudent: () => null
+  setCurrentStudent: () => null,
+  canCreateClassroom: false,
+  setCanCreateClassroom: () => null
 }
 
 export const AdminContext = createContext<AdminContextInterface>(initialAdminContext)
@@ -26,6 +30,7 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentCourse, setCurrentCourse] = useState<Course | null>(initialAdminContext.currentCourse)
   const [currentTeacherId, setCurrentTeacherId] = useState<string | null>(initialAdminContext.currentTeacherId)
   const [currentStudent, setCurrentStudent] = useState<DetailedMember | null>(initialAdminContext.currentStudent)
+  const [canCreateClassroom, setCanCreateClassroom] = useState<boolean>(initialAdminContext.canCreateClassroom)
 
   return (
     <AdminContext.Provider
@@ -35,7 +40,9 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
         currentTeacherId,
         setCurrentTeacherId,
         currentStudent,
-        setCurrentStudent
+        setCurrentStudent,
+        canCreateClassroom,
+        setCanCreateClassroom
       }}
     >
       {children}

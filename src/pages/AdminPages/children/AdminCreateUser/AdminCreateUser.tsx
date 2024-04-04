@@ -9,31 +9,9 @@ import { isAxiosBadRequestError } from 'src/utils/utils'
 import { ErrorRespone } from 'src/types/utils.type'
 import DialogPopup from 'src/components/DialogPopup'
 import LoadingRing from 'src/components/LoadingRing'
-import { random, reject } from 'lodash'
+import { reject } from 'lodash'
 
 type FormData = AdminCreateUserSchema
-
-const cities = [
-  'Hồ Chí Minh',
-  'Thủ Đức',
-  'Biên Hòa',
-  'Đà Lạt',
-  'Tân Phú',
-  'Vũng Tàu',
-  'Dĩ An',
-  'Bà Rịa',
-  'Long An',
-  'Cà Mau',
-  'Thuận An',
-  'Đà Nẵng',
-  'Bình Thuận',
-  'Cam Ranh',
-  'Nha Trang',
-  'Tây Uyên',
-  'Thủ Dầu Một',
-  'Cần Giờ',
-  'Bình Phước'
-]
 
 export default function AdminCreateUser() {
   const [role, setRole] = useState<number>(0)
@@ -84,13 +62,10 @@ export default function AdminCreateUser() {
       createUserMutation.mutate(data, {
         onSuccess: () => {
           setError(false)
-          // reset()
-          // setCount(count + 1)
-          setValue('phone', random(100000000, 999999999).toString())
-          setValue('address', cities[random(0, cities.length - 1)])
-
+          reset()
           setRole(0)
           queryClient.invalidateQueries({ queryKey: ['user_list'] })
+          queryClient.invalidateQueries({ queryKey: ['admin_user_list'] })
         },
         onError: () => {
           setError(true)

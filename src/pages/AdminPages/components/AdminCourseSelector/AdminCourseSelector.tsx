@@ -1,34 +1,48 @@
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useContext } from 'react'
+import classroomApi from 'src/apis/classroom.api'
 import courseApi from 'src/apis/course.api'
 import LoadingSection from 'src/components/LoadingSection'
 import { AdminContext } from 'src/contexts/admin.context'
 import useCourseListQueryConfig from 'src/hooks/useCourseListQueryConfig'
 import { Course } from 'src/types/course.type'
+import { InfomationField } from 'src/types/utils.type'
 
 function CourseCard({ course }: { course: Course }) {
-  const { setCurrentCourse, currentCourse } = useContext(AdminContext)
+  const { setCurrentCourse, currentCourse, setCanCreateClassroom } = useContext(AdminContext)
   const isSelected = currentCourse?._id == course._id
 
-  const infos = [
+  //! Get classroom list in course
+  const { data: classroomListData } = useQuery({
+    queryKey: ['admin_classroom_list', course._id],
+    queryFn: () => classroomApi.getClassroomList({ course_id: course._id as string })
+  })
+  const classroomList = classroomListData?.data.data || []
+
+  const infos: InfomationField[] = [
     {
       title: 'Khóa học',
-      content: course.course_name
+      info: course.course_name
     },
     {
       title: 'Số tín chỉ',
-      content: course.credit
+      info: course.credit
     },
     {
-      title: 'Số lớp',
-      content: course.limit
+      title: 'Số lớp tối đa',
+      info: course.limit
+    },
+    {
+      title: 'Số lớp hiện tại',
+      info: `${classroomList.length} / ${course.limit}`
     }
   ]
 
-  //! HANDLE ENTER ITEM
+  //! Handle choose course
   const handleClickItem = () => {
     if (isSelected) return
+    setCanCreateClassroom(classroomList.length < course.limit)
     setCurrentCourse(course)
   }
 
@@ -42,9 +56,9 @@ function CourseCard({ course }: { course: Course }) {
     >
       <div className='space-y-2'>
         {infos.map((info, index) => (
-          <div key={index} className='grid grid-cols-4 gap-2 text-left items-center'>
+          <div key={index} className='grid grid-cols-3 gap-2 text-left items-center'>
             <span className='col-span-1 opacity-70 text-sm'>{info.title}</span>
-            <span className='col-span-3 '>{info.content}</span>
+            <span className='col-span-2 '>{info.info}</span>
           </div>
         ))}
       </div>

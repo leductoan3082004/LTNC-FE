@@ -23,7 +23,15 @@ export default function AdminCreateClassroomForm() {
       error: errors.course_id,
       errorMessage: errors.course_id?.message,
       name: 'course_id',
-      title: 'ID khóa học'
+      title: 'ID khóa học',
+      readonly: true
+    },
+    {
+      error: errors.teacher_id,
+      errorMessage: errors.teacher_id?.message,
+      name: 'teacher_id',
+      title: 'ID khóa học',
+      readonly: true
     },
     {
       error: errors.limit,
@@ -50,6 +58,7 @@ export default function AdminCreateClassroomForm() {
       {fields.map((field, index) => (
         <Input
           key={index}
+          readOnly={field.readonly}
           className={inputFieldStyle}
           inputClassName={classNames(inputStyle, {
             'outline-red-600': Boolean(field.error)
