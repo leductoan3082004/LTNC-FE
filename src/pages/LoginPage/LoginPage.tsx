@@ -68,7 +68,6 @@ export default function LoginPage() {
           if (formError) {
             const errorMessage = HttpStatusMessage.get(formError.error_key)
             if (errorMessage) {
-              console.log(errorMessage)
               setError('username', {
                 message: errorMessage,
                 type: 'Server'

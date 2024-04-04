@@ -7,6 +7,7 @@ import { CourseContext } from 'src/contexts/course.context'
 import useCourseListQueryConfig from 'src/hooks/useCourseListQueryConfig'
 import { CourseListConfig } from 'src/types/course.type'
 import CourseCard from '../CourseCard'
+import LoadingSection from 'src/components/LoadingSection'
 
 interface Props {
   year: number
@@ -25,7 +26,7 @@ export default function CourseSortingtByYear({ year }: Props) {
     ...courseListConfig,
     end_time: startTimeStamp
   }
-  const { data: startCourseListData } = useQuery({
+  const { data: startCourseListData, isFetched: startCourseListIsFetched } = useQuery({
     queryKey: ['course_list', startYearConfig],
     queryFn: () => courseApi.getCourseList(startYearConfig)
   })
@@ -36,7 +37,7 @@ export default function CourseSortingtByYear({ year }: Props) {
     ...courseListConfig,
     end_time: endTimtStamp
   }
-  const { data: endCourseListData } = useQuery({
+  const { data: endCourseListData, isFetched: endCourseListIsFetched } = useQuery({
     queryKey: ['course_list', endYearConfig],
     queryFn: () => courseApi.getCourseList(endYearConfig)
   })
@@ -63,9 +64,10 @@ export default function CourseSortingtByYear({ year }: Props) {
         <div className='border-t-2 border-primaryText w-6/12 desktop:w-4/12'></div>
       </div>
       <div className='flex flex-col'>
-        {currentCourseList.map((course) => (
-          <CourseCard key={course._id} course={course} />
-        ))}
+        {(!startCourseListIsFetched || !endCourseListIsFetched) && <LoadingSection />}
+        {startCourseListIsFetched &&
+          endCourseListIsFetched &&
+          currentCourseList.map((course) => <CourseCard key={course._id} course={course} />)}
       </div>
     </div>
   )

@@ -5,13 +5,14 @@ import LoadingSection from 'src/components/LoadingSection'
 import { AppContext } from 'src/contexts/app.context'
 import { Course } from 'src/types/course.type'
 import CourseDetailClassroomCard from '../../components/CourseDetailClassroomCard'
+import authApi from 'src/apis/auth.api'
 
 interface Props {
   course: Course
 }
 
 export default function CourseDetailClassroomList({ course }: Props) {
-  const { isAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, profile } = useContext(AppContext)
 
   const today = new Date()
   const endDate = new Date(course.end_time)
@@ -25,6 +26,15 @@ export default function CourseDetailClassroomList({ course }: Props) {
     queryFn: () => classroomApi.getClassroomList({ course_id: course._id })
   })
   const classroomList = classroomListData?.data.data
+
+  //! Get joined classroom list
+  const { data: joinedClassroomListData } = useQuery({
+    queryKey: ['joined_classroom_list', profile?._id],
+    queryFn: () => authApi.getJoinedClassroomList(),
+    enabled: isAuthenticated
+  })
+  const joinedClassroomList = joinedClassroomListData?.data.data || []
+  const joinedClassroomIdList = joinedClassroomList.map((classroom) => classroom.class._id)
 
   return (
     <div className='border p-4 border-black/40 rounded-lg sticky top-16 desktop:top-20 space-y-4'>
@@ -41,7 +51,11 @@ export default function CourseDetailClassroomList({ course }: Props) {
         <div className='grid grid-cols-1 desktop:grid-cols-2 gap-4'>
           {classroomList.map((clasroom) => (
             <div key={clasroom._id} className='col-span-1'>
-              <CourseDetailClassroomCard classroom={clasroom} canRegister={canRegister} />
+              <CourseDetailClassroomCard
+                classroom={clasroom}
+                canRegister={canRegister}
+                joinedClassroomList={joinedClassroomIdList}
+              />
             </div>
           ))}
         </div>
