@@ -63,7 +63,7 @@ export default function CourseSortingtByYear({ year }: Props) {
       <div className='w-full flex justify-center'>
         <div className='border-t-2 border-primaryText w-6/12 desktop:w-4/12'></div>
       </div>
-      <div className='flex flex-col'>
+      <div className='rounded-lg bg-white px-4 flex flex-col'>
         {(!startCourseListIsFetched || !endCourseListIsFetched) && <LoadingSection />}
         {startCourseListIsFetched &&
           endCourseListIsFetched &&

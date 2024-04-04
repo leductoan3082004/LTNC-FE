@@ -1,8 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
-import { random } from 'lodash'
 import { useLocation } from 'react-router-dom'
-import { Fragment } from 'react/jsx-runtime'
 import classroomApi from 'src/apis/classroom.api'
 import BackButton from 'src/components/BackButton'
 import LoadingSection from 'src/components/LoadingSection'
@@ -54,21 +52,6 @@ export default function AdminClassroomDetail() {
   const teacher = memberList?.find((member) => member.role == 1)
   const studentList = memberList?.filter((member) => member.role == 0) || []
 
-  const tempStudent: Member = {
-    _id: random(1000000, 9999999).toString(),
-    status: 0,
-    created_at: new Date().toDateString(),
-    updated_at: new Date().toDateString(),
-    name: 'Le Toan',
-    address: 'Ho Chi Minh',
-    phone: '000-000-000',
-    role: 0,
-    attendance: 0.8,
-    lab: 1.9,
-    midterm: 2.0,
-    final: 2.8
-  }
-
   return (
     <div className='space-y-8'>
       <BackButton />
@@ -84,10 +67,10 @@ export default function AdminClassroomDetail() {
             <span className='font-medium opacity-60'>Giáo viên:</span>
             <span className='text-primaryText'>{teacher ? teacher.name : ''}</span>
           </p>
-          <div className='rounded-lg border-black/20 p-4 bg-webColor100'>
+          <div className='rounded-lg border-black/20 p-4 bg-webColor100 space-y-4'>
             <p className='font-medium text-center text-lg desktop:text-xl uppercase'>Danh sách sinh viên</p>
             <div className='flex flex-col space-y-2'>
-              {(Array(80).fill(tempStudent) as Member[]).map((student, index) => (
+              {studentList.map((student, index) => (
                 <StudentCard key={index} student={student} index={index} />
               ))}
             </div>
