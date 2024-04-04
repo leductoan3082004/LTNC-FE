@@ -22,8 +22,8 @@ export default function CourseDetailClassroomCard({ classroom, canRegister = fal
   const startTimestamp = new Date(classroom.time_table[0].lesson_start)
   const endTimestamp = new Date(classroom.time_table[0].lesson_end)
 
-  const startTime = startTimestamp.getHours().toString() + ':' + startTimestamp.getMinutes().toString()
-  const endTime = endTimestamp.getHours().toString() + ':' + endTimestamp.getMinutes().toString()
+  const startTime = startTimestamp.getHours().toString() + ':00'
+  const endTime = endTimestamp.getHours().toString() + ':00'
   const day = startTimestamp.getDay()
 
   //! Handle registration

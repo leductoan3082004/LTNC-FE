@@ -5,7 +5,8 @@ import Input from 'src/components/Input'
 import { AdminCreateClassroomSchema } from 'src/rules/classroom.rule'
 import { InputField } from 'src/types/utils.type'
 import ErrorSection from '../ErrorSection'
-import DateSelect from 'src/components/DateSelect'
+import TimeSelector from 'src/components/TimeSelector'
+import DayInWeekSelector from 'src/components/DayInWeekSelector'
 
 type FormData = AdminCreateClassroomSchema
 
@@ -30,7 +31,7 @@ export default function AdminCreateClassroomForm() {
       error: errors.teacher_id,
       errorMessage: errors.teacher_id?.message,
       name: 'teacher_id',
-      title: 'ID khóa học',
+      title: 'ID giáo viên',
       readonly: true
     },
     {
@@ -81,12 +82,12 @@ export default function AdminCreateClassroomForm() {
           <span className='opacity-60'>Giờ bắt đầu học</span>
           <span className='text-alertRed text-lg'>*</span>
         </div>
-        <div className={inputStyle}>
+        <div className='text-primaryText py-1 col-span-3 text-base lg:text-lg rounded-lg outline-none focus:outline-primaryText'>
           <Controller
             control={control}
             name='lesson_start'
             render={({ field }) => (
-              <DateSelect errorMessage={errors.lesson_start?.message} value={field.value} onChange={field.onChange} />
+              <TimeSelector errorMessage={errors.lesson_start?.message} value={field.value} onChange={field.onChange} />
             )}
           />
         </div>
@@ -97,12 +98,32 @@ export default function AdminCreateClassroomForm() {
           <span className='opacity-60'>Giờ kết thúc</span>
           <span className='text-alertRed text-lg'>*</span>
         </div>
-        <div className={inputStyle}>
+        <div className='text-primaryText py-1 col-span-3 text-base lg:text-lg rounded-lg outline-none focus:outline-primaryText'>
           <Controller
             control={control}
             name='lesson_end'
             render={({ field }) => (
-              <DateSelect errorMessage={errors.lesson_end?.message} value={field.value} onChange={field.onChange} />
+              <TimeSelector errorMessage={errors.lesson_end?.message} value={field.value} onChange={field.onChange} />
+            )}
+          />
+        </div>
+      </div>
+
+      <div className={inputFieldStyle}>
+        <div className={titleStyle}>
+          <span className='opacity-60'>Ngày học trong tuần</span>
+          <span className='text-alertRed text-lg'>*</span>
+        </div>
+        <div className='text-primaryText py-1 col-span-3 text-base lg:text-lg rounded-lg outline-none focus:outline-primaryText'>
+          <Controller
+            control={control}
+            name='date'
+            render={({ field }) => (
+              <DayInWeekSelector
+                errorMessage={errors.lesson_end?.message}
+                value={field.value}
+                onChange={field.onChange}
+              />
             )}
           />
         </div>
