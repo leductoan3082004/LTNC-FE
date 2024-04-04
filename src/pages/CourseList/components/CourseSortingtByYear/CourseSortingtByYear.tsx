@@ -64,9 +64,7 @@ export default function CourseSortingtByYear({ year }: Props) {
       </div>
       <div className='flex flex-col'>
         {currentCourseList.map((course) => (
-          <div key={course._id} className='border-b last:border-none border-primaryText/80'>
-            <CourseCard course={course} year={year} />
-          </div>
+          <CourseCard key={course._id} course={course} year={year} />
         ))}
       </div>
     </div>

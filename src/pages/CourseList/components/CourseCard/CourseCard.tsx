@@ -23,7 +23,10 @@ export default function CourseCard({ course, year }: Props) {
   }
 
   return (
-    <button onClick={chooseCourse} className='py-4 group  text-darkText flex w-full items-center justify-between'>
+    <button
+      onClick={chooseCourse}
+      className='py-4 group border-b last:border-none border-primaryText/80 text-darkText flex w-full items-center justify-between'
+    >
       <span className='font-medium group-hover:text-primaryText text-lg uppercase desktop:text-xl'>
         {course.course_name}
       </span>

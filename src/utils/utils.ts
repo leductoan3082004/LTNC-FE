@@ -46,3 +46,8 @@ export const generateID = (id: string) => {
   }
   return ''
 }
+
+export const getAcademicYearFromUrl = (url: string) => {
+  const arr = url.split('/courses/')
+  return arr[arr.length - 1]
+}
