@@ -2,11 +2,15 @@ import { useState, createContext } from 'react'
 import { PathElement } from 'src/components/PathBar/PathBar'
 
 interface ClassesContextInterface {
+  subject: string
+  setSubject: React.Dispatch<React.SetStateAction<string>>
   classesPathList: PathElement[]
   setClassesPathList: React.Dispatch<React.SetStateAction<PathElement[]>>
 }
 
 const initialClassesContext: ClassesContextInterface = {
+  subject: '',
+  setSubject: () => '',
   classesPathList: [],
   setClassesPathList: () => null
 }
@@ -14,13 +18,16 @@ const initialClassesContext: ClassesContextInterface = {
 export const ClassesContext = createContext<ClassesContextInterface>(initialClassesContext)
 
 export const ClassesProvider = ({ children }: { children: React.ReactNode }) => {
+  const [subject, setSubject] = useState<string>(initialClassesContext.subject)
     const [classesPathList, setClassesPathList] = useState<PathElement[]>(initialClassesContext.classesPathList)
     
     return (
         <ClassesContext.Provider
         value={{
-            classesPathList,
-            setClassesPathList
+          subject,
+          setSubject,
+          classesPathList,
+          setClassesPathList
         }}
         >
         {children}
