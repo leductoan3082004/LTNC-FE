@@ -4,8 +4,13 @@ import LoadingPage from 'src/components/LoadingPage'
 import mainPath, { adminPath } from 'src/constants/path'
 import { AdminProvider } from 'src/contexts/admin.context'
 import { AppContext } from 'src/contexts/app.context'
-import AdminLayout from 'src/layouts/AdminLayout'
+
 import AdminPages from 'src/pages/AdminPages'
+
+import AdminLayout from 'src/layouts/AdminLayout'
+import AdminCourseLayout from 'src/pages/AdminPages/layouts/AdminCourseLayout'
+import AdminUserLayout from 'src/pages/AdminPages/layouts/AdminUserLayout'
+
 import AdminClassroomDetail from 'src/pages/AdminPages/children/AdminClassroomDetail'
 import AdminCourseDetail from 'src/pages/AdminPages/children/AdminCourseDetail'
 import AdminCourseManagement from 'src/pages/AdminPages/children/AdminCourseManagement'
@@ -15,8 +20,6 @@ import AdminCreateUser from 'src/pages/AdminPages/children/AdminCreateUser'
 import AdminStudentDetail from 'src/pages/AdminPages/children/AdminStudentDetail'
 import AdminStudentList from 'src/pages/AdminPages/children/AdminStudentList'
 import AdminTeacherList from 'src/pages/AdminPages/children/AdminTeacherList'
-import AdminCourseLayout from 'src/pages/AdminPages/layouts/AdminCourseLayout'
-import AdminUserLayout from 'src/pages/AdminPages/layouts/AdminUserLayout/AdminUserLayout'
 
 function ProtectedAdminRoute() {
   const { isAuthenticated, profile } = useContext(AppContext)
