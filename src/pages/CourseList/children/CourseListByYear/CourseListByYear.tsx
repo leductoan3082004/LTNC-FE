@@ -7,8 +7,8 @@ import mainPath from 'src/constants/path'
 import { CourseContext } from 'src/contexts/course.context'
 import useCourseListQueryConfig from 'src/hooks/useCourseListQueryConfig'
 import { CourseListConfig } from 'src/types/course.type'
-import { getAcademicYearFromUrl } from 'src/utils/utils'
 import CourseCard from '../../components/CourseCard'
+import { getAcademicYearFromUrl } from 'src/utils/course.utils'
 
 export default function CourseListByYear() {
   const { academicYear, setAcademicYear, setCoursePathList } = useContext(CourseContext)
@@ -60,7 +60,7 @@ export default function CourseListByYear() {
       { pathName: `Năm học ${academicYear}`, url: `${mainPath.courseList}/${academicYear}` }
     ])
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [yearInt])
 
   return (
     <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
@@ -72,7 +72,7 @@ export default function CourseListByYear() {
         {!startListIsFetched && !endListIsFetched && <LoadingSection />}
         {startListIsFetched &&
           endListIsFetched &&
-          currentCourseList.map((course) => <CourseCard key={course._id} course={course} year={yearInt} />)}
+          currentCourseList.map((course) => <CourseCard key={course._id} course={course} />)}
       </div>
     </div>
   )

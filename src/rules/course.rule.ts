@@ -11,14 +11,10 @@ export const adminCreateCourseSchema = yup.object({
   lab_ratio: yup.number().required('Yêu cầu điền % điểm lab'),
   midterm_ratio: yup.number().required('Yêu cầu điền % điểm giữa kì'),
   final_ratio: yup.number().required('Yêu cầu điền % điểm cuối kì'),
-  start_time: yup
-    .date()
-    .required('Yêu cầu điền thời gian mở đăng ký')
-    .min(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()), 'Thời gian không hợp lệ'),
-  end_time: yup
-    .date()
-    .required('Yêu cầu điền thời gian đóng đăng ký')
-    .min(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()), 'Thời gian không hợp lệ')
+  start_time: yup.date().required('Yêu cầu điền thời gian mở đăng ký'),
+  // .min(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()), 'Thời gian không hợp lệ'),
+  end_time: yup.date().required('Yêu cầu điền thời gian đóng đăng ký')
+  // .min(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()), 'Thời gian không hợp lệ')
 })
 export type AdminCreateCourseSchema = yup.InferType<typeof adminCreateCourseSchema>
 

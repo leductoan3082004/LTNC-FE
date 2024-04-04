@@ -42,6 +42,7 @@ export default function CourseList() {
       )}
       {(!query || query == '') && (
         <Fragment>
+          <CourseSortingtByYear year={2023} />
           <CourseSortingtByYear year={2024} />
           <CourseSortingtByYear year={2025} />
         </Fragment>
