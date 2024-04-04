@@ -46,3 +46,8 @@ export const adminUpdateCourseSchema = yup.object({
   end_time: yup.date().default(currentDate)
 })
 export type AdminUpdateCourseSchema = yup.InferType<typeof adminUpdateCourseSchema>
+
+export const courseSearchSchema = yup.object({
+  query: yup.string().default('')
+})
+export type CourseSearchSchema = yup.InferType<typeof courseSearchSchema>

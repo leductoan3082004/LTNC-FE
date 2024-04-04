@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import mainPath from 'src/constants/path'
@@ -7,18 +8,20 @@ import { generateCourseId } from 'src/utils/course.utils'
 
 interface Props {
   course: Course
-  year: number
 }
 
-export default function CourseCard({ course, year }: Props) {
+export default function CourseCard({ course }: Props) {
   //! Use hooks
   const { setAcademicYear } = useContext(CourseContext)
   const navigate = useNavigate()
 
+  //! Get acadeic year
+  const academicYear = moment(course.end_time).year()
+
   const chooseCourse = () => {
-    setAcademicYear(year.toString())
+    setAcademicYear(academicYear.toString())
     navigate({
-      pathname: `${mainPath.courseList}/${year}/${generateCourseId({ course: course.course_name, id: course._id })}`
+      pathname: `${mainPath.courseList}/${academicYear}/${generateCourseId({ course: course.course_name, id: course._id })}`
     })
   }
 

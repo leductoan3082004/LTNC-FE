@@ -26,7 +26,7 @@ export default function CourseSortingtByYear({ year }: Props) {
     end_time: startTimeStamp
   }
   const { data: startCourseListData } = useQuery({
-    queryKey: ['course_list', startTimeStamp],
+    queryKey: ['course_list', startYearConfig],
     queryFn: () => courseApi.getCourseList(startYearConfig)
   })
   const startCourseList = startCourseListData?.data.data || []
@@ -37,7 +37,7 @@ export default function CourseSortingtByYear({ year }: Props) {
     end_time: endTimtStamp
   }
   const { data: endCourseListData } = useQuery({
-    queryKey: ['course_list', endTimtStamp],
+    queryKey: ['course_list', endYearConfig],
     queryFn: () => courseApi.getCourseList(endYearConfig)
   })
   const endCourseListId = endCourseListData?.data.data.map((course) => course._id) || []
@@ -64,7 +64,7 @@ export default function CourseSortingtByYear({ year }: Props) {
       </div>
       <div className='flex flex-col'>
         {currentCourseList.map((course) => (
-          <CourseCard key={course._id} course={course} year={year} />
+          <CourseCard key={course._id} course={course} />
         ))}
       </div>
     </div>
