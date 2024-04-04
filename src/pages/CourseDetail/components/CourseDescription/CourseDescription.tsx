@@ -13,11 +13,10 @@ interface Info {
   content: string | number
 }
 
-const today = new Date()
-
 export default function CourseDescription({ course }: Props) {
   const { academicYear } = useContext(CourseContext)
 
+  const today = new Date()
   const endDate = new Date(course.end_time)
   const outOfDate = today.getTime() > endDate.getTime()
 

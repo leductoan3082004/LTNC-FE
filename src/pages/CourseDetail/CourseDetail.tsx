@@ -3,12 +3,12 @@ import { useLocation } from 'react-router-dom'
 import LoadingRing from 'src/components/LoadingRing'
 import mainPath from 'src/constants/path'
 import { CourseContext } from 'src/contexts/course.context'
-import ClassroomInCourseDetail from './components/ClassroomInCourseDetail'
 import CourseDescription from './components/CourseDescription'
 import { getYearFromUrlInCourseDetailUrl } from 'src/utils/course.utils'
 import { useQuery } from '@tanstack/react-query'
 import { getIdFromUrl } from 'src/utils/utils'
 import courseApi from 'src/apis/course.api'
+import CourseDetailClassroomList from './children/CourseDetailClassroomList'
 
 export default function CourseDetail() {
   const { academicYear, setAcademicYear, setCoursePathList } = useContext(CourseContext)
@@ -56,18 +56,7 @@ export default function CourseDetail() {
             <CourseDescription course={courseDetail} />
           </div>
           <div className='col-span-5'>
-            <div className='border p-4 border-black/40 rounded-lg sticky top-16 desktop:top-20 space-y-4'>
-              <p className='w-full text-center font-semibold uppercase text-lg desktop:text-xl'>Danh sách lớp học</p>
-              <div className='grid grid-cols-1 desktop:grid-cols-2 gap-4'>
-                {Array(5)
-                  .fill(0)
-                  .map((_, index) => (
-                    <div key={index} className='col-span-1'>
-                      <ClassroomInCourseDetail />
-                    </div>
-                  ))}
-              </div>
-            </div>
+            <CourseDetailClassroomList course={courseDetail} />
           </div>
         </div>
       )}

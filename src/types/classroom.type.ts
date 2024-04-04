@@ -29,7 +29,7 @@ export interface MemberList {
   data: Member[]
 }
 
-export interface Classromm {
+export interface Classroom {
   _id: string
   status: number
   created_at: string
@@ -41,7 +41,7 @@ export interface Classromm {
 }
 
 export interface ClassroomList {
-  data: Classromm[]
+  data: Classroom[]
   paging: Paging
 }
 

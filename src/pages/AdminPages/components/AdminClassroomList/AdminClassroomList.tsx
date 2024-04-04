@@ -9,7 +9,7 @@ import LoadingSection from 'src/components/LoadingSection'
 import DaysInWeekEnum from 'src/constants/daysInWeek'
 import { adminPath } from 'src/constants/path'
 import { AdminContext } from 'src/contexts/admin.context'
-import { Classromm } from 'src/types/classroom.type'
+import { Classroom } from 'src/types/classroom.type'
 import { Course } from 'src/types/course.type'
 import { generateClassroomId } from 'src/utils/classroom.utils'
 
@@ -17,7 +17,7 @@ interface Props {
   course: Course
 }
 
-function ClassroomCard({ classroom, index }: { classroom: Classromm; index: number }) {
+function ClassroomCard({ classroom, index }: { classroom: Classroom; index: number }) {
   //! Get timetable
   const startTimestamp = new Date(classroom.time_table[0].lesson_start)
   const endTimestamp = new Date(classroom.time_table[0].lesson_end)
