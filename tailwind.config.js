@@ -32,7 +32,13 @@ module.exports = {
 
         //? INTERACTING
         unhoverBg: '#48CAE4',
-        hoveringBg: '#00B4D8'
+        hoveringBg: '#00B4D8',
+
+        //? Score color
+        weakColor: '#cc3300',
+        normalColor: '#ffcc00',
+        fineColor: '#023E8A',
+        goodColor: '#339900'
       }
     },
     screens: {

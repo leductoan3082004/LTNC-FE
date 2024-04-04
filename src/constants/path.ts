@@ -20,7 +20,25 @@ export const personalPath = {
 } as const
 
 export const ScorePath = {
-  ScoreByYear: '/score/:year',
+  ScoreByYear: '/score/:year'
 } as const
 
-export const adminPath = {} as const
+//! ADMIN PATH
+export const adminPath = {
+  mainPage: '/admin',
+  users: '/admin/users',
+  studentList: '/admin/users/students',
+  studentDetail: '/admin/users/students/:studentId',
+  teacherList: '/admin/users/teachers',
+  createUser: '/admin/users/create',
+
+  // Courses
+  courses: '/admin/courses',
+  courseDetail: '/admin/courses/:courseId',
+  createCourse: '/admin/courses/create',
+
+  // Classes
+  classrooms: '/admin/classrooms',
+  classroomDetail: '/admin/classrooms/:classroomId',
+  createClassroom: '/admin/classrooms/create'
+} as const

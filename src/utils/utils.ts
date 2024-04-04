@@ -18,8 +18,12 @@ export const removeSpecialCharacter = (str: string) =>
   // eslint-disable-next-line no-useless-escape
   str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, '')
 
+export const generateNameId = ({ name, id }: { name: string; id: string }) => {
+  return removeSpecialCharacter(name).replace(/\s/g, '-') + `-i:${id}`
+}
+
 export const getIdFromUrl = (idString: string) => {
-  const arr = idString.split('-id:')
+  const arr = idString.split('id:')
   return arr[arr.length - 1]
 }
 
@@ -36,4 +40,13 @@ export const showSuccessDialog = (setIsOpen: React.Dispatch<React.SetStateAction
   setTimeout(() => {
     setIsOpen(false)
   }, time || 1500)
+}
+
+export const generateID = (id: string) => {
+  let MSSV = ''
+  for (const c of id) {
+    if (c >= '0' && c <= '9') MSSV = c + MSSV
+    if (MSSV.length == 6) return MSSV
+  }
+  return ''
 }

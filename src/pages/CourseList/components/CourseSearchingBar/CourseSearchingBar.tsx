@@ -1,16 +1,57 @@
-import React from 'react'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { omit } from 'lodash'
+import { useForm } from 'react-hook-form'
+import { createSearchParams, useNavigate } from 'react-router-dom'
+import mainPath from 'src/constants/path'
+import useCourseListQueryConfig from 'src/hooks/useCourseListQueryConfig'
+import { CourseSearchSchema, courseSearchSchema } from 'src/rules/course.rule'
+
+type FormData = CourseSearchSchema
 
 export default function CourseSearchingBar() {
+  //! decalre form
+  const { register, handleSubmit } = useForm<FormData>({
+    defaultValues: {
+      query: ''
+    },
+    resolver: yupResolver(courseSearchSchema)
+  })
+
+  //! Handle search
+  const navigate = useNavigate()
+  const courseListConfig = useCourseListQueryConfig()
+  const handleSearch = handleSubmit((data) => {
+    const config =
+      data.query == ''
+        ? omit(
+            {
+              ...courseListConfig
+            },
+            ['page', 'limit', 'end_time', 'query']
+          )
+        : omit(
+            {
+              ...courseListConfig,
+              query: data.query
+            },
+            ['page', 'limit', 'end_time']
+          )
+
+    navigate({
+      pathname: mainPath.courseList,
+      search: createSearchParams(config).toString()
+    })
+  })
   return (
     <div className='w-full'>
       <form
-        className='relative flex w-full items-center rounded-lg bg-sidebarItemLight shadow-sm duration-200 dark:bg-sidebarItemDark'
-        // onSubmit={handleSearch}
+        className='relative flex w-full items-center rounded-lg bg-sidebarItemLight shadow-sm duration-200'
+        onSubmit={handleSearch}
       >
         <input
-          className='focus:ring-primaryText desktop:py-2 desktop:text-lg w-full rounded-md bg-transparent px-4 py-1 text-base text-darkText caret-black ring-2 outline-none ring-primaryTextUnHover duration-200 '
+          className='focus:ring-2 desktop:text-lg w-full rounded-md bg-transparent px-4 py-2 text-base text-darkText caret-black ring-1 outline-none ring-primaryTextUnHover duration-200 '
           placeholder='Tìm kiếm khóa học'
-          // {...register('name')}
+          {...register('query')}
         />
         <button className='desktop:right-4 desktop:px-3 text-white absolute right-1 flex items-center justify-center rounded-lg bg-primaryTextUnHover px-2 py-2 duration-200 hover:bg-primaryText '>
           <svg
