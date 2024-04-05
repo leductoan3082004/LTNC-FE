@@ -3,7 +3,7 @@ const mainPath = {
   login: '/login',
   calendar: '/calendar',
   courseList: '/courses',
-  classList: '/classes',
+  classList: '/classrooms',
   personal: '/personal',
 
 } as const
@@ -15,8 +15,8 @@ export const coursePath = {
 } as const
 
 export const classPath = {
-  classList: '/classes',
-  classesDetail: '/classes/class1'
+  classList: '/classrooms',
+  classesDetail: '/classrooms/:classroomId'
 } as const
 
 export const personalPath = {

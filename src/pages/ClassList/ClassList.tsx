@@ -2,8 +2,15 @@ import mainPath from 'src/constants/path'
 import { useContext, useEffect, useState } from 'react'
 import { ClassesContext } from 'src/contexts/classes.context'
 import { useNavigate } from 'react-router-dom'
+import { generateNameId } from 'src/utils/utils'
+import { useQuery } from '@tanstack/react-query'
+import authApi from 'src/apis/auth.api'
+import classroomApi from 'src/apis/classroom.api'
+import { JoinedClassroom } from 'src/types/joinedClassroom.type'
 
-interface Video {
+
+interface Video 
+ {
   id: number
   title: string
   path: string
@@ -11,22 +18,19 @@ interface Video {
 }
 
 export default function ClassListLayout() {
-  const { setClassesPathList,setSubject } = useContext(ClassesContext)
+  const { setClassesPathList, setSubject } = useContext(ClassesContext)
 
+  const { data: ClassRoomListData } = useQuery({
+    queryKey: ['classroom_list'],
+    queryFn: () => authApi.getJoinedClassroomList() 
+   })
+  const classroomList = ClassRoomListData?.data.data
 
-  useEffect(() => {
-    setClassesPathList([{
-      pathName: 'Lớp học',
-      url: mainPath.classList
-    }])
-  }, [])
-
-  const navigate = useNavigate()
   //! HANDLE CHOOSE YEAR
-  const handleSelectSubject = (selectedVideo: Video) => {
-    setSubject(selectedVideo.title);
-    navigate({ pathname: `${mainPath.classList}/${selectedVideo.path}` })
-  }
+ // const handleSelectSubject = (selectedVideo: Video) => {
+   // setSubject(selectedVideo.title);
+  //  navigate({ pathname: `${mainPath.classList}/${selectedVideo.path}` })
+ // }
   // Mock data
   const videoList: Video[] = [
     {
@@ -61,14 +65,15 @@ export default function ClassListLayout() {
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(e.target.value)
   }
+  //handle click item
+  const navigate = useNavigate()
+  const handleClickItem = (classroom: JoinedClassroom) => () => {
+    navigate({ pathname: `${mainPath.classList}/${generateNameId({ name: classroom.course.course_name, id: classroom.class._id })}` })
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value)
   }
-
-  const filteredVideoList: Video[] = videoList
-    .filter((video) => (selectedOption === 'all' && video.isActive) || (selectedOption === 'hidden' && !video.isActive))
-    .filter((video) => video.title.toLowerCase().includes(searchKeyword.toLowerCase()))
 
   return (
     <div className='bg-mainBg min-h-[100vh] py-4'>
@@ -99,18 +104,18 @@ export default function ClassListLayout() {
         <div className='flex flex-col px-1 video gap-y-2'>
           <h4 className='text-lg font-normal title'>Danh sách khóa học</h4>
           <ul className='list-video'>
-            {filteredVideoList.length > 0 ? (
+            {classroomList ?  (
               <ul className='list-video'>
-                {filteredVideoList.map((video) => (
-                  <li key={video.id} className='px-1 py-2 border-b border-black item'>
-                    <button onClick={() => handleSelectSubject(video)} className='text-lg font-medium text-blue-800'>
-                      {video.title}
+                {classroomList.map((classroom) => (
+                  <li key ={classroom.class._id} className='px-1 py-2 border-b border-black item'>
+                    <button onClick={ handleClickItem(classroom)} className='text-lg font-medium text-blue-800'>
+                      {classroom.course.course_name}
                     </button>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className='text-lg'>Không có video</p>
+              <p className='text-lg'>Không có lớp học</p>
             )}
           </ul>
         </div>
