@@ -1,8 +1,13 @@
 import classNames from 'classnames'
+import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import mainPath, { personalPath } from 'src/constants/path'
+import { AppContext } from 'src/contexts/app.context'
 
 export default function PersonalNavBar() {
+  const { profile } = useContext(AppContext)
+  const isTeacher = profile?.role == 1
+
   //! STYLES
   const navlinkClassname = 'px-4 py-4 text-lg uppercase font-medium hover:text-primaryText'
 
@@ -19,7 +24,7 @@ export default function PersonalNavBar() {
       >
         Hồ sơ
       </NavLink>
-      <div className='w-full border-t border-black/20'></div>
+      <div className='w-full border-t border-black/20' />
       <NavLink
         to={personalPath.account}
         className={({ isActive }) =>
@@ -30,17 +35,19 @@ export default function PersonalNavBar() {
       >
         Tài khoản
       </NavLink>
-      <div className='w-full border-t border-black/20'></div>
-      <NavLink
-        to={personalPath.score}
-        className={({ isActive }) =>
-          classNames(navlinkClassname, {
-            'text-primaryText': isActive
-          })
-        }
-      >
-        Điểm
-      </NavLink>
+      <div className='w-full border-t border-black/20' />
+      {!isTeacher && (
+        <NavLink
+          to={personalPath.score}
+          className={({ isActive }) =>
+            classNames(navlinkClassname, {
+              'text-primaryText': isActive
+            })
+          }
+        >
+          Điểm
+        </NavLink>
+      )}
     </div>
   )
 }

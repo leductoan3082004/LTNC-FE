@@ -18,7 +18,7 @@ export default function CourseDetailClassroomList({ course }: Props) {
   const endDate = new Date(course.end_time)
   const inDate = today.getTime() <= endDate.getTime()
 
-  const canRegister = isAuthenticated && inDate
+  const canRegister = isAuthenticated && inDate && profile?.role == 0
 
   //! Get classroom list
   const { data: classroomListData } = useQuery({
