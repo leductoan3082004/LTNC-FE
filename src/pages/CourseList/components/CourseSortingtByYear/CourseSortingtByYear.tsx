@@ -1,8 +1,13 @@
+import { useQuery } from '@tanstack/react-query'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import courseApi from 'src/apis/course.api'
 import mainPath from 'src/constants/path'
 import { CourseContext } from 'src/contexts/course.context'
-import { generateCourseId } from 'src/utils/course.utils'
+import useCourseListQueryConfig from 'src/hooks/useCourseListQueryConfig'
+import { CourseListConfig } from 'src/types/course.type'
+import CourseCard from '../CourseCard'
+import LoadingSection from 'src/components/LoadingSection'
 
 interface Props {
   year: number
@@ -11,17 +16,40 @@ interface Props {
 export default function CourseSortingtByYear({ year }: Props) {
   const { setAcademicYear } = useContext(CourseContext)
 
-  const navigate = useNavigate()
+  const startTimeStamp = new Date(year, 0).getTime() / 1000
+  const endTimtStamp = new Date(year + 1, 0).getTime() / 1000
+
+  //! Get course list by year
+  const courseListConfig = useCourseListQueryConfig()
+  // Get course list from current year
+  const startYearConfig: CourseListConfig = {
+    ...courseListConfig,
+    end_time: startTimeStamp
+  }
+  const { data: startCourseListData, isFetched: startCourseListIsFetched } = useQuery({
+    queryKey: ['course_list', startYearConfig],
+    queryFn: () => courseApi.getCourseList(startYearConfig)
+  })
+  const startCourseList = startCourseListData?.data.data || []
+
+  // Get course list from the next year
+  const endYearConfig: CourseListConfig = {
+    ...courseListConfig,
+    end_time: endTimtStamp
+  }
+  const { data: endCourseListData, isFetched: endCourseListIsFetched } = useQuery({
+    queryKey: ['course_list', endYearConfig],
+    queryFn: () => courseApi.getCourseList(endYearConfig)
+  })
+  const endCourseListId = endCourseListData?.data.data.map((course) => course._id) || []
+
+  const currentCourseList = startCourseList.filter((course) => !endCourseListId.includes(course._id))
+
   //! HANDLE CHOOSE YEAR
+  const navigate = useNavigate()
   const handleSelectYear = () => {
     setAcademicYear(year.toString())
     navigate({ pathname: `${mainPath.courseList}/${year}` })
-  }
-
-  //! HANDLE CHOOSE COURSE
-  const chooseCourse = (courseName: string, id: string) => () => {
-    setAcademicYear(year.toString())
-    navigate({ pathname: `${mainPath.courseList}/${year}/${generateCourseId({ course: courseName, id: id })}` })
   }
 
   return (
@@ -35,18 +63,11 @@ export default function CourseSortingtByYear({ year }: Props) {
       <div className='flex justify-center w-full'>
         <div className='w-6/12 border-t-2 border-primaryText desktop:w-4/12'></div>
       </div>
-      <div className='flex flex-col'>
-        {Array(5)
-          .fill(0)
-          .map((_, index) => (
-            <button
-              onClick={chooseCourse(`Lập trình nâng cao 0${index}`, `${index}`)}
-              className='py-4 text-lg uppercase border-b last:border-none border-primaryText/80 hover:text-primaryText desktop:text-xl text-darkText text-start'
-              key={index}
-            >
-              Lập trình nâng cao
-            </button>
-          ))}
+      <div className='rounded-lg bg-white px-4 flex flex-col'>
+        {(!startCourseListIsFetched || !endCourseListIsFetched) && <LoadingSection />}
+        {startCourseListIsFetched &&
+          endCourseListIsFetched &&
+          currentCourseList.map((course) => <CourseCard key={course._id} course={course} />)}
       </div>
     </div>
   )

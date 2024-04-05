@@ -16,13 +16,13 @@ export default function UsePagination({ totalPage, isMobile, queryConfig }: Prop
   //! GET LOCATION
   const pathname = useLocation().pathname
 
-  //? STYLES
+  //! STYLES
   const indexNumberStyle =
-    'mx-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border px-2 py-2 text-sm shadow-sm  desktop:mx-2 desktop:h-8 desktop:w-8 desktop:text-base'
+    'mx-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border px-2 py-2 text-sm shadow-sm desktop:mx-2 desktop:h-8 desktop:w-8 desktop:text-base'
   const activeArrowStyle =
-    'group mx-2 flex cursor-pointer items-center space-x-1 rounded-xl border border-darkText px-3  py-1 text-sm text-darkText shadow-sm hover:border-primaryBlue desktop:text-base'
+    'group mx-2 flex cursor-pointer items-center space-x-1 rounded-xl border border-black/60 px-3  py-1 text-sm text-black/60 shadow-sm hover:border-primaryText hover:text-primaryText desktop:text-base'
   const inactiveArrowStyle =
-    'group mx-2 flex cursor-not-allowed items-center space-x-1 rounded-xl border border-darkText px-3 py-1 text-sm text-darkText opacity-40 shadow-sm desktop:text-base'
+    'group mx-2 flex cursor-not-allowed items-center space-x-1 rounded-xl border border-black/60 px-3 py-1 text-sm text-black/60 opacity-40 shadow-sm desktop:text-base'
 
   const renderPagination = () => {
     let dotAfter = false
@@ -31,7 +31,7 @@ export default function UsePagination({ totalPage, isMobile, queryConfig }: Prop
       if (!dotBefore) {
         dotBefore = true
         return (
-          <span className='mx-1 rounded bg-transparent px-2 py-2 tracking-[4px] text-darkText shadow-sm' key={index}>
+          <span className='mx-1 rounded bg-transparent px-2 py-2 tracking-[4px] text-darkText' key={index}>
             ...
           </span>
         )
@@ -42,7 +42,7 @@ export default function UsePagination({ totalPage, isMobile, queryConfig }: Prop
       if (!dotAfter) {
         dotAfter = true
         return (
-          <span className='mx-1 rounded bg-transparent px-2 py-2 tracking-[4px] text-darkText shadow-sm' key={index}>
+          <span className='mx-1 rounded bg-transparent px-2 py-2 tracking-[4px] text-darkText' key={index}>
             ...
           </span>
         )
@@ -65,10 +65,7 @@ export default function UsePagination({ totalPage, isMobile, queryConfig }: Prop
           return renderDotBefore(index)
         } else if (pageNumber == currentPage)
           return (
-            <div
-              className={classNames(indexNumberStyle, 'border-transparent bg-primaryBackground text-darkText')}
-              key={index}
-            >
+            <div className={classNames(indexNumberStyle, 'border-primaryText bg-unhoverBg text-darkText')} key={index}>
               {pageNumber}
             </div>
           )
@@ -83,7 +80,7 @@ export default function UsePagination({ totalPage, isMobile, queryConfig }: Prop
             }}
             className={classNames(
               indexNumberStyle,
-              'border-darkText text-darkText hover:border-primaryBlue hover:text-primaryBlue'
+              'border-darkText/60 text-darkText/60 hover:border-primaryText hover:text-primaryText'
             )}
             key={index}
           >
@@ -107,11 +104,11 @@ export default function UsePagination({ totalPage, isMobile, queryConfig }: Prop
           }}
           className={activeArrowStyle}
         >
-          <FontAwesomeIcon icon={faAngleLeft} className='py-1 text-darkText group-hover:text-primaryBlue' />
+          <FontAwesomeIcon icon={faAngleLeft} className='py-1' />
         </Link>
       ) : (
         <span className={inactiveArrowStyle}>
-          <FontAwesomeIcon icon={faAngleLeft} className='py-1 text-darkText ' />
+          <FontAwesomeIcon icon={faAngleLeft} className='py-1' />
         </span>
       )}
 
@@ -128,11 +125,11 @@ export default function UsePagination({ totalPage, isMobile, queryConfig }: Prop
           }}
           className={activeArrowStyle}
         >
-          <FontAwesomeIcon icon={faAngleRight} className='py-1 text-darkText group-hover:text-primaryBlue' />
+          <FontAwesomeIcon icon={faAngleRight} className='py-1' />
         </Link>
       ) : (
         <span className={inactiveArrowStyle}>
-          <FontAwesomeIcon icon={faAngleRight} className='py-1 text-darkText ' />
+          <FontAwesomeIcon icon={faAngleRight} className='py-1' />
         </span>
       )}
     </div>
