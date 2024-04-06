@@ -45,7 +45,6 @@ export default function LoginPage() {
   const onSubmit = handleSubmit((data) => {
     loginMutation.mutate(data, {
       onSuccess: () => {
-        setIsAuthenticated(true)
         // const token = getAccessTokenFromLS()
         // const headers = {
         //   Authorization: `Bearer ${token}`,
@@ -55,11 +54,11 @@ export default function LoginPage() {
         //   setProfileToLS(response.data.data)
         // })
         getProfileMutation.mutateAsync().then((response) => {
+          setIsAuthenticated(true)
           setProfileToLS(response.data.data)
           setProfile(response.data.data)
+          navigate(-1)
         })
-
-        navigate(-1)
       },
       onError: (error) => {
         if (isAxiosBadRequestError<ErrorRespone>(error)) {
