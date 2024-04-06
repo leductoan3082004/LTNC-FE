@@ -47,7 +47,7 @@ export default function CourseDetail() {
       {!courseDetail && (
         <div className='h-[50vh] w-full flex flex-col items-center justify-center'>
           <LoadingRing />
-          <div className='font-medium opacity-80 uppercase text-xl'>Đang lấy thông tin khóa học</div>
+          <div className='text-xl font-medium uppercase opacity-80'>Đang lấy thông tin khóa học</div>
         </div>
       )}
       {courseDetail && (

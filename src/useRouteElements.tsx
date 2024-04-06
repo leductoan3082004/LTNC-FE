@@ -7,9 +7,12 @@ import MainLayout from './layouts/MainLayout'
 import NotFound from './components/NotFound'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
+import ClassList from './pages/ClassList'
+import Calendar from './pages/Calendar'
+import ClassesRoutes from './routes/classesRoutes'
+import AdminRoutes from './routes/adminRoute'
 import CourseRoutes from './routes/courseRoute'
 import PersonalRoutes from './routes/personalRoute'
-import AdminRoutes from './routes/adminRoute'
 
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -52,6 +55,24 @@ export default function useRouteElements() {
       children: [PersonalRoutes]
     },
     {
+      path: mainPath.classList,
+      element: (
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      ),
+      children: [ClassesRoutes]
+      
+    },
+    {
+      path: mainPath.calendar,
+      element: (
+        <MainLayout>
+          <Calendar />
+        </MainLayout>
+      ),
+    },
+    { 
       path: adminPath.mainPage,
       children: [AdminRoutes]
     },
