@@ -20,6 +20,7 @@ import AdminCreateUser from 'src/pages/AdminPages/children/AdminCreateUser'
 import AdminStudentDetail from 'src/pages/AdminPages/children/AdminStudentDetail'
 import AdminStudentList from 'src/pages/AdminPages/children/AdminStudentList'
 import AdminTeacherList from 'src/pages/AdminPages/children/AdminTeacherList'
+import AdminUserDetail from 'src/pages/AdminPages/children/AdminUserDetail'
 
 function ProtectedAdminRoute() {
   const { isAuthenticated, profile } = useContext(AppContext)
@@ -62,6 +63,10 @@ const AdminRoutes = {
       path: adminPath.users,
       element: <AdminUserRoute />,
       children: [
+        {
+          path: adminPath.userDetail,
+          element: <AdminUserDetail />
+        },
         {
           path: adminPath.studentList,
           element: <AdminStudentList />

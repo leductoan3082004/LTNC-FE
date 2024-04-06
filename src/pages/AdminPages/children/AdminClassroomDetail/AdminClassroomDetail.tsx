@@ -1,9 +1,10 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames'
-import { useContext } from 'react'
+import { Fragment, useContext, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import classroomApi from 'src/apis/classroom.api'
 import BackButton from 'src/components/BackButton'
+import DialogPopup from 'src/components/DialogPopup'
 import LoadingSection from 'src/components/LoadingSection'
 import { adminPath } from 'src/constants/path'
 import { AdminContext } from 'src/contexts/admin.context'
@@ -52,6 +53,16 @@ function StudentCard({ student, index }: { student: DetailedMember; index: numbe
 }
 
 export default function AdminClassroomDetail() {
+  //! Declate states
+  const [deleteDialog, setDeleteDialog] = useState<boolean>(false)
+  const [confirmMessage, setConfirmMessage] = useState<boolean>(false)
+  const [excuting, setExcuting] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
+  const [success, setSuccess] = useState<boolean>(false)
+
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
+
   //! Get classroom detail
   const pathname = useLocation().pathname
   const classroomId = getIdFromUrl(pathname)
@@ -66,9 +77,55 @@ export default function AdminClassroomDetail() {
   const teacher = memberList?.find((member) => member.role == 1)
   const studentList = memberList?.filter((member) => member.role == 0) || []
 
+  //! Handle delete classroom
+  const openDeleteDialog = () => {
+    setDeleteDialog(true)
+    setConfirmMessage(true)
+    setExcuting(false)
+    setError(false)
+  }
+
+  const closeDeleteDialog = () => {
+    setDeleteDialog(false)
+    setConfirmMessage(false)
+    success && navigate(-1)
+  }
+
+  const deleteClassroomMutation = useMutation({
+    mutationFn: classroomApi.deleteClassroom
+  })
+  const handleDelete = () => {
+    setConfirmMessage(false)
+    setExcuting(true)
+    deleteClassroomMutation.mutate(
+      { classroom_ids: [classroomId] },
+      {
+        onSettled: () => {
+          setExcuting(false)
+        },
+        onSuccess: () => {
+          setSuccess(true)
+          setError(false)
+          queryClient.invalidateQueries({
+            queryKey: ['admin_classroom_list']
+          })
+        },
+        onError: () => {
+          setSuccess(false)
+          setError(true)
+        }
+      }
+    )
+  }
+
   return (
     <div className='space-y-8'>
-      <BackButton />
+      <div className='flex justify-between'>
+        <BackButton />
+        <button onClick={openDeleteDialog} className='py-1.5 px-4 bg-alertRed/80 hover:bg-alertRed rounded-md'>
+          Xóa lớp học
+        </button>
+      </div>
 
       {!memberList && <LoadingSection />}
 
@@ -91,6 +148,46 @@ export default function AdminClassroomDetail() {
           </div>
         </div>
       )}
+
+      <DialogPopup isOpen={deleteDialog} handleClose={closeDeleteDialog}>
+        {confirmMessage && (
+          <div className='desktop:text-lg space-y-4 text-center'>
+            <p className='font-medium text-alertRed'>Những thành viên trong lớp học này sẽ bị buộc rời khỏi lớp</p>
+            <p className=''>Bạn có chắc muốn xóa lớp học này chứ?</p>
+            <div className='w-full justify-between flex'>
+              <button
+                onClick={closeDeleteDialog}
+                className='px-3 text-sm py-1 rounded-md bg-unhoverBg hover:bg-hoveringBg'
+              >
+                Hủy
+              </button>
+              <button onClick={handleDelete} className='px-3 text-sm py-1 rounded-md bg-alertRed/80 hover:bg-alertRed'>
+                Xóa
+              </button>
+            </div>
+          </div>
+        )}
+
+        {!confirmMessage && (
+          <Fragment>
+            {excuting && <LoadingSection />}
+            {!excuting && (
+              <Fragment>
+                {success && (
+                  <p className='text-center text-xl font-medium uppercase leading-6 text-successGreen'>
+                    Đã xóa lớp học
+                  </p>
+                )}
+                {error && (
+                  <p className='text-center text-xl font-medium uppercase leading-6 text-alertRed'>
+                    Đã có lỗi xảy ra, vui lòng thử lại
+                  </p>
+                )}
+              </Fragment>
+            )}
+          </Fragment>
+        )}
+      </DialogPopup>
     </div>
   )
 }
