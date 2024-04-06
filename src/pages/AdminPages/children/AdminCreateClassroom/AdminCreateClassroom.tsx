@@ -20,7 +20,7 @@ type FormData = AdminCreateClassroomSchema
 const currentDate = new Date()
 
 export default function AdminCreateClassroom() {
-  const { currentCourse, currentTeacherId, canCreateClassroom } = useContext(AdminContext)
+  const { currentCourse, canCreateClassroom } = useContext(AdminContext)
 
   const [excutingDialog, setExcutingDialog] = useState<boolean>(false)
   const [excuting, setExcuting] = useState<boolean>(false)
@@ -31,7 +31,6 @@ export default function AdminCreateClassroom() {
   const methods = useForm<FormData>({
     defaultValues: {
       course_id: currentCourse?._id,
-      teacher_id: currentTeacherId || '',
       limit: 1,
       weeks: 12,
       lesson_start: 7,
@@ -42,9 +41,6 @@ export default function AdminCreateClassroom() {
   })
   const { handleSubmit, setValue, reset } = methods
 
-  useEffect(() => {
-    setValue('teacher_id', currentTeacherId || '')
-  }, [currentTeacherId, setValue])
   useEffect(() => {
     setValue('course_id', currentCourse?._id || '')
   }, [currentCourse, setValue])
@@ -69,7 +65,6 @@ export default function AdminCreateClassroom() {
     try {
       const date = data.date
       const createBody: CreateClassroomForm = {
-        teacher_id: data.teacher_id,
         course_id: data.course_id,
         weeks: data.weeks,
         limit: data.limit,

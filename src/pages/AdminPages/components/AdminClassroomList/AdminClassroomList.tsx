@@ -49,9 +49,9 @@ export default function AdminClassroomList({ course }: Props) {
 
       <div className='grid grid-cols-3 gap-4'>
         {classroomList &&
-          classroomList.map((classroom, index) => (
+          classroomList.map((classroom) => (
             <div key={classroom._id} className='col-span-1'>
-              <AdminClassroomCard classroom={classroom} index={index} />
+              <AdminClassroomCard classroom={classroom} />
             </div>
           ))}
 

@@ -3,15 +3,14 @@ import DaysInWeekEnum from 'src/constants/daysInWeek'
 import { adminPath } from 'src/constants/path'
 import { Classroom } from 'src/types/classroom.type'
 import { Course } from 'src/types/course.type'
-import { generateClassroomId } from 'src/utils/classroom.utils'
+import { generateClassroomId, generateClassroomName } from 'src/utils/classroom.utils'
 
 interface Props {
   classroom: Classroom
-  index: number
   course?: Course
 }
 
-export default function AdminClassroomCard({ classroom, index, course }: Props) {
+export default function AdminClassroomCard({ classroom, course }: Props) {
   //! Get timetable
   const startTimestamp = new Date(classroom.time_table[0].lesson_start)
   const endTimestamp = new Date(classroom.time_table[0].lesson_end)
@@ -30,10 +29,7 @@ export default function AdminClassroomCard({ classroom, index, course }: Props) 
     <div className='bg-webColor100 rounded-md border border-black/20 py-2 px-3 space-y-3'>
       <p className='uppercase font-medium text-lg text-center desktop:text-xl space-x-1.5'>
         <span className=''>Lớp</span>
-        <span className=''>
-          <span className=''>L</span>
-          <span className=''>{index}</span>
-        </span>
+        <span className=''>{generateClassroomName(classroom._id)}</span>
       </p>
 
       {course && (
@@ -56,9 +52,9 @@ export default function AdminClassroomCard({ classroom, index, course }: Props) 
       <div className='flex space-x-2 items-center'>
         <span className='opacity-60'>Thành viên: </span>
         <span className='text-primaryText font-medium flex space-x-0.5 items-center'>
-          <span>{classroom.members ? classroom.members.length : 0}</span>
+          <span>{classroom.members ? classroom.members.length - 1 : 0}</span>
           <span className='text-xl'>/</span>
-          <span>{classroom.limit}</span>
+          <span>{classroom.members ? classroom.limit + classroom.members.length - 1 : classroom.limit - 1}</span>
         </span>
       </div>
 

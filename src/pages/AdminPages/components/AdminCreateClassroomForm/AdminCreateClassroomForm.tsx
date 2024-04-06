@@ -28,13 +28,6 @@ export default function AdminCreateClassroomForm() {
       readonly: true
     },
     {
-      error: errors.teacher_id,
-      errorMessage: errors.teacher_id?.message,
-      name: 'teacher_id',
-      title: 'ID giáo viên',
-      readonly: true
-    },
-    {
       error: errors.limit,
       errorMessage: errors.limit?.message,
       name: 'limit',
