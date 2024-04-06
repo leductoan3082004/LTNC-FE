@@ -5,6 +5,7 @@ import DialogPopup from 'src/components/DialogPopup'
 import LoadingRing from 'src/components/LoadingRing'
 import DaysInWeekEnum from 'src/constants/daysInWeek'
 import { Classroom } from 'src/types/classroom.type'
+import { generateClassroomName } from 'src/utils/classroom.utils'
 
 interface Props {
   classroom: Classroom
@@ -55,10 +56,7 @@ export default function CourseDetailClassroomCard({ classroom, canRegister = fal
     <div className='bg-webColor100 rounded-md p-2 space-y-2'>
       <p className='uppercase font-medium text-lg text-center desktop:text-xl space-x-1.5'>
         <span className=''>Lớp</span>
-        <span className=''>
-          <span className=''>L</span>
-          <span className=''>{1}</span>
-        </span>
+        <span className=''>{generateClassroomName(classroom._id)}</span>
       </p>
       <div className='flex space-x-1'>
         <span className='text-primaryText font-medium'>{startTime}</span>

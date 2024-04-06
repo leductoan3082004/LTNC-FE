@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
-import { useContext } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 import classroomApi from 'src/apis/classroom.api'
 import courseApi from 'src/apis/course.api'
 import LoadingSection from 'src/components/LoadingSection'
@@ -18,7 +18,11 @@ function CourseCard({ course }: { course: Course }) {
     queryKey: ['admin_classroom_list', course._id],
     queryFn: () => classroomApi.getClassroomList({ course_id: course._id as string })
   })
-  const classroomList = classroomListData?.data.data || []
+  const classroomList = useMemo(() => classroomListData?.data.data || [], [classroomListData])
+
+  useEffect(() => {
+    setCanCreateClassroom(classroomList.length < course.limit)
+  }, [classroomList, course.limit, setCanCreateClassroom])
 
   const infos: InfomationField[] = [
     {

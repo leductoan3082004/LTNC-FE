@@ -25,6 +25,9 @@ const classroomApi = {
   },
   getMemberListInClassromm(params: { classroom_id: string }) {
     return http.get<DetailedMemberList>(`${URL}/member/`, { params })
+  },
+  deleteClassroom(body: { classroom_ids: string[] }) {
+    return http.delete(`${URL}/`, { data: body })
   }
 }
 export default classroomApi
