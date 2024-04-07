@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useContext, useEffect } from 'react'
 import authApi from 'src/apis/auth.api'
 import mainPath from 'src/constants/path'
-import { ClassroomContext } from 'src/contexts/classroomcontext'
+import { ClassroomContext } from 'src/contexts/classroom.context'
 import ClassroomCard from './components/ClassroomCard'
 import LoadingSection from 'src/components/LoadingSection'
 

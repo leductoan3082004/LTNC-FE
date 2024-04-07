@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import PathBar from 'src/components/PathBar'
-import { ClassroomContext } from 'src/contexts/classroomcontext'
+import { ClassroomContext } from 'src/contexts/classroom.context'
 
 interface Props {
   children?: React.ReactNode

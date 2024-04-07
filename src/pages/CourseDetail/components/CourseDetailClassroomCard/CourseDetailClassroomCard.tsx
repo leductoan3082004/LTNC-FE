@@ -119,9 +119,6 @@ export default function CourseDetailClassroomCard({
   const studentList = memberList.filter((member) => {
     return member.role == 0
   })
-  const teacherList = memberList.filter((member) => {
-    return member.role == 1
-  })
 
   return (
     <div className='bg-webColor100 rounded-md p-2 space-y-2'>
@@ -144,7 +141,7 @@ export default function CourseDetailClassroomCard({
         <span className='text-primaryText font-medium flex space-x-0.5 items-center'>
           <span>{studentList.length}</span>
           <span className='text-xl'>/</span>
-          <span>{classroom.limit + studentList.length - teacherList.length}</span>
+          <span>{classroom.limit + studentList.length}</span>
         </span>
       </div>
 
@@ -156,7 +153,7 @@ export default function CourseDetailClassroomCard({
               onClick={registerClassroom}
               className='flex bg-unhoverBg hover:bg-hoveringBg disabled:hover:bg-unhoverBg disabled:opacity-50 rounded-lg items-center justify-center py-1 px-3'
             >
-              {courseIsRegisterd ? 'Đã đăng ký' : 'Đăng ký'}
+              Đăng ký
             </button>
           )}
 

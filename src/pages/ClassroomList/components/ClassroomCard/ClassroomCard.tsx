@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import classroomApi from 'src/apis/classroom.api'
 import courseApi from 'src/apis/course.api'
 import mainPath from 'src/constants/path'
+import { ClassroomContext } from 'src/contexts/classroom.context'
 import { JoinedClassroom } from 'src/types/joinedClassroom.type'
 import { SimpleMember } from 'src/types/member.type'
 import { generateClassroomName } from 'src/utils/classroom.utils'
@@ -14,9 +15,12 @@ interface Props {
 }
 
 export default function ClassroomCard({ classroomDetail }: Props) {
+  const { setSubject } = useContext(ClassroomContext)
+
   //! handle click item
   const navigate = useNavigate()
   const handleClickItem = (classroom: JoinedClassroom) => () => {
+    setSubject(classroomDetail.course.course_name)
     navigate({
       pathname: `${mainPath.classroomList}/${generateNameId({ name: classroom.course.course_name, id: classroom.class._id })}`
     })
@@ -52,9 +56,9 @@ export default function ClassroomCard({ classroomDetail }: Props) {
         <span className=''>Lớp</span>
         <span className='uppercase'>{generateClassroomName(classroomDetail.class._id)}</span>
       </p>
-      <p className='flex space-x-1 text-base'>
+      {/* <p className='flex space-x-1 text-base'>
         <span className=''>Giáo viên:</span>
-      </p>
+      </p> */}
     </button>
   )
 }
