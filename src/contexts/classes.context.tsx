@@ -19,20 +19,19 @@ export const ClassesContext = createContext<ClassesContextInterface>(initialClas
 
 export const ClassesProvider = ({ children }: { children: React.ReactNode }) => {
   const [subject, setSubject] = useState<string>(initialClassesContext.subject)
-    const [classesPathList, setClassesPathList] = useState<PathElement[]>(initialClassesContext.classesPathList)
-    
-    return (
-        <ClassesContext.Provider
-        value={{
-          subject,
-          setSubject,
-          classesPathList,
-          setClassesPathList
-        }}
-        >
-        {children}
-        </ClassesContext.Provider>
-    )
+  const [classesPathList, setClassesPathList] = useState<PathElement[]>(initialClassesContext.classesPathList)
+
+  return (
+    <ClassesContext.Provider
+      value={{
+        subject,
+        setSubject,
+        classesPathList,
+        setClassesPathList
+      }}
+    >
+      {children}
+    </ClassesContext.Provider>
+  )
 }
 // Path: src/pages/ClassList/layouts/ClassListLayout/ClassListLayout.tsx
-

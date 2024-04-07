@@ -1,8 +1,8 @@
 import { useState, createContext } from 'react'
 
 interface PersonalscoreContextInterface {
-    academicYear: string
-    setAcademicYear: React.Dispatch<React.SetStateAction<string>>
+  academicYear: string
+  setAcademicYear: React.Dispatch<React.SetStateAction<string>>
 }
 
 const initialCourseContext: PersonalscoreContextInterface = {

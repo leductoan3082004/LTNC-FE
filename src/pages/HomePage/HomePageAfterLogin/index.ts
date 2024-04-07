@@ -1,3 +1,3 @@
-import HomePageAfterLogin from "./HomePageAfterLogin"
+import HomePageAfterLogin from './HomePageAfterLogin'
 
 export default HomePageAfterLogin

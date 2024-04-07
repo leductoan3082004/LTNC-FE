@@ -8,24 +8,24 @@ import ClassroomDetail from 'src/pages/ClassList/children/ClassroomDetail'
 import ClassListLayout from 'src/pages/ClassList/layouts/ClassListLayout'
 
 function ClassesRoute() {
-    return (
-        <ClassesProvider>
-        <Suspense fallback={<LoadingPage />}>
-            <ClassListLayout >
-                <Outlet />
-            </ClassListLayout>
-        </Suspense>
-        </ClassesProvider>
-    )
+  return (
+    <ClassesProvider>
+      <Suspense fallback={<LoadingPage />}>
+        <ClassListLayout>
+          <Outlet />
+        </ClassListLayout>
+      </Suspense>
+    </ClassesProvider>
+  )
 }
 
-const ClassesRoutes : RouteObject= {
-    path: '',
-    element: <ClassesRoute />,
-    children: [
-        { path: '', element: <ClassList /> },
+const ClassesRoutes: RouteObject = {
+  path: '',
+  element: <ClassesRoute />,
+  children: [
+    { path: '', element: <ClassList /> },
     { path: classPath.classesDetail, element: <ClassroomDetail /> }
-    ]
+  ]
 }
 
 export default ClassesRoutes

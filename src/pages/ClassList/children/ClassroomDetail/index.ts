@@ -1,3 +1,3 @@
-import ClassroomDetail from "./ClassroomDetail";
+import ClassroomDetail from './ClassroomDetail'
 
 export default ClassroomDetail

@@ -4,8 +4,7 @@ const mainPath = {
   calendar: '/calendar',
   courseList: '/courses',
   classList: '/classrooms',
-  personal: '/personal',
-
+  personal: '/personal'
 } as const
 export default mainPath
 

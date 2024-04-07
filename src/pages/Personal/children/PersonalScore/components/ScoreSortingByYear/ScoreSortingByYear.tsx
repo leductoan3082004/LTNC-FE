@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { personalPath } from 'src/constants/path'
-import { PersonalscoreContext } from 'src/contexts/personalscore.context' 
+import { PersonalscoreContext } from 'src/contexts/personalscore.context'
 
 interface Props {
   year: number

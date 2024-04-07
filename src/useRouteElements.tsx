@@ -62,7 +62,6 @@ export default function useRouteElements() {
         </MainLayout>
       ),
       children: [ClassesRoutes]
-      
     },
     {
       path: mainPath.calendar,
@@ -70,9 +69,9 @@ export default function useRouteElements() {
         <MainLayout>
           <Calendar />
         </MainLayout>
-      ),
+      )
     },
-    { 
+    {
       path: adminPath.mainPage,
       children: [AdminRoutes]
     },

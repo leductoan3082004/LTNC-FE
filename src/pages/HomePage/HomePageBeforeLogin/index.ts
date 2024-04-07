@@ -1,5 +1,3 @@
-import HomePageBeforeLogin from "./HomePageBeforeLogin"
-
-
+import HomePageBeforeLogin from './HomePageBeforeLogin'
 
 export default HomePageBeforeLogin

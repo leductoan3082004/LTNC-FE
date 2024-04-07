@@ -1,4 +1,3 @@
-
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -53,13 +52,13 @@
 @import 'tailwindcss/utilities';
 
 @layer utilities {
-    .rtl {
-        direction: rtl;
-    }
+  .rtl {
+    direction: rtl;
+  }
 }
 
-[x-cloak=""] {
-    display: none;
+[x-cloak=''] {
+  display: none;
 }
 @tailwind base;
 @tailwind components;
