@@ -12,6 +12,7 @@ import AdminRoutes from './routes/adminRoute'
 import CourseRoutes from './routes/courseRoute'
 import PersonalRoutes from './routes/personalRoute'
 import ClassroomRoutes from './routes/classroomRoute'
+import CalendarRoutes from './routes/calendarRoutes'
 
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -43,6 +44,15 @@ export default function useRouteElements() {
         </MainLayout>
       ),
       children: [CourseRoutes]
+    },
+    {
+      path: mainPath.calendar,
+      element: (
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      ),
+      children: [CalendarRoutes]
     },
     {
       path: mainPath.personal,

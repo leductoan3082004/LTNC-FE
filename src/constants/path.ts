@@ -17,7 +17,10 @@ export const classroomPath = {
   classroomList: '/classrooms',
   classroomDetail: '/classrooms/:classroomId'
 } as const
-
+export const calendarPath = {
+  calendarListByYear: '/calendar/:year',
+  calendarDetail: '/calendar/:year/:courseId'
+} as const
 export const personalPath = {
   profile: '/personal/profile',
   account: '/personal/account',

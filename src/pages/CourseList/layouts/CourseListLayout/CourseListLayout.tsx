@@ -15,6 +15,7 @@ export default function CourseListLayout({ children }: Props) {
     <div className='py-4 bg-mainBg desktop:py-8'>
       <div className='container'>
         <PathBar pathList={coursePathList} />
+        <div className='flex-col desktop:flex-row flex desktop:justify-between desktop:items-center space-y-4 desktop:space-y-0 desktop:space-x-8'>
 
         <div className='flex flex-col space-y-4 desktop:flex-row desktop:justify-between desktop:items-center desktop:space-y-0 desktop:space-x-8'>
           <div className=''>
