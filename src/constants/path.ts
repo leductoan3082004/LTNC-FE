@@ -3,9 +3,8 @@ const mainPath = {
   login: '/login',
   calendar: '/calendar',
   courseList: '/courses',
-  classList: '/classrooms',
-  personal: '/personal',
-
+  classroomList: '/classrooms',
+  personal: '/personal'
 } as const
 export default mainPath
 
@@ -14,9 +13,9 @@ export const coursePath = {
   courseDetail: '/courses/:year/:courseId'
 } as const
 
-export const classPath = {
-  classList: '/classrooms',
-  classesDetail: '/classrooms/:classroomId'
+export const classroomPath = {
+  classroomList: '/classrooms',
+  classroomDetail: '/classrooms/:classroomId'
 } as const
 
 export const personalPath = {

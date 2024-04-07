@@ -1,7 +1,5 @@
-import React from 'react'
-
 export default function ClassSearchingBar() {
-    return (
+  return (
     <div className='w-full'>
       <form
         className='relative flex items-center w-full duration-200 rounded-lg shadow-sm bg-sidebarItemLight dark:bg-sidebarItemDark'

@@ -35,6 +35,7 @@ export default function CourseDetailClassroomList({ course }: Props) {
   })
   const joinedClassroomList = joinedClassroomListData?.data.data || []
   const joinedClassroomIdList = joinedClassroomList.map((classroom) => classroom.class._id)
+  const courseIsRegistered = joinedClassroomList.map((classroom) => classroom.course._id).includes(course._id)
 
   return (
     <div className='border p-4 border-black/40 rounded-lg sticky top-16 desktop:top-20 space-y-4'>
@@ -52,6 +53,7 @@ export default function CourseDetailClassroomList({ course }: Props) {
           {classroomList.map((clasroom) => (
             <div key={clasroom._id} className='col-span-1'>
               <CourseDetailClassroomCard
+                courseIsRegisterd={courseIsRegistered}
                 classroom={clasroom}
                 canRegister={canRegister}
                 joinedClassroomList={joinedClassroomIdList}

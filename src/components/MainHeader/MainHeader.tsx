@@ -25,7 +25,7 @@ export default function MainHeader() {
     },
     {
       name: 'LỚP HỌC',
-      path: mainPath.classList
+      path: mainPath.classroomList
     }
   ]
 
