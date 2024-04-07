@@ -6,10 +6,12 @@ import LoadingRing from 'src/components/LoadingRing'
 import DaysInWeekEnum from 'src/constants/daysInWeek'
 import { Classroom } from 'src/types/classroom.type'
 import { generateClassroomName } from 'src/utils/classroom.utils'
+import { ClassroomTimetable } from '../../children/CourseDetailClassroomList/CourseDetailClassroomList'
 
 interface Props {
   classroom: Classroom
   courseIsRegisterd: boolean
+  studentTimeTable: ClassroomTimetable[]
   canRegister?: boolean
   joinedClassroomList?: string[]
 }
@@ -17,30 +19,56 @@ interface Props {
 export default function CourseDetailClassroomCard({
   classroom,
   canRegister = false,
+  studentTimeTable,
   joinedClassroomList = [],
   courseIsRegisterd
 }: Props) {
   //! Declare states
   const [excuting, setExcuting] = useState<boolean>(false)
   const [dialog, setDialog] = useState<boolean>(false)
+  const [invalidTime, setInvalidTime] = useState<boolean>(false)
   const [registerError, setRegisterError] = useState<boolean>(false)
   const [registerSuccess, setRegisterSuccess] = useState<boolean>(false)
   const [unRegisterSuccess, setUnRegisterSuccess] = useState<boolean>(false)
+  const [duplicatedCourseTime, setDuplicatedCourseTime] = useState<string>('')
 
   //! Get timetable
   const startTimestamp = new Date(classroom.time_table[0].lesson_start)
   const endTimestamp = new Date(classroom.time_table[0].lesson_end)
 
-  const startTime = startTimestamp.getHours().toString() + ':00'
-  const endTime = endTimestamp.getHours().toString() + ':00'
+  const startTime = startTimestamp.getHours()
+  const endTime = endTimestamp.getHours()
   const day = startTimestamp.getDay()
 
   //! Handle registration
   const queryClient = useQueryClient()
   const registerMutation = useMutation({ mutationFn: memberApi.registerToClassroom })
+
+  //:: function to check valid timetable
+  const validTimetable = () => {
+    for (const timetable of studentTimeTable) {
+      if (timetable.day == day) {
+        if (
+          (timetable.startTime <= startTime && startTime <= timetable.endTime) ||
+          (timetable.startTime <= endTime && endTime <= timetable.endTime)
+        ) {
+          setDuplicatedCourseTime(timetable.course)
+          return false
+        }
+      }
+      return true
+    }
+  }
+
+  //:: register classroom
   const registerClassroom = () => {
     setDialog(true)
     setExcuting(true)
+    if (!validTimetable()) {
+      setExcuting(false)
+      setInvalidTime(true)
+      return
+    }
     registerMutation.mutate(classroom._id, {
       onSettled: () => {
         setExcuting(false)
@@ -102,9 +130,9 @@ export default function CourseDetailClassroomCard({
         <span className=''>{generateClassroomName(classroom._id)}</span>
       </p>
       <div className='flex space-x-1'>
-        <span className='text-primaryText font-medium'>{startTime}</span>
+        <span className='text-primaryText font-medium'>{startTime.toString() + ':00'}</span>
         <span className=''>đến</span>
-        <span className='text-primaryText font-medium'>{endTime}</span>
+        <span className='text-primaryText font-medium'>{endTime.toString() + ':00'}</span>
       </div>
       <div className='flex space-x-1'>
         <span className='text-primaryText font-medium'>{DaysInWeekEnum[day]}</span>
@@ -154,6 +182,16 @@ export default function CourseDetailClassroomCard({
           {excuting && <LoadingRing />}
           {!excuting && (
             <Fragment>
+              {invalidTime && (
+                <div className='space-y-2 text-center text-lg'>
+                  <p className='font-medium flex space-x-1.5 text-alertRed'>
+                    <span className='uppercase'>trùng lịch học với lớp </span>
+                    <span className='text-primaryText'>{duplicatedCourseTime}</span>
+                  </p>
+                  <p className=''>Vui lòng điều chỉnh lại thời gian các lớp học</p>
+                </div>
+              )}
+
               {registerSuccess && (
                 <p className='text-center text-xl shrink-0 font-medium uppercase leading-6 text-successGreen'>
                   Đăng ký lớp học thành công

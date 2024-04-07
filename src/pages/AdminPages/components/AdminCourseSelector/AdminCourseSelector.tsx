@@ -60,7 +60,7 @@ function CourseCard({ course }: { course: Course }) {
     >
       <div className='space-y-2'>
         {infos.map((info, index) => (
-          <div key={index} className='grid grid-cols-3 gap-2 text-left items-center'>
+          <div key={index} className='grid grid-cols-3 gap-2 text-left items-center truncate'>
             <span className='col-span-1 opacity-70 text-sm'>{info.title}</span>
             <span className='col-span-2 '>{info.info}</span>
           </div>
@@ -81,16 +81,12 @@ export default function AdminCourseSelector() {
   const courseList = courseListData?.data.data
 
   return (
-    <div>
+    <div className='rounded-lg bg-webColor100 p-4 space-y-4'>
       <p className='w-full text-center font-semibold desktop:text-xl uppercase text-primaryText'>Chọn khóa học</p>
-
-      <div className='py-4 px-20 w-full'>
-        <div className='border-t border-white'></div>
-      </div>
 
       {!courseListData && <LoadingSection />}
 
-      <div className='grid grid-cols-3 gap-4'>
+      <div className='grid grid-cols-3 gap-4 max-h-80 overflow-auto p-4 border border-white'>
         {courseList &&
           courseList.map((course) => (
             <div key={course._id} className='col-span-1'>

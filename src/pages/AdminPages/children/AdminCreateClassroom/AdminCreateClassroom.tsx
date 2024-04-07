@@ -5,7 +5,6 @@ import { AdminCreateClassroomSchema, adminCreateClassroomSchema } from 'src/rule
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import AdminCreateClassroomForm from '../../components/AdminCreateClassroomForm'
-import AdminTeacherSelector from '../../components/AdminTeacherSelector'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import classroomApi, { CreateClassroomForm } from 'src/apis/classroom.api'
 import { formatTimeToSeconds, isAxiosBadRequestError } from 'src/utils/utils'
@@ -136,8 +135,6 @@ export default function AdminCreateClassroom() {
           <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit, onInvalid)} className='space-y-4'>
               <AdminCreateClassroomForm />
-
-              <AdminTeacherSelector />
 
               <div className='w-full flex justify-end'>
                 <button type='submit' className='py-1.5 px-4 rounded-md bg-unhoverBg hover:bg-hoveringBg'>
