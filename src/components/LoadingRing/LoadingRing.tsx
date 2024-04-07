@@ -14,7 +14,7 @@ export default function LoadingRing({ width = 80, colorCode = '0096C7' }: Props)
       ariaLabel='blocks-loading'
       wrapperStyle={{}}
       wrapperClass='blocks-wrapper'
-      colors={[`${colorCode}`, `${colorCode}`, `${colorCode}`, `${colorCode}`, `${colorCode}`]}
+      colors={[`#${colorCode}`, `#${colorCode}`, `#${colorCode}`, `#${colorCode}`, `#${colorCode}`]}
     />
   )
 }

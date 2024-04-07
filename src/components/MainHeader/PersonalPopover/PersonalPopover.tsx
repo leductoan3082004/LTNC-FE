@@ -7,7 +7,7 @@ import mainPath, { personalPath } from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
 
 export default function PersonalPopover() {
-  const { profile, logoutFunction } = useContext(AppContext)
+  const { profile, handleLogout } = useContext(AppContext)
 
   //! STYLES
   const itemStyle = 'py-2 px-4 flex items-center justify-start w-full select-none hover:bg-webColor200'
@@ -43,7 +43,7 @@ export default function PersonalPopover() {
                 </NavLink>
               </div>
               <div className='w-full border-t border-black/20'></div>
-              <button className={itemStyle} onClick={() => logoutFunction()}>
+              <button className={itemStyle} onClick={() => handleLogout()}>
                 Đăng xuất
               </button>
             </div>

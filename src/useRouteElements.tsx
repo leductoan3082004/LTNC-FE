@@ -2,7 +2,7 @@ import { Suspense, useContext } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import LoadingPage from './components/LoadingPage'
 import { AppContext } from './contexts/app.context'
-import mainPath from './constants/path'
+import mainPath, { adminPath } from './constants/path'
 import MainLayout from './layouts/MainLayout'
 import NotFound from './components/NotFound'
 import HomePage from './pages/HomePage'
@@ -70,7 +70,11 @@ export default function useRouteElements() {
           <Calendar />
         </MainLayout>
       ),
-      
+    },
+    {
+      path: adminPath.mainPage,
+      children: [AdminRoutes]
+
     },
     {
       path: '',
