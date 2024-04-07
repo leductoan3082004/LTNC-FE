@@ -12,7 +12,10 @@ export const coursePath = {
   courseListByYear: '/courses/:year',
   courseDetail: '/courses/:year/:courseId'
 } as const
-
+export const calendarPath = {
+  calendarListByYear: '/calendar/:year',
+  calendarDetail: '/calendar/:year/:courseId'
+} as const
 export const personalPath = {
   profile: '/personal/profile',
   account: '/personal/account',
@@ -20,7 +23,7 @@ export const personalPath = {
 } as const
 
 export const ScorePath = {
-  ScoreByYear: '/score/:year',
+  ScoreByYear: '/score/:year'
 } as const
 
 export const adminPath = {} as const

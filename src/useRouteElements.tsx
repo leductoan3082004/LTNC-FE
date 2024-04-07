@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import CourseRoutes from './routes/courseRoutes'
 import PersonalRoutes from './routes/personalRoutes'
+import CalendarRoutes from './routes/calendarRoutes'
 
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -40,6 +41,15 @@ export default function useRouteElements() {
         </MainLayout>
       ),
       children: [CourseRoutes]
+    },
+    {
+      path: mainPath.calendar,
+      element: (
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      ),
+      children: [CalendarRoutes]
     },
     {
       path: mainPath.personal,
