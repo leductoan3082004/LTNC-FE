@@ -18,8 +18,6 @@ export default function CalendarSortingtByYear({ year }: Props) {
   }
 
 
-
-
   return (
     <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
       <button

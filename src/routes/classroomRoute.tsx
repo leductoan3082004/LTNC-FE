@@ -5,6 +5,7 @@ import { classroomPath } from 'src/constants/path'
 import { ClassrroomProvider } from 'src/contexts/classroom.context'
 import ClassroomList from 'src/pages/ClassroomList'
 import ClassroomDetail from 'src/pages/ClassroomList/children/ClassroomDetail'
+import ClassroomStudentScore from 'src/pages/ClassroomList/children/ClassroomStudentScore'
 import ClassroomLayout from 'src/pages/ClassroomList/layouts/ClassroomLayout'
 
 function ClassroomRoute() {
@@ -24,7 +25,8 @@ const ClassroomRoutes: RouteObject = {
   element: <ClassroomRoute />,
   children: [
     { path: '', element: <ClassroomList /> },
-    { path: classroomPath.classroomDetail, element: <ClassroomDetail /> }
+    { path: classroomPath.classroomDetail, element: <ClassroomDetail /> },
+    { path: classroomPath.classroomScore, element: <ClassroomStudentScore /> }
   ]
 }
 

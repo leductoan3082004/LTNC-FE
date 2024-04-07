@@ -1,5 +1,5 @@
 import React from 'react'
-import ExpendableButton from './ExpendableButton'
+import ExpendableButton from '../../../ClassList/children/ClassroomDetail/commponents/ExpendableButton'
 import useOpenController from 'src/hooks/useOpenController';
 
 interface ClassSectionProps {

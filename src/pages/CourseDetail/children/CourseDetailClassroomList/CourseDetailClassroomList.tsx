@@ -57,7 +57,7 @@ export default function CourseDetailClassroomList({ course }: Props) {
     }
     return timetable
   })
-
+  console.log(studentTimetable)
   return (
     <div className='border p-4 border-black/40 rounded-lg sticky top-16 desktop:top-20 space-y-4'>
       <p className='w-full text-center text-primaryText font-semibold uppercase text-lg desktop:text-xl'>

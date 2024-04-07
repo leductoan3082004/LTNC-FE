@@ -56,8 +56,8 @@ export default function CourseDetailClassroomCard({
           return false
         }
       }
-      return true
     }
+    return true
   }
 
   //:: register classroom

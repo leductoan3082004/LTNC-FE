@@ -15,7 +15,8 @@ export const coursePath = {
 
 export const classroomPath = {
   classroomList: '/classrooms',
-  classroomDetail: '/classrooms/:classroomId'
+  classroomDetail: '/classrooms/:classroomId',
+  classroomScore: '/classrooms/:classroomId/score'
 } as const
 export const calendarPath = {
   calendarListByYear: '/calendar/:year',
