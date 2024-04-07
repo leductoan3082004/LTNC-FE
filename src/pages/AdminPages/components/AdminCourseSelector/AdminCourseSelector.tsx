@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
-import { useContext } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 import classroomApi from 'src/apis/classroom.api'
 import courseApi from 'src/apis/course.api'
 import LoadingSection from 'src/components/LoadingSection'
@@ -18,7 +18,11 @@ function CourseCard({ course }: { course: Course }) {
     queryKey: ['admin_classroom_list', course._id],
     queryFn: () => classroomApi.getClassroomList({ course_id: course._id as string })
   })
-  const classroomList = classroomListData?.data.data || []
+  const classroomList = useMemo(() => classroomListData?.data.data || [], [classroomListData])
+
+  useEffect(() => {
+    setCanCreateClassroom(classroomList.length < course.limit)
+  }, [classroomList, course.limit, setCanCreateClassroom])
 
   const infos: InfomationField[] = [
     {
@@ -56,7 +60,7 @@ function CourseCard({ course }: { course: Course }) {
     >
       <div className='space-y-2'>
         {infos.map((info, index) => (
-          <div key={index} className='grid grid-cols-3 gap-2 text-left items-center'>
+          <div key={index} className='grid grid-cols-3 gap-2 text-left items-center truncate'>
             <span className='col-span-1 opacity-70 text-sm'>{info.title}</span>
             <span className='col-span-2 '>{info.info}</span>
           </div>
@@ -77,16 +81,12 @@ export default function AdminCourseSelector() {
   const courseList = courseListData?.data.data
 
   return (
-    <div>
+    <div className='rounded-lg bg-webColor100 p-4 space-y-4'>
       <p className='w-full text-center font-semibold desktop:text-xl uppercase text-primaryText'>Chọn khóa học</p>
-
-      <div className='py-4 px-20 w-full'>
-        <div className='border-t border-white'></div>
-      </div>
 
       {!courseListData && <LoadingSection />}
 
-      <div className='grid grid-cols-3 gap-4'>
+      <div className='grid grid-cols-3 gap-4 max-h-80 overflow-auto p-4 border border-white'>
         {courseList &&
           courseList.map((course) => (
             <div key={course._id} className='col-span-1'>

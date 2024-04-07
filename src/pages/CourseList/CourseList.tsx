@@ -44,7 +44,6 @@ export default function CourseList() {
         <Fragment>
           <CourseSortingtByYear year={2023} />
           <CourseSortingtByYear year={2024} />
-          <CourseSortingtByYear year={2025} />
         </Fragment>
       )}
     </div>

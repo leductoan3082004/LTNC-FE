@@ -3,7 +3,7 @@ const mainPath = {
   login: '/login',
   calendar: '/calendar',
   courseList: '/courses',
-  classList: '/classrooms',
+  classroomList: '/classrooms',
   personal: '/personal'
 } as const
 export default mainPath
@@ -13,9 +13,9 @@ export const coursePath = {
   courseDetail: '/courses/:year/:courseId'
 } as const
 
-export const classPath = {
-  classList: '/classrooms',
-  classesDetail: '/classrooms/:classroomId'
+export const classroomPath = {
+  classroomList: '/classrooms',
+  classroomDetail: '/classrooms/:classroomId'
 } as const
 
 export const personalPath = {
@@ -32,6 +32,7 @@ export const ScorePath = {
 export const adminPath = {
   mainPage: '/admin',
   users: '/admin/users',
+  userDetail: '/admin/users/:userId',
   studentList: '/admin/users/students',
   studentDetail: '/admin/users/students/:studentId',
   teacherList: '/admin/users/teachers',
@@ -45,5 +46,6 @@ export const adminPath = {
   // Classes
   classrooms: '/admin/classrooms',
   classroomDetail: '/admin/classrooms/:classroomId',
-  createClassroom: '/admin/classrooms/create'
+  createClassroom: '/admin/classrooms/create',
+  addTeacher: '/admin/classrooms/addTeacher'
 } as const

@@ -5,7 +5,6 @@ import { AdminCreateClassroomSchema, adminCreateClassroomSchema } from 'src/rule
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import AdminCreateClassroomForm from '../../components/AdminCreateClassroomForm'
-import AdminTeacherSelector from '../../components/AdminTeacherSelector'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import classroomApi, { CreateClassroomForm } from 'src/apis/classroom.api'
 import { formatTimeToSeconds, isAxiosBadRequestError } from 'src/utils/utils'
@@ -20,7 +19,7 @@ type FormData = AdminCreateClassroomSchema
 const currentDate = new Date()
 
 export default function AdminCreateClassroom() {
-  const { currentCourse, currentTeacherId, canCreateClassroom } = useContext(AdminContext)
+  const { currentCourse, canCreateClassroom } = useContext(AdminContext)
 
   const [excutingDialog, setExcutingDialog] = useState<boolean>(false)
   const [excuting, setExcuting] = useState<boolean>(false)
@@ -31,7 +30,6 @@ export default function AdminCreateClassroom() {
   const methods = useForm<FormData>({
     defaultValues: {
       course_id: currentCourse?._id,
-      teacher_id: currentTeacherId || '',
       limit: 1,
       weeks: 12,
       lesson_start: 7,
@@ -42,9 +40,6 @@ export default function AdminCreateClassroom() {
   })
   const { handleSubmit, setValue, reset } = methods
 
-  useEffect(() => {
-    setValue('teacher_id', currentTeacherId || '')
-  }, [currentTeacherId, setValue])
   useEffect(() => {
     setValue('course_id', currentCourse?._id || '')
   }, [currentCourse, setValue])
@@ -69,7 +64,6 @@ export default function AdminCreateClassroom() {
     try {
       const date = data.date
       const createBody: CreateClassroomForm = {
-        teacher_id: data.teacher_id,
         course_id: data.course_id,
         weeks: data.weeks,
         limit: data.limit,
@@ -141,8 +135,6 @@ export default function AdminCreateClassroom() {
           <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit, onInvalid)} className='space-y-4'>
               <AdminCreateClassroomForm />
-
-              <AdminTeacherSelector />
 
               <div className='w-full flex justify-end'>
                 <button type='submit' className='py-1.5 px-4 rounded-md bg-unhoverBg hover:bg-hoveringBg'>

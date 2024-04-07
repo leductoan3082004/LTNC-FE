@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function ClassSearchingBar() {
   return (
     <div className='w-full'>
