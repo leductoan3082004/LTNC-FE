@@ -13,7 +13,7 @@ export default function ClassroomLayout({ children }: Props) {
     <div className='py-4 bg-mainBg desktop:py-8'>
       <div className='container bg-mainBg'>
         <PathBar pathList={classroomPathList} />
-        <div className=''>{children}</div>
+        <div className='py-6'>{children}</div>
       </div>
     </div>
   )
