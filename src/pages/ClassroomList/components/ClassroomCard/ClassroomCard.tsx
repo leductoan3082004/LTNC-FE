@@ -15,12 +15,13 @@ interface Props {
 }
 
 export default function ClassroomCard({ classroomDetail }: Props) {
-  const { setSubject } = useContext(ClassroomContext)
+  const { setSubject, setCurrentClassroom } = useContext(ClassroomContext)
 
   //! handle click item
   const navigate = useNavigate()
   const handleClickItem = (classroom: JoinedClassroom) => () => {
     setSubject(classroomDetail.course.course_name)
+    setCurrentClassroom(classroom)
     navigate({
       pathname: `${mainPath.classroomList}/${generateNameId({ name: classroom.course.course_name, id: classroom.class._id })}`
     })

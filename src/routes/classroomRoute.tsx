@@ -1,14 +1,17 @@
-import { Suspense } from 'react'
-import { Outlet, RouteObject } from 'react-router-dom'
+import { Suspense, useContext } from 'react'
+import { Navigate, Outlet, RouteObject } from 'react-router-dom'
 import LoadingPage from 'src/components/LoadingPage'
-import { classroomPath } from 'src/constants/path'
+import mainPath, { classroomPath } from 'src/constants/path'
+import { AppContext } from 'src/contexts/app.context'
 import { ClassrroomProvider } from 'src/contexts/classroom.context'
 import ClassroomList from 'src/pages/ClassroomList'
 import ClassroomDetail from 'src/pages/ClassroomList/children/ClassroomDetail'
 import ClassroomLayout from 'src/pages/ClassroomList/layouts/ClassroomLayout'
 
 function ClassroomRoute() {
-  return (
+  const { isAuthenticated } = useContext(AppContext)
+
+  return isAuthenticated ? (
     <ClassrroomProvider>
       <Suspense fallback={<LoadingPage />}>
         <ClassroomLayout>
@@ -16,6 +19,8 @@ function ClassroomRoute() {
         </ClassroomLayout>
       </Suspense>
     </ClassrroomProvider>
+  ) : (
+    <Navigate to={mainPath.login} />
   )
 }
 

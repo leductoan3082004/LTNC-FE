@@ -5,8 +5,10 @@ import mainPath from 'src/constants/path'
 import { ClassroomContext } from 'src/contexts/classroom.context'
 import ClassroomCard from './components/ClassroomCard'
 import LoadingSection from 'src/components/LoadingSection'
+import { AppContext } from 'src/contexts/app.context'
 
 export default function ClassroomList() {
+  const { isAuthenticated } = useContext(AppContext)
   const { setClassroomPathList } = useContext(ClassroomContext)
 
   useEffect(() => {
@@ -18,7 +20,8 @@ export default function ClassroomList() {
   //! Get classroom list
   const { data: ClassRoomListData } = useQuery({
     queryKey: ['classroom_list'],
-    queryFn: () => authApi.getJoinedClassroomList()
+    queryFn: () => authApi.getJoinedClassroomList(),
+    enabled: isAuthenticated
   })
   const classroomList = ClassRoomListData?.data.data
 
