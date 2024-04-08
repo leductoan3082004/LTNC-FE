@@ -24,7 +24,7 @@ module.exports = {
         //? TEXT
         lightText: '#EEEEEE',
         darkText: '#111111',
-        primaryText: '#0096C7',
+        primaryText: '#0077B6',
         primaryTextUnHover: '#00B4D8',
         alertRed: '#ff0f0f',
         successGreen: '#4bb543',
