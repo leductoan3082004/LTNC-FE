@@ -1,12 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import classroomApi from 'src/apis/classroom.api'
-import courseApi from 'src/apis/course.api'
 import mainPath from 'src/constants/path'
 import { ClassroomContext } from 'src/contexts/classroom.context'
 import { JoinedClassroom } from 'src/types/joinedClassroom.type'
-import { SimpleMember } from 'src/types/member.type'
 import { generateClassroomName } from 'src/utils/classroom.utils'
 import { generateNameId } from 'src/utils/utils'
 
@@ -29,20 +27,14 @@ export default function ClassroomCard({ classroomDetail }: Props) {
 
   //! HANDLE GET TEACHER
   //:: get current classroom
-  const { data: classroomListData } = useQuery({
-    queryKey: ['member_list', classroomDetail.class._id],
-    queryFn: () => classroomApi.getClassroomList({ course_id: classroomDetail.course._id })
+  const { data: memberListData } = useQuery({
+    queryKey: ['classroom_member_list', classroomDetail.class._id],
+    queryFn: () => classroomApi.getMemberListInClassromm({ classroom_id: classroomDetail.class._id })
   })
-  const classroomList = classroomListData?.data.data || []
-
-  //:: get memeber list
-  const currentClassroom = classroomList.find((classroom) => {
-    return classroom._id == classroomDetail.class._id
-  })
-  const memberList = currentClassroom?.members || []
+  const memberList = memberListData?.data.data || []
 
   //:: get teacher
-  const teacher: SimpleMember = memberList.find((member) => {
+  const teacher = memberList.find((member) => {
     return member.role == 1
   })
 
@@ -50,16 +42,19 @@ export default function ClassroomCard({ classroomDetail }: Props) {
     <button
       key={classroomDetail.class._id}
       onClick={handleClickItem(classroomDetail)}
-      className='text-lg border-t first:border-none items-center border-black/60 desktop:text-xl py-2 text-center justify-between flex font-medium text-webColor600 hover:text-webColor800'
+      className='text-lg border px-4 py-8 space-y-2 w-full bg-webColor200 rounded-md border-black/20 items-center desktop:text-xl text-center hover:bg-webColor300'
     >
-      <span>{classroomDetail.course.course_name}</span>
+      <p className='font-semibold'>{classroomDetail.course.course_name}</p>
       <p className='flex space-x-1 text-base'>
         <span className=''>Lớp</span>
-        <span className='uppercase'>{generateClassroomName(classroomDetail.class._id)}</span>
+        <span className='uppercase text-primaryText font-medium'>
+          {generateClassroomName(classroomDetail.class._id)}
+        </span>
       </p>
-      {/* <p className='flex space-x-1 text-base'>
+      <p className='flex space-x-1 text-base'>
         <span className=''>Giáo viên:</span>
-      </p> */}
+        <span className='text-primaryText font-medium'>{teacher?.name}</span>
+      </p>
     </button>
   )
 }

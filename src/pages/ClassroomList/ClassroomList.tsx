@@ -31,13 +31,16 @@ export default function ClassroomList() {
         <h1 className='text-2xl uppercase font-semibold text-center tracking-wide'>Lớp học của tôi</h1>
       </div>
 
-      <div className='flex flex-col'>
-        {classroomList ? (
-          classroomList.map((classroom) => <ClassroomCard key={classroom.class._id} classroomDetail={classroom} />)
-        ) : (
-          <LoadingSection />
-        )}
-      </div>
+      {!classroomList && <LoadingSection />}
+      {classroomList && (
+        <div className='grid grid-cols-3 gap-4'>
+          {classroomList.map((classroom) => (
+            <div className='col-span-1' key={classroom.class._id}>
+              <ClassroomCard classroomDetail={classroom} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
