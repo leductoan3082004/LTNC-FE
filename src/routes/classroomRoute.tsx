@@ -1,22 +1,38 @@
-import { Suspense } from 'react'
-import { Outlet, RouteObject } from 'react-router-dom'
+import { Suspense, useContext } from 'react'
+import { Navigate, Outlet, RouteObject } from 'react-router-dom'
 import LoadingPage from 'src/components/LoadingPage'
-import { classroomPath } from 'src/constants/path'
+import mainPath, { classroomPath } from 'src/constants/path'
+import { AppContext } from 'src/contexts/app.context'
 import { ClassrroomProvider } from 'src/contexts/classroom.context'
 import ClassroomList from 'src/pages/ClassroomList'
-import ClassroomDetail from 'src/pages/ClassroomList/children/ClassroomDetail'
+import ClassroomDetail from 'src/pages/ClassroomDetail'
+import ClassroomMemberListForTeacher from 'src/pages/ClassroomDetail/children/ClassroomMemberListForTeacher'
+import ClassroomScoreForStudent from 'src/pages/ClassroomDetail/children/ClassroomScoreForStudent'
 import ClassroomStudentScore from 'src/pages/ClassroomList/children/ClassroomStudentScore'
-import ClassroomLayout from 'src/pages/ClassroomList/layouts/ClassroomLayout'
+import ClassroomDetailLayout from 'src/pages/ClassroomDetail/layouts/ClassroomDetailLayout'
+import ClassroomListLayout from 'src/pages/ClassroomList/layouts/ClassroomListLayout'
 
 function ClassroomRoute() {
-  return (
+  const { isAuthenticated } = useContext(AppContext)
+
+  return isAuthenticated ? (
     <ClassrroomProvider>
       <Suspense fallback={<LoadingPage />}>
-        <ClassroomLayout>
+        <ClassroomListLayout>
           <Outlet />
-        </ClassroomLayout>
+        </ClassroomListLayout>
       </Suspense>
     </ClassrroomProvider>
+  ) : (
+    <Navigate to={mainPath.login} />
+  )
+}
+
+function ClassroomDetailRoute() {
+  return (
+    <ClassroomDetailLayout>
+      <Outlet />
+    </ClassroomDetailLayout>
   )
 }
 
@@ -25,8 +41,7 @@ const ClassroomRoutes: RouteObject = {
   element: <ClassroomRoute />,
   children: [
     { path: '', element: <ClassroomList /> },
-    { path: classroomPath.classroomDetail, element: <ClassroomDetail /> },
-    { path: classroomPath.classroomScore, element: <ClassroomStudentScore /> }
+    { path: classroomPath.classroomDetail, element: <ClassroomDetail /> }
   ]
 }
 
