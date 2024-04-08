@@ -41,7 +41,9 @@ const ClassroomRoutes: RouteObject = {
   element: <ClassroomRoute />,
   children: [
     { path: '', element: <ClassroomList /> },
-    { path: classroomPath.classroomDetail, element: <ClassroomDetail /> }
+    { path: classroomPath.classroomDetail, element: <ClassroomDetail /> },
+    { path: classroomPath.classroomScore, element: <ClassroomScoreForStudent /> }
+
   ]
 }
 
