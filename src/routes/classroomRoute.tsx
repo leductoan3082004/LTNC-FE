@@ -5,11 +5,11 @@ import mainPath, { classroomPath } from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
 import { ClassrroomProvider } from 'src/contexts/classroom.context'
 import ClassroomList from 'src/pages/ClassroomList'
-import ClassroomDetail from 'src/pages/ClassroomList/children/ClassroomDetail'
-import ClassroomMemberListForTeacher from 'src/pages/ClassroomList/children/ClassroomMemberListForTeacher'
-import ClassroomScoreForStudent from 'src/pages/ClassroomList/children/ClassroomScoreForStudent'
-import ClassroomDetailLayout from 'src/pages/ClassroomList/layouts/ClassroomDetailLayout'
-import ClassroomLayout from 'src/pages/ClassroomList/layouts/ClassroomLayout'
+import ClassroomDetail from 'src/pages/ClassroomDetail'
+import ClassroomMemberListForTeacher from 'src/pages/ClassroomDetail/children/ClassroomMemberListForTeacher'
+import ClassroomScoreForStudent from 'src/pages/ClassroomDetail/children/ClassroomScoreForStudent'
+import ClassroomDetailLayout from 'src/pages/ClassroomDetail/layouts/ClassroomDetailLayout'
+import ClassroomListLayout from 'src/pages/ClassroomList/layouts/ClassroomListLayout'
 
 function ClassroomRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -17,9 +17,9 @@ function ClassroomRoute() {
   return isAuthenticated ? (
     <ClassrroomProvider>
       <Suspense fallback={<LoadingPage />}>
-        <ClassroomLayout>
+        <ClassroomListLayout>
           <Outlet />
-        </ClassroomLayout>
+        </ClassroomListLayout>
       </Suspense>
     </ClassrroomProvider>
   ) : (

@@ -6,7 +6,7 @@ interface Props {
   children?: React.ReactNode
 }
 
-export default function ClassroomLayout({ children }: Props) {
+export default function ClassroomListLayout({ children }: Props) {
   const { classroomPathList } = useContext(ClassroomContext)
 
   return (

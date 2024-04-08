@@ -1,4 +1,4 @@
-export default function ClassSearchingBar() {
+export default function ClassroomSearchingBar() {
   return (
     <div className='w-full'>
       <form

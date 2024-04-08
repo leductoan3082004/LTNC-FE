@@ -1,7 +1,7 @@
 import { Fragment, useContext } from 'react'
 import { AppContext } from 'src/contexts/app.context'
-import ClassroomDetailForStudent from '../ClassroomDetailForStudent'
-import ClassroomDetailForTeacher from '../ClassroomDetailForTeacher'
+import ClassroomDetailForStudent from './children/ClassroomDetailForStudent'
+import ClassroomDetailForTeacher from './children/ClassroomDetailForTeacher'
 import { ClassroomContext } from 'src/contexts/classroom.context'
 
 export default function ClassroomDetail() {
