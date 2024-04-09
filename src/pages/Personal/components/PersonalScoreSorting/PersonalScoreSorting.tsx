@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import {personalPath} from 'src/constants/path'
 import { PersonalscoreContext } from 'src/contexts/personalscore.context' 
 
-export default function ScoreSorting() {
+export default function PersonalScoreSorting() {
   const { academicYear, setAcademicYear } = useContext(PersonalscoreContext)
 
   //! HANDLE SELECT YEAR

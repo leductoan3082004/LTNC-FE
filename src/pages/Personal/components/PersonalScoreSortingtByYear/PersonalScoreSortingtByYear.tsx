@@ -1,14 +1,14 @@
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { personalPath } from 'src/constants/path'
-import { PersonalscoreContext } from 'src/contexts/personalscore.context' 
+import { PersonalscoreContext } from 'src/contexts/personalscore.context'
 
 interface Props {
   year: number
 }
 
-export default function ScoreSortingtByYear({ year }: Props) {
-  const { setAcademicYear } = useContext(PersonalscoreContext)
+export default function PersonalScoreSortingtByYear({ year }: Props) {
+  const { setAcademicYear, joinedClassroomList } = useContext(PersonalscoreContext)
 
   const navigate = useNavigate()
   //! HANDLE CHOOSE YEAR
@@ -16,8 +16,8 @@ export default function ScoreSortingtByYear({ year }: Props) {
     setAcademicYear(year.toString())
     navigate({ pathname: `${personalPath.score}/${year}` })
   }
-
   return (
+
     <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
       <button
         onClick={handleSelectYear}
@@ -34,23 +34,22 @@ export default function ScoreSortingtByYear({ year }: Props) {
             <tr>
               <th className='px-4 py-2 uppercase'>STT</th>
               <th className='px-4 py-2 uppercase'>Tên môn học</th>
-              <th className='px-4 py-2 uppercase'>Mã môn học</th>
               <th className='px-4 py-2 uppercase'>Số tín chỉ</th>
               <th className='px-4 py-2 uppercase'>Điểm</th>
             </tr>
           </thead>
           <tbody>
-            {Array(5)
-              .fill(0)
-              .map((_, index) => (
-                <tr key={index}>
+            {joinedClassroomList.map((classroom, index) => {
+              const score = classroom.member.attendance * classroom.course.attendance_ratio + classroom.member.lab * classroom.course.lab_ratio + classroom.member.midterm * classroom.course.midterm_ratio + classroom.member.final * classroom.course.final_ratio
+              return (
+                <tr key={classroom.class._id}>
                   <td className='border border-black px-4 py-2 text-center text-lg'>{index + 1}</td>
-                  <td className='border border-black px-4 py-2 text-center '>Lập trình nâng cao</td>
-                  <td className='border border-black px-4 py-2 text-center'>CO1010</td>
-                  <td className='border border-black px-4 py-2 text-center'>3</td>
-                  <td className='border border-black px-4 py-2 text-center'>9</td>
+                  <td className='border border-black px-4 py-2 text-center '>{classroom.course.course_name}</td>
+                  <td className='border border-black px-4 py-2 text-center'>{classroom.course.credit}</td>
+                  <td className='border border-black px-4 py-2 text-center'>{score / 100}</td>
                 </tr>
-              ))}
+              )
+            })}
           </tbody>
         </table>
       </div>

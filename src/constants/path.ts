@@ -21,12 +21,10 @@ export const classroomPath = {
 export const personalPath = {
   profile: '/personal/profile',
   account: '/personal/account',
-  score: '/personal/score'
+  score: '/personal/score',
+  scoreByYear: '/personal/score/:year'
 } as const
 
-export const ScorePath = {
-  ScoreByYear: '/score/:year'
-} as const
 
 //! ADMIN PATH
 export const adminPath = {
