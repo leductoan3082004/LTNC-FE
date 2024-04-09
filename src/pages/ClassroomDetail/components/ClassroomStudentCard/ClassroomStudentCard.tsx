@@ -2,12 +2,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { reject } from 'lodash'
-import { Fragment, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import classroomApi from 'src/apis/classroom.api'
 import DialogPopup from 'src/components/DialogPopup'
 import LoadingRing from 'src/components/LoadingRing'
 import { HttpStatusMessage } from 'src/constants/httpStatusMessage'
+import { ClassroomContext } from 'src/contexts/classroom.context'
 import { UpdateScoreSchema, updateScoreSchema } from 'src/rules/score.rule'
 import { JoinedClassroom } from 'src/types/joinedClassroom.type'
 import { DetailedMember } from 'src/types/member.type'
@@ -22,12 +23,27 @@ interface Props {
 type FormData = UpdateScoreSchema
 
 export default function ClassroomStudentCard({ student, classroom }: Props) {
+  const { updatingStudentID, setUpdatingStudentID } = useContext(ClassroomContext)
+
   //! Declare states
   const [updatingScore, setUpdatingScore] = useState<boolean>(false)
   const [excutingDialog, setExcutingDialog] = useState<boolean>(false)
   const [excuting, setExcuting] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>('')
+
+  const resetState = () => {
+    setExcuting(false)
+    setError(false)
+    setErrorMessage('')
+  }
+
+  useEffect(() => {
+    if (updatingStudentID != student._id) {
+      cancelUpdating()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [student._id, updatingStudentID])
 
   //! Calculate score
   const course = classroom.course
@@ -100,9 +116,8 @@ export default function ClassroomStudentCard({ student, classroom }: Props) {
     reject(errors)
   }
   const onSubmit = async (data: FormData) => {
+    resetState()
     setExcutingDialog(true)
-    setError(false)
-    setErrorMessage('')
     setExcuting(true)
 
     try {
@@ -158,7 +173,13 @@ export default function ClassroomStudentCard({ student, classroom }: Props) {
           <p className={classNames(cellStyle, 'col-span-1')}>{student.final}</p>
           <p className={classNames(cellStyle, 'col-span-1 text-primaryText')}>{averageScore}</p>
           <div className={classNames(cellStyle, 'col-span-2')}>
-            <button onClick={() => setUpdatingScore(true)} className='hover:text-primaryText'>
+            <button
+              onClick={() => {
+                setUpdatingScore(true)
+                setUpdatingStudentID(student._id)
+              }}
+              className='hover:text-primaryText'
+            >
               Cập nhật
             </button>
           </div>
