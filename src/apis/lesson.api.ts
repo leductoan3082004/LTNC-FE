@@ -6,10 +6,10 @@ const URL = 'lesson'
 
 const lessonApi = {
   listLessons(params: LessonListConfig) {
-    return http.get<LessonList>(`${URL}`, { params })
+    return http.get<LessonList>(`${URL}/`, { params })
   },
   createLesson(body: LessonCreate) {
-    return http.post<SuccessRespone<string>>(URL, body)
+    return http.post<SuccessRespone<string>>(`${URL}/`, body)
   },
   deleteLesson(lessonId: string) {
     const body = {
