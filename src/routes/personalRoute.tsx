@@ -8,6 +8,7 @@ import PersonalAccount from 'src/pages/Personal/children/PersonalAccount'
 import PersonalProfile from 'src/pages/Personal/children/PersonalProfile'
 import PersonalScore from 'src/pages/Personal/children/PersonalScore'
 import PersonalScoreByYear from 'src/pages/Personal/children/PersonalScoreByYear'
+import PersonalScoreAllYear from 'src/pages/Personal/components/PersonalScoreAllYear'
 import PersonalLayout from 'src/pages/Personal/layouts/PersonalLayout'
 
 function PersonalRoute() {
@@ -34,7 +35,8 @@ const PersonalRoutes = {
     { path: '', element: <PersonalProfile /> },
     { path: personalPath.score, element: <PersonalScore /> },
     { path: personalPath.account, element: <PersonalAccount /> },
-    { path: personalPath.scoreByYear, element: <PersonalScoreByYear /> }
+    { path: personalPath.scoreByYear, element: <PersonalScoreByYear /> },
+    { path: personalPath.scoreAllYear, element: <PersonalScoreAllYear /> }
   ]
 }
 

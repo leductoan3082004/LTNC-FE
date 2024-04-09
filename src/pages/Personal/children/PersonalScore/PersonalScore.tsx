@@ -5,9 +5,11 @@ import { useQuery } from '@tanstack/react-query'
 import { PersonalscoreContext } from 'src/contexts/personalscore.context'
 import PersonalScoreSortingByYearColumn from '../../components/PersonalScoreSortingByYearColumn'
 import PersonalInScore from '../../components/PersonalInScore'
+import { NavLink } from 'react-router-dom'
+import { personalPath } from 'src/constants/path'
 
 export default function PersonalScore() {
-  const { setJoinedClassroomList, form} = useContext(PersonalscoreContext)
+  const { setJoinedClassroomList, form } = useContext(PersonalscoreContext)
 
   const { data: joinedClassroomListData } = useQuery({
     queryKey: ['joined_classroom_list'],
@@ -26,23 +28,30 @@ export default function PersonalScore() {
 
 
   return (
-      
-      <div>
-        <PersonalInScore />
-        {!form && (
-          <div>
-            <PersonalScoreSortingtByYear year={2024} />
-            <PersonalScoreSortingtByYear year={2025} />
-            <PersonalScoreSortingtByYear year={2026} />
-            <PersonalScoreSortingtByYear year={2027} />
+
+    <div>
+      <PersonalInScore />
+      {!form && (
+        <div>
+          <PersonalScoreSortingtByYear year={2024} />
+          <PersonalScoreSortingtByYear year={2025} />
+          <PersonalScoreSortingtByYear year={2026} />
+          <PersonalScoreSortingtByYear year={2027} />
+        </div>
+      )}
+      {form && (
+        <div>
+          <PersonalScoreSortingByYearColumn year={2024} />
+          <PersonalScoreSortingByYearColumn year={2025} />
+          <div className='bg-webColor100 py-4 px-6 space-y-4 text-darkText'>
+            <NavLink
+            to={personalPath.scoreAllYear}
+              className='py-2 flex justify-end items-center w-full hover:text-primaryText text-lg font-semibold shrink-0 '>
+              Thông kê điểm theo năm học
+            </NavLink>
           </div>
-        )}
-        {form && (
-          <div>
-            <PersonalScoreSortingByYearColumn year={2024} />
-            <PersonalScoreSortingByYearColumn year={2025} />
-          </div>
-        )}
-      </div>
+        </div>
+      )}
+    </div>
   )
 }

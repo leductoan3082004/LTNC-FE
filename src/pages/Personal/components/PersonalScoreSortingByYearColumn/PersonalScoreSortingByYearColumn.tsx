@@ -22,7 +22,7 @@ export default function PersonalScoreSortingByYearColumn({ year }: Props) {
       Điểm: score
     })})
   return (
-    <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
+    <div className='bg-webColor100 py-4 px-6 space-y-4 text-darkText'>
       <button
         onClick={handleSelectYear}
         className='py-2 flex justify-center items-center w-full hover:text-primaryText uppercase text-lg desktop:text-2xl font-semibold shrink-0 '>

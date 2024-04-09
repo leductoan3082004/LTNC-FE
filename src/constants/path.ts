@@ -22,7 +22,8 @@ export const personalPath = {
   profile: '/personal/profile',
   account: '/personal/account',
   score: '/personal/score',
-  scoreByYear: '/personal/score/:year'
+  scoreByYear: '/personal/score/:year',
+  scoreAllYear: '/personal/score/all'
 } as const
 
 
