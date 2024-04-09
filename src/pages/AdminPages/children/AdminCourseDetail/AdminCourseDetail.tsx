@@ -14,7 +14,7 @@ export default function AdminCourseDetail() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
 
-  //! Declare stats
+  //! Declare states
   const [editingMode, setEditingMode] = useState<boolean>(false)
   const [dialog, setDialog] = useState<boolean>(false)
   const [confirmMessage, setConfirmMessage] = useState<boolean>(false)

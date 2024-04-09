@@ -32,6 +32,15 @@ export default function CourseDetailClassroomCard({
   const [unRegisterSuccess, setUnRegisterSuccess] = useState<boolean>(false)
   const [duplicatedCourseTime, setDuplicatedCourseTime] = useState<string>('')
 
+  const resetState = () => {
+    setInvalidTime(false)
+    setRegisterError(false)
+    setRegisterSuccess(false)
+    setInvalidTime(false)
+    setUnRegisterSuccess(false)
+    setDuplicatedCourseTime('')
+  }
+
   //! Get timetable
   const startTimestamp = new Date(classroom.time_table[0].lesson_start)
   const endTimestamp = new Date(classroom.time_table[0].lesson_end)
@@ -56,12 +65,13 @@ export default function CourseDetailClassroomCard({
           return false
         }
       }
-      return true
     }
+    return true
   }
 
   //:: register classroom
   const registerClassroom = () => {
+    resetState()
     setDialog(true)
     setExcuting(true)
     if (!validTimetable()) {
@@ -91,6 +101,7 @@ export default function CourseDetailClassroomCard({
     mutationFn: memberApi.removeClassroom
   })
   const unregisterClassroom = () => {
+    resetState()
     setDialog(true)
     setExcuting(true)
     unregisterMutation.mutate(classroom._id, {

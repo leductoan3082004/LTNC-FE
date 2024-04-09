@@ -9,3 +9,10 @@ export const adminCreateClassroomSchema = yup.object({
   date: yup.date().required('Yêu cầu điền ngày học trong tuần')
 })
 export type AdminCreateClassroomSchema = yup.InferType<typeof adminCreateClassroomSchema>
+
+export const createLessonSchema = yup.object({
+  classroom_id: yup.string().required('Yêu cầu có ID lớp học'),
+  name: yup.string().required('Yêu cầu có tên bài giảng'),
+  content: yup.string().required('Yêu cầu có nội dung bài giảng')
+})
+export type CreateLessonSchema = yup.InferType<typeof createLessonSchema>

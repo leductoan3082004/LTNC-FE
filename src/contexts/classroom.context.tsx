@@ -9,15 +9,19 @@ interface ClassroomContextInterface {
   setClassroomPathList: React.Dispatch<React.SetStateAction<PathElement[]>>
   currentClassroom: JoinedClassroom | null
   setCurrentClassroom: React.Dispatch<React.SetStateAction<JoinedClassroom | null>>
+  updatingStudentID: string
+  setUpdatingStudentID: React.Dispatch<React.SetStateAction<string>>
 }
 
 const initialClassroomContext: ClassroomContextInterface = {
   subject: '',
-  setSubject: () => '',
+  setSubject: () => null,
   classroomPathList: [],
   setClassroomPathList: () => null,
   currentClassroom: null,
-  setCurrentClassroom: () => null
+  setCurrentClassroom: () => null,
+  updatingStudentID: '',
+  setUpdatingStudentID: () => null
 }
 
 export const ClassroomContext = createContext<ClassroomContextInterface>(initialClassroomContext)
@@ -28,6 +32,7 @@ export const ClassrroomProvider = ({ children }: { children: React.ReactNode }) 
   const [currentClassroom, setCurrentClassroom] = useState<JoinedClassroom | null>(
     initialClassroomContext.currentClassroom
   )
+  const [updatingStudentID, setUpdatingStudentID] = useState<string>(initialClassroomContext.updatingStudentID)
 
   return (
     <ClassroomContext.Provider
@@ -37,7 +42,9 @@ export const ClassrroomProvider = ({ children }: { children: React.ReactNode }) 
         classroomPathList,
         setClassroomPathList,
         currentClassroom,
-        setCurrentClassroom
+        setCurrentClassroom,
+        updatingStudentID,
+        setUpdatingStudentID
       }}
     >
       {children}
