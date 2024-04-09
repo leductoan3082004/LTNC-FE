@@ -77,7 +77,7 @@ export default function AdminCreateCourse() {
           reset()
           setStartTime(currentDate)
           setEndTime(currentDate)
-          queryClient.invalidateQueries({ queryKey: ['course_list'] })
+          queryClient.invalidateQueries({ queryKey: ['admin_course_list'] })
         },
         onError: (error) => {
           if (isAxiosBadRequestError<ErrorRespone>(error)) {

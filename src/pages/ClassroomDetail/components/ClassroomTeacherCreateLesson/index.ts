@@ -1,0 +1,3 @@
+import ClassroomTeacherCreateLesson from './ClassroomTeacherCreateLesson'
+
+export default ClassroomTeacherCreateLesson

@@ -22,10 +22,6 @@ export default function MainHeader() {
     {
       name: 'KHÓA HỌC',
       path: mainPath.courseList
-    },
-    {
-      name: 'LỚP HỌC',
-      path: mainPath.classList
     }
   ]
 
@@ -50,7 +46,7 @@ export default function MainHeader() {
                 to={menu.path}
                 className={({ isActive }) =>
                   classNames(
-                    'text-lightText justify-center rounded-lg col-span-1 relative flex items-center font-medium desktop:text-lg px-6 hover:bg-hoveringBg',
+                    'text-lightText uppercase justify-center rounded-lg col-span-1 relative flex items-center font-medium desktop:text-lg px-6 hover:bg-hoveringBg',
                     {
                       'bg-hoveringBg': isActive
                     }
@@ -60,6 +56,22 @@ export default function MainHeader() {
                 {menu.name}
               </NavLink>
             ))}
+
+            {isAuthenticated && (
+              <NavLink
+                to={mainPath.classroomList}
+                className={({ isActive }) =>
+                  classNames(
+                    'text-lightText uppercase justify-center rounded-lg col-span-1 relative flex items-center font-medium desktop:text-lg px-6 hover:bg-hoveringBg',
+                    {
+                      'bg-hoveringBg': isActive
+                    }
+                  )
+                }
+              >
+                Lớp học
+              </NavLink>
+            )}
           </div>
         </div>
 

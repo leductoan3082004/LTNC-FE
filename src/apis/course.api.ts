@@ -43,6 +43,12 @@ const courseApi = {
   },
   updateCourse(body: UpdateCourseForm) {
     return http.put<SuccessRespone<string>>(`${URL}/`, body)
+  },
+  deleteCourse(courseId: string) {
+    const body = {
+      course_id: courseId
+    }
+    return http.delete(`${URL}/`, { data: body })
   }
 }
 
