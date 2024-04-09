@@ -1,44 +1,54 @@
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useContext } from 'react'
+import { ClassroomContext } from 'src/contexts/classroom.context'
 import { User } from 'src/types/user.type'
 import { getProfileFromLS } from 'src/utils/auth'
 
 const headerTable = ['Mục điểm', 'Điểm', 'Contribution to course total']
 const titleBody = ['Chuyên cần', 'Lab', 'Giữa kỳ', 'Cuối kỳ', 'Tổng kết']
-const datas = [
-  {
-    ['id']: 1,
-    ['point_section']: 'Toán rời rạc',
-    ['point']: 10,
-    ['contribution_to_course_total']: 1000
-  },
-  {
-    ['id']: 1,
-    ['point_section']: 'Toán rời rạc',
-    ['point']: 10,
-    ['contribution_to_course_total']: 1000
-  },
-  {
-    ['id']: 1,
-    ['point_section']: 'Toán rời rạc',
-    ['point']: 10,
-    ['contribution_to_course_total']: 1000
-  },
-  {
-    ['id']: 1,
-    ['point_section']: 'Toán rời rạc',
-    ['point']: 10,
-    ['contribution_to_course_total']: 1000
-  },
-  {
-    ['id']: 1,
-    ['point_section']: 'Toán rời rạc',
-    ['point']: 10,
-    ['contribution_to_course_total']: 1000
-  }
-]
+
 
 export default function ClassroomScoreForStudent() {
+  const { currentClassroom } = useContext(ClassroomContext)
+  let all_score = 0
+  if (currentClassroom) {
+    all_score = (currentClassroom.member.attendance * currentClassroom.course.attendance_ratio + currentClassroom.member.lab * currentClassroom.course.lab_ratio + currentClassroom.member.midterm * currentClassroom.course.midterm_ratio + currentClassroom.member.final * currentClassroom.course.final_ratio) / 100
+  }
+
+
+  const datas = currentClassroom ?
+    [
+      {
+        Name: 'Chuyên cần',
+        Score: currentClassroom.member.attendance,
+        contribution: currentClassroom.course.attendance_ratio
+      },
+      {
+        Name: 'lab',
+        Score: currentClassroom.member.lab,
+        contribution: currentClassroom.course.lab_ratio
+      },
+      {
+        Name: 'Giữa kỳ',
+        Score: currentClassroom.member.midterm,
+        contribution: currentClassroom.course.midterm_ratio
+      },
+      {
+        Name: 'Cuối kỳ',
+        Score: currentClassroom.member.final,
+        contribution: currentClassroom.course.final_ratio
+      },
+      {
+        Name: 'Tổng kết',
+        Score: all_score,
+        contribution: 100
+      },
+    ] : []
+
+
+
+
   const profile: User = getProfileFromLS()
 
   return (
@@ -68,22 +78,22 @@ export default function ClassroomScoreForStudent() {
               ))}
             </div>
             <div>
-              {datas.map((data, index) => (
+              {datas && datas?.map((data, index) => (
                 <div
                   key={index}
                   className={`p-3 text-center ${index === datas.length - 1 ? 'font-bold bg-[rgb(230_238_246)]' : 'bg-[white]'} mb-2  border-y-[#ccc] border-t border-solid border-b`}
                 >
-                  {data.point}
+                  {data.Score}
                 </div>
               ))}
             </div>
             <div>
-              {datas.map((data, index) => (
+              {datas && datas?.map((data, index) => (
                 <div
                   key={index}
-                  className={`p-3 text-center border-r-[#ccc] ${index === datas.length - 1 ? 'font-bold bg-[rgb(230_238_246)]' : 'bg-[white]'} border-r border-solid mb-2  border-y-[#ccc] border-t border-solid border-b`}
+                  className={`p-3 text-center ${index === datas.length - 1 ? 'font-bold bg-[rgb(230_238_246)]' : 'bg-[white]'} mb-2  border-y-[#ccc] border-t border-solid border-b`}
                 >
-                  {data.contribution_to_course_total}
+                  {data.contribution} %
                 </div>
               ))}
             </div>
