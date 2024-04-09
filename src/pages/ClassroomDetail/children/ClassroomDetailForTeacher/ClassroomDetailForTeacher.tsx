@@ -4,7 +4,7 @@ import ClassroomTeacherCreateLesson from '../../components/ClassroomTeacherCreat
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import lessonApi from 'src/apis/lesson.api'
 import { Lesson } from 'src/types/lesson.type'
-import ClassroomLessonCard from '../../components/ClassroomLessonCard'
+import ClassroomLessonCard from '../ClassroomLessonCard'
 import DialogPopup from 'src/components/DialogPopup'
 import LoadingSection from 'src/components/LoadingSection'
 

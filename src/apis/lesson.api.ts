@@ -11,8 +11,11 @@ const lessonApi = {
   createLesson(body: LessonCreate) {
     return http.post<SuccessRespone<string>>(URL, body)
   },
-  uploadMaterial(lessonId: string, body: { file: File }) {
-    return http.post<SuccessRespone<string>>(`${URL}upload/${lessonId}`, body, {
+  uploadMaterial(data: { lessonId: string; file: File }) {
+    const body = {
+      file: data.file
+    }
+    return http.post<SuccessRespone<string>>(`${URL}upload/${data.lessonId}`, body, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

@@ -1,6 +1,6 @@
 import { JSONModel } from './utils.type'
 
-export interface Material {
+export interface LessonMaterial {
   key: string
   name: string
 }
@@ -12,7 +12,7 @@ export interface LessonCreate {
 }
 
 export interface Lesson extends JSONModel, LessonCreate {
-  materials: Material[]
+  materials: LessonMaterial[]
 }
 
 export interface LessonUpdate {

@@ -74,7 +74,7 @@ export default function ClassroomTeacherCreateLessonForm() {
       <div className='space-y-4 px-2'>
         <div className='flex space-x-2'>
           <div className={classNames(titleStyle, 'justify-center flex w-full')}>
-            <span className='opacity-60'>Mô tả khóa học</span>
+            <span className='opacity-60'>Nội dung bài giảng</span>
             <span className='text-alertRed text-lg'>*</span>
           </div>
           <span className='text-sm text-alertRed'>{errors.content?.message}</span>
