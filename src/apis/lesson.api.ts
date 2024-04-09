@@ -2,19 +2,23 @@ import { LessonCreate, LessonList, LessonListConfig } from 'src/types/lesson.typ
 import { SuccessRespone } from 'src/types/utils.type'
 import http from 'src/utils/http'
 
-const URL = 'lesson'
+const URL = 'lesson/'
 
 const lessonApi = {
   listLessons(params: LessonListConfig) {
-    return http.get<LessonList>(`${URL}/`, { params })
+    return http.get<LessonList>(URL, { params })
   },
   createLesson(body: LessonCreate) {
-    return http.post<SuccessRespone<string>>(`${URL}/`, body)
+    return http.post<SuccessRespone<string>>(URL, body)
   },
-  deleteLesson(lessonId: string) {
-    const body = {
-      lesson_id: lessonId
-    }
+  uploadMaterial(lessonId: string, body: { file: File }) {
+    return http.post<SuccessRespone<string>>(`${URL}upload/${lessonId}`, body, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  },
+  deleteLesson(body: { lesson_id: string; classroom_id: string }) {
     return http.delete<SuccessRespone<string>>(URL, { data: body })
   }
 }

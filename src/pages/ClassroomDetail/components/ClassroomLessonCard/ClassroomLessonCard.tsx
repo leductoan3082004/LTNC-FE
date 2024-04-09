@@ -26,8 +26,10 @@ export default function ClassroomLessonCard({ lesson }: Props) {
     setExtending(false)
   }
 
+  //! Handle delete lesson
+
   return (
-    <div key={lesson._id} className='p-4 rounded-md bg-webColor100'>
+    <div className='p-4 rounded-md bg-webColor100'>
       <button
         onClick={extending ? collapse : extend}
         className='flex hover:text-primaryText text-lg w-full items-center justify-between'
@@ -42,9 +44,12 @@ export default function ClassroomLessonCard({ lesson }: Props) {
           ref={itemDescriptionRef}
           className={classNames('', {
             'max-h-0 overflow-hidden': !extending,
-            'h-full overflow-visible py-1': extending
+            'h-full overflow-visible py-1 space-y-4': extending
           })}
         >
+          <div className='space-y-2'>
+            <p className='text-lg desktop:text-xl font-semibold  uppercase text-center'>Tài liệu</p>
+          </div>
           <div
             ref={itemDescriptionContentRef}
             dangerouslySetInnerHTML={{
