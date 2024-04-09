@@ -1,5 +1,6 @@
 import { LessonCreate, LessonList, LessonListConfig } from 'src/types/lesson.type'
 import { SuccessRespone } from 'src/types/utils.type'
+import { getAccessTokenFromLS } from 'src/utils/auth'
 import http from 'src/utils/http'
 
 const URL = 'lesson/'
@@ -20,6 +21,13 @@ const lessonApi = {
         'Content-Type': 'multipart/form-data'
       }
     })
+  },
+  getMaterial(materialKey: string) {
+    const token = getAccessTokenFromLS()
+    const headers = {
+      Authorization: `Bearer ${token}`
+    }
+    return http.get<string>(`${URL}material/${materialKey}`, { headers, responseType: 'blob' })
   },
   deleteLesson(body: { lesson_id: string; classroom_id: string }) {
     return http.delete<SuccessRespone<string>>(URL, { data: body })

@@ -7,7 +7,6 @@ import ClassroomTeacherCreateLessonForm from '../ClassroomTeacherCreateLessonFor
 import DialogPopup from 'src/components/DialogPopup'
 import LoadingRing from 'src/components/LoadingRing'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import classroomApi from 'src/apis/classroom.api'
 import lessonApi from 'src/apis/lesson.api'
 import { reject } from 'lodash'
 import { HttpStatusMessage } from 'src/constants/httpStatusMessage'
@@ -38,7 +37,7 @@ export default function ClassroomTeacherCreateLesson({ setCreatingLesson }: Prop
     },
     resolver: yupResolver(createLessonSchema)
   })
-  const { handleSubmit, setValue, reset } = methods
+  const { handleSubmit, reset } = methods
 
   const handleClose = () => {
     reset()

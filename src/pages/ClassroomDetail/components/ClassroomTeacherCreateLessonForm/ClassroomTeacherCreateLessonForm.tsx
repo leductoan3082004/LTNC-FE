@@ -79,7 +79,6 @@ export default function ClassroomTeacherCreateLessonForm() {
           </div>
           <span className='text-sm text-alertRed'>{errors.content?.message}</span>
         </div>
-        {/* <QuillEditor value={editorContent} setValue={onEditorStateChange} /> */}
         <CustomJoditEditor content={editorContent} setContent={onEditorStateChange} />
       </div>
     </Fragment>

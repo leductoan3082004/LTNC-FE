@@ -31,7 +31,7 @@ export default function ClassroomLessonCard({ lesson }: Props) {
   }
 
   return (
-    <div className='p-4 rounded-md bg-webColor100'>
+    <div className=''>
       <button
         onClick={extending ? collapse : extend}
         className='flex hover:text-primaryText font-semibold text-lg w-full items-center justify-between'
@@ -78,7 +78,7 @@ export default function ClassroomLessonCard({ lesson }: Props) {
               </button>
             )}
           </div>
-          <div className='p-4 rounded-lg border border-black/20'>
+          <div className='p-4 rounded-lg border bg-white border-black/20'>
             {uploadingMaterial && <ClassroomUploadMaterialForLesson lessonId={lesson._id} />}
             {!uploadingMaterial && <ClassroomMaterialListForLesson materials={lesson.materials} />}
           </div>

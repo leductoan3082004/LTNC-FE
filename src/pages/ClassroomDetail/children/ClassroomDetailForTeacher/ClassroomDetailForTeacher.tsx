@@ -114,7 +114,7 @@ export default function ClassroomDetailForTeacher() {
               <p className='uppercase text-lg text-center desktop:text-xl font-medium tracking-wide'>Bài giảng</p>
 
               {extendedLessonList.map((lesson) => (
-                <div key={lesson._id} className='space-y-1'>
+                <div key={lesson._id} className='space-y-1 bg-webColor100 p-4 rounded-lg'>
                   <ClassroomLessonCard lesson={lesson} />
                   <div className='w-full flex justify-end'>
                     <button

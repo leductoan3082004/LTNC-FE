@@ -60,7 +60,7 @@ export default function ClassroomUploadMaterialForLesson({ lessonId }: Props) {
       return
     }
 
-    queryClient.invalidateQueries({ queryKey: ['material_list'] })
+    queryClient.invalidateQueries({ queryKey: ['lesson_list'] })
     setFiles([])
     setExcuting(false)
     setError(false)
