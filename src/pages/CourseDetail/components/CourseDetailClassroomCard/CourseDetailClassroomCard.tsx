@@ -131,6 +131,9 @@ export default function CourseDetailClassroomCard({
     return member.role == 0
   })
 
+  //! Check limit of the class
+  const outOfLimit = classroom.limit == 0
+
   return (
     <div className='bg-webColor100 rounded-md p-2 space-y-2'>
       <p className='uppercase font-medium text-lg text-center desktop:text-xl space-x-1.5'>
@@ -158,23 +161,28 @@ export default function CourseDetailClassroomCard({
 
       {canRegister && (
         <div className='w-full justify-center flex min-h-8'>
-          {!isRegistered && (
-            <button
-              disabled={courseIsRegisterd}
-              onClick={registerClassroom}
-              className='flex bg-unhoverBg hover:bg-hoveringBg disabled:hover:bg-unhoverBg disabled:opacity-50 rounded-lg items-center justify-center py-1 px-3'
-            >
-              Đăng ký
-            </button>
-          )}
+          {outOfLimit && <p className='text-center font-medium text-alertRed'>Lớp học đã đầy</p>}
+          {!outOfLimit && (
+            <Fragment>
+              {!isRegistered && (
+                <button
+                  disabled={courseIsRegisterd}
+                  onClick={registerClassroom}
+                  className='flex bg-unhoverBg hover:bg-hoveringBg disabled:hover:bg-unhoverBg disabled:opacity-50 rounded-lg items-center justify-center py-1 px-3'
+                >
+                  Đăng ký
+                </button>
+              )}
 
-          {isRegistered && (
-            <button
-              onClick={unregisterClassroom}
-              className='flex bg-alertRed/80 hover:bg-alertRed rounded-lg items-center justify-center py-1 px-3'
-            >
-              Hủy đăng ký
-            </button>
+              {isRegistered && (
+                <button
+                  onClick={unregisterClassroom}
+                  className='flex bg-alertRed/80 hover:bg-alertRed rounded-lg items-center justify-center py-1 px-3'
+                >
+                  Hủy đăng ký
+                </button>
+              )}
+            </Fragment>
           )}
         </div>
       )}
