@@ -1,8 +1,8 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { range } from 'lodash'
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import academicYears from 'src/constants/academicYears'
 import mainPath from 'src/constants/path'
 import { CalendarContext } from 'src/contexts/calendar.context'
 // import './CalendarSorting.css'
@@ -35,7 +35,7 @@ export default function CalendarSorting() {
           <option disabled className='uppercase text-lg font-semibold'>
             Năm học
           </option>
-          {range(2024, 2028).map((year) => (
+          {academicYears.map((year) => (
             <option value={year} key={year} className='text-darkText/80'>
               {year}
             </option>
