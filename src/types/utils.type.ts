@@ -6,6 +6,10 @@ export interface ErrorRespone {
   status_code: number
   log: string
 }
+export interface ScoreForYear{
+  year: number,
+  score: number
+}
 
 export interface SuccessRespone<Data> {
   data: Data

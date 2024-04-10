@@ -1,0 +1,3 @@
+import PersonalScoreSortingByYearColumn from "./PersonalScoreSortingByYearColumn";
+
+export default PersonalScoreSortingByYearColumn

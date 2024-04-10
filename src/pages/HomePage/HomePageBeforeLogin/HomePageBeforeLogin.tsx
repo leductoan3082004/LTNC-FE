@@ -28,7 +28,7 @@ export default function HomePageBeforeLogin() {
 
           <NavLink
             to={mainPath.login}
-            className='inline-block border text-lightText h-24 w-72 my-10 text-3xl mx-10 bg-darkText flex justify-center items-center px-6'
+            className='inline-block border text-lightText h-24 w-72 my-10 text-3xl mx-10 bg-darkText justify-center items-center px-6'
           >
             Sign up / Login
           </NavLink>
