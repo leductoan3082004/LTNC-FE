@@ -5,8 +5,10 @@ import mainPath from 'src/constants/path'
 import { ClassroomContext } from 'src/contexts/classroom.context'
 import ClassroomCard from './components/ClassroomCard'
 import LoadingSection from 'src/components/LoadingSection'
+import { AppContext } from 'src/contexts/app.context'
 
 export default function ClassroomList() {
+  const { isAuthenticated } = useContext(AppContext)
   const { setClassroomPathList } = useContext(ClassroomContext)
 
   useEffect(() => {
@@ -18,7 +20,8 @@ export default function ClassroomList() {
   //! Get classroom list
   const { data: ClassRoomListData } = useQuery({
     queryKey: ['classroom_list'],
-    queryFn: () => authApi.getJoinedClassroomList()
+    queryFn: () => authApi.getJoinedClassroomList(),
+    enabled: isAuthenticated
   })
   const classroomList = ClassRoomListData?.data.data
 
@@ -28,13 +31,16 @@ export default function ClassroomList() {
         <h1 className='text-2xl uppercase font-semibold text-center tracking-wide'>Lớp học của tôi</h1>
       </div>
 
-      <div className='flex flex-col'>
-        {classroomList ? (
-          classroomList.map((classroom) => <ClassroomCard key={classroom.class._id} classroomDetail={classroom} />)
-        ) : (
-          <LoadingSection />
-        )}
-      </div>
+      {!classroomList && <LoadingSection />}
+      {classroomList && (
+        <div className='grid grid-cols-3 gap-4'>
+          {classroomList.map((classroom) => (
+            <div className='col-span-1' key={classroom.class._id}>
+              <ClassroomCard classroomDetail={classroom} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

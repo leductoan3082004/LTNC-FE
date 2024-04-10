@@ -1,0 +1,3 @@
+import ClassroomUploadMaterialForLesson from './ClassroomUploadMaterialForLesson'
+
+export default ClassroomUploadMaterialForLesson

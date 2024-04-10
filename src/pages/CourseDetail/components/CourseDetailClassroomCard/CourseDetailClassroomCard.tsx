@@ -32,6 +32,15 @@ export default function CourseDetailClassroomCard({
   const [unRegisterSuccess, setUnRegisterSuccess] = useState<boolean>(false)
   const [duplicatedCourseTime, setDuplicatedCourseTime] = useState<string>('')
 
+  const resetState = () => {
+    setInvalidTime(false)
+    setRegisterError(false)
+    setRegisterSuccess(false)
+    setInvalidTime(false)
+    setUnRegisterSuccess(false)
+    setDuplicatedCourseTime('')
+  }
+
   //! Get timetable
   const startTimestamp = new Date(classroom.time_table[0].lesson_start)
   const endTimestamp = new Date(classroom.time_table[0].lesson_end)
@@ -56,12 +65,13 @@ export default function CourseDetailClassroomCard({
           return false
         }
       }
-      return true
     }
+    return true
   }
 
   //:: register classroom
   const registerClassroom = () => {
+    resetState()
     setDialog(true)
     setExcuting(true)
     if (!validTimetable()) {
@@ -91,6 +101,7 @@ export default function CourseDetailClassroomCard({
     mutationFn: memberApi.removeClassroom
   })
   const unregisterClassroom = () => {
+    resetState()
     setDialog(true)
     setExcuting(true)
     unregisterMutation.mutate(classroom._id, {
@@ -120,6 +131,9 @@ export default function CourseDetailClassroomCard({
     return member.role == 0
   })
 
+  //! Check limit of the class
+  const outOfLimit = classroom.limit == 0
+
   return (
     <div className='bg-webColor100 rounded-md p-2 space-y-2'>
       <p className='uppercase font-medium text-lg text-center desktop:text-xl space-x-1.5'>
@@ -147,23 +161,28 @@ export default function CourseDetailClassroomCard({
 
       {canRegister && (
         <div className='w-full justify-center flex min-h-8'>
-          {!isRegistered && (
-            <button
-              disabled={courseIsRegisterd}
-              onClick={registerClassroom}
-              className='flex bg-unhoverBg hover:bg-hoveringBg disabled:hover:bg-unhoverBg disabled:opacity-50 rounded-lg items-center justify-center py-1 px-3'
-            >
-              Đăng ký
-            </button>
-          )}
+          {outOfLimit && <p className='text-center font-medium text-alertRed'>Lớp học đã đầy</p>}
+          {!outOfLimit && (
+            <Fragment>
+              {!isRegistered && (
+                <button
+                  disabled={courseIsRegisterd}
+                  onClick={registerClassroom}
+                  className='flex bg-unhoverBg hover:bg-hoveringBg disabled:hover:bg-unhoverBg disabled:opacity-50 rounded-lg items-center justify-center py-1 px-3'
+                >
+                  Đăng ký
+                </button>
+              )}
 
-          {isRegistered && (
-            <button
-              onClick={unregisterClassroom}
-              className='flex bg-alertRed/80 hover:bg-alertRed rounded-lg items-center justify-center py-1 px-3'
-            >
-              Hủy đăng ký
-            </button>
+              {isRegistered && (
+                <button
+                  onClick={unregisterClassroom}
+                  className='flex bg-alertRed/80 hover:bg-alertRed rounded-lg items-center justify-center py-1 px-3'
+                >
+                  Hủy đăng ký
+                </button>
+              )}
+            </Fragment>
           )}
         </div>
       )}

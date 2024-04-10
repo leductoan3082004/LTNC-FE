@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import FloatingOnClick from 'src/components/FoatingOnClick'
-import mainPath, { personalPath } from 'src/constants/path'
+import mainPath, { adminPath, personalPath } from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
 
 export default function PersonalPopover() {
   const { profile, handleLogout } = useContext(AppContext)
 
-  const isTeacher = profile?.role == 1
+  const isStudent = profile?.role == 0
+  const isAdmin = profile?.role == 2
 
   //! STYLES
   const itemStyle = 'py-2 px-4 flex items-center justify-start w-full select-none hover:bg-webColor200'
@@ -36,9 +37,15 @@ export default function PersonalPopover() {
                   Hồ sơ
                 </NavLink>
 
-                {!isTeacher && (
+                {isStudent && (
                   <NavLink to={personalPath.score} className={itemStyle}>
                     Điểm
+                  </NavLink>
+                )}
+
+                {isAdmin && (
+                  <NavLink to={adminPath.mainPage} className={itemStyle}>
+                    Quản trị
                   </NavLink>
                 )}
 

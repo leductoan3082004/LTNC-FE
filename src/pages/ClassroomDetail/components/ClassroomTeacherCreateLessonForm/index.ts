@@ -1,0 +1,3 @@
+import ClassroomTeacherCreateLessonForm from './ClassroomTeacherCreateLessonForm'
+
+export default ClassroomTeacherCreateLessonForm

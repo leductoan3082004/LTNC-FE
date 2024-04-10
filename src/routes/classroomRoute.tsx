@@ -1,22 +1,48 @@
-import { Suspense } from 'react'
-import { Outlet, RouteObject } from 'react-router-dom'
+import { Fragment, ReactNode, Suspense, useContext } from 'react'
+import { Navigate, Outlet, RouteObject } from 'react-router-dom'
 import LoadingPage from 'src/components/LoadingPage'
-import { classroomPath } from 'src/constants/path'
+import mainPath, { classroomPath } from 'src/constants/path'
+import { AppContext } from 'src/contexts/app.context'
 import { ClassrroomProvider } from 'src/contexts/classroom.context'
 import ClassroomList from 'src/pages/ClassroomList'
-import ClassroomDetail from 'src/pages/ClassroomList/children/ClassroomDetail'
-import ClassroomLayout from 'src/pages/ClassroomList/layouts/ClassroomLayout'
+import ClassroomDetail from 'src/pages/ClassroomDetail'
+import ClassroomMemberListForTeacher from 'src/pages/ClassroomDetail/children/ClassroomMemberListForTeacher'
+import ClassroomScoreForStudent from 'src/pages/ClassroomDetail/children/ClassroomScoreForStudent'
+import ClassroomDetailLayout from 'src/pages/ClassroomDetail/layouts/ClassroomDetailLayout'
+import ClassroomListLayout from 'src/pages/ClassroomList/layouts/ClassroomListLayout'
 
 function ClassroomRoute() {
-  return (
+  const { isAuthenticated } = useContext(AppContext)
+
+  return isAuthenticated ? (
     <ClassrroomProvider>
       <Suspense fallback={<LoadingPage />}>
-        <ClassroomLayout>
+        <ClassroomListLayout>
           <Outlet />
-        </ClassroomLayout>
+        </ClassroomListLayout>
       </Suspense>
     </ClassrroomProvider>
+  ) : (
+    <Navigate to={mainPath.login} />
   )
+}
+
+function ClassroomDetailRoute() {
+  return (
+    <ClassroomDetailLayout>
+      <Outlet />
+    </ClassroomDetailLayout>
+  )
+}
+
+function TeacherRoute({ children }: { children: ReactNode }) {
+  const { profile } = useContext(AppContext)
+  return profile?.role != 0 ? <Fragment>{children} </Fragment> : <Navigate to={classroomPath.classroomDetail} />
+}
+
+function StudentRoute({ children }: { children: ReactNode }) {
+  const { profile } = useContext(AppContext)
+  return profile?.role == 0 ? <Fragment>{children} </Fragment> : <Navigate to={classroomPath.classroomDetail} />
 }
 
 const ClassroomRoutes: RouteObject = {
@@ -24,7 +50,29 @@ const ClassroomRoutes: RouteObject = {
   element: <ClassroomRoute />,
   children: [
     { path: '', element: <ClassroomList /> },
-    { path: classroomPath.classroomDetail, element: <ClassroomDetail /> }
+    {
+      path: classroomPath.classroomDetail,
+      element: <ClassroomDetailRoute />,
+      children: [
+        { path: '', element: <ClassroomDetail /> },
+        {
+          path: classroomPath.classroomMemberList,
+          element: (
+            <TeacherRoute>
+              <ClassroomMemberListForTeacher />
+            </TeacherRoute>
+          )
+        },
+        {
+          path: classroomPath.classroomScore,
+          element: (
+            <StudentRoute>
+              <ClassroomScoreForStudent />
+            </StudentRoute>
+          )
+        }
+      ]
+    }
   ]
 }
 

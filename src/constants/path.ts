@@ -15,7 +15,9 @@ export const coursePath = {
 
 export const classroomPath = {
   classroomList: '/classrooms',
-  classroomDetail: '/classrooms/:classroomId'
+  classroomDetail: '/classrooms/:classroomId',
+  classroomMemberList: '/classrooms/:classroomId/members',
+  classroomScore: '/classrooms/:classroomId/score'
 } as const
 
 export const personalPath = {
