@@ -9,7 +9,9 @@ interface Props {
 
 export default function PersonalScoreSortingtByYear({ year }: Props) {
   const { setAcademicYear, joinedClassroomList } = useContext(PersonalscoreContext)
-
+  const joinedClassroomListByYear = joinedClassroomList.filter((classroom) => {
+    return new Date(classroom.course.start_time).getFullYear() == year
+  })
   const navigate = useNavigate()
   //! HANDLE CHOOSE YEAR
   const handleSelectYear = () => {
@@ -39,7 +41,7 @@ export default function PersonalScoreSortingtByYear({ year }: Props) {
             </tr>
           </thead>
           <tbody>
-            {joinedClassroomList.map((classroom, index) => {
+            {joinedClassroomListByYear.map((classroom, index) => {
               const score = classroom.member.attendance * classroom.course.attendance_ratio + classroom.member.lab * classroom.course.lab_ratio + classroom.member.midterm * classroom.course.midterm_ratio + classroom.member.final * classroom.course.final_ratio
               return (
                 <tr key={classroom.class._id}>

@@ -8,7 +8,10 @@ import { Bar, Tooltip, Legend, XAxis, YAxis, CartesianGrid, ComposedChart } from
 export default function PersonalScoreByYear() {
   const { academicYear, form, joinedClassroomList } = useContext(PersonalscoreContext)
 
-  const data = joinedClassroomList.map((classroom) => {
+  const joinedClassroomListByYear = joinedClassroomList.filter((classroom)=>{
+    return new Date(classroom.course.start_time).getFullYear() == parseInt(academicYear)
+  })
+  const data = joinedClassroomListByYear.map((classroom) => {
     const score = (classroom.member.attendance * classroom.course.attendance_ratio + classroom.member.lab * classroom.course.lab_ratio + classroom.member.midterm * classroom.course.midterm_ratio + classroom.member.final * classroom.course.final_ratio) / 100
     return ({
       name: classroom.course.course_name,
@@ -39,7 +42,7 @@ export default function PersonalScoreByYear() {
                 </tr>
               </thead>
               <tbody>
-                {joinedClassroomList.map((classroom, index) => {
+                {joinedClassroomListByYear.map((classroom, index) => {
                   const score = (classroom.member.attendance * classroom.course.attendance_ratio + classroom.member.lab * classroom.course.lab_ratio + classroom.member.midterm * classroom.course.midterm_ratio + classroom.member.final * classroom.course.final_ratio) / 100
                   return (
                     <tr key={classroom.class._id}>
@@ -64,7 +67,7 @@ export default function PersonalScoreByYear() {
           <ComposedChart width={730} height={250} data={data}>
             <XAxis dataKey="name" />
             <YAxis domain={[0, 10]} tickCount={7} />
-            <Tooltip />
+            <Tooltip labelFormatter={value => parseFloat(value).toFixed(2)}/>
             <Legend />
             <CartesianGrid stroke="#f5f5f5" />
             <Bar dataKey="Điểm" barSize={20} fill="#413ea0" />

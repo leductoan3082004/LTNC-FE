@@ -1,6 +1,9 @@
 import { useState, createContext } from 'react'
 import { JoinedClassroom } from 'src/types/joinedClassroom.type'
 
+
+
+
 interface PersonalscoreContextInterface {
   form: boolean
   setForm: React.Dispatch<React.SetStateAction<boolean>>
@@ -34,7 +37,7 @@ export const PersonalScoreProvider = ({ children }: { children: React.ReactNode 
         academicYear,
         setAcademicYear,
         joinedClassroomList,
-        setJoinedClassroomList
+        setJoinedClassroomList,
       }}
     >
       {children}
