@@ -46,10 +46,10 @@ export default function PersonalScoreSortingByYearColumn({ year }: Props) {
       <ComposedChart width={730} height={250} data={data}>
         <XAxis dataKey="name" />
         <YAxis domain={[0, 10]} tickCount={7} />
-        <Tooltip />
+        <Tooltip/>
         <Legend />
         <CartesianGrid stroke="#f5f5f5" />
-        <Bar dataKey="score" barSize={20} fill="#413ea0" />
+        <Bar name='Điểm' dataKey="score" barSize={20} fill="#413ea0" />
       </ComposedChart>
     </div>
   )

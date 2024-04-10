@@ -5,6 +5,7 @@ import { useContext } from "react"
 import { AppContext } from "src/contexts/app.context"
 import { Bar, Tooltip, Legend, XAxis, YAxis, CartesianGrid, ComposedChart } from 'recharts'
 import { ScoreForYear } from "src/types/utils.type"
+import PersonalInScore from "../PersonalInScore"
 
 interface ScoreAllYear {
   year: number
@@ -55,23 +56,9 @@ export default function PersonalScoreAllYear() {
 
   return (
     <div>
-      <div className='items-center justify-center py-10 bg-webColor200'>
-
-        <div className='container pb-4'>
-          <div className='border h-9 border-transparent flex items-center py-4 text-lg desktop:text-xl font-bold text-darkText text-start '>
-            <div className='w-1/4 text-left pr-4'> Tài Khoản </div>
-          </div>
-          <div className='border h-9 flex border-transparent items-center py-4 text-lg desktop:text-xl font-bold text-darkText text-start6 '>
-            <div className='w-1/4 text-left pr-4'>Tên sinh viên: </div>
-            <div className='border rounded-md border-transparent w-3/5 h-10 pt-2.5 px-4'>{profile?.name}</div>
-          </div>
-          <div className='border h-9 border-transparent flex items-center py-4 text-lg desktop:text-xl font-bold text-darkText text-start '>
-            <div className='w-1/4 text-left pr-4'>Mã số sinh viên: </div>
-            <div className='border rounded-md border-transparent w-3/5 h-10 pt-2.5 px-4'>{generateID(profile?._id || '')}</div>
-
-          </div>
-        </div>
-      </div>
+      <div className=" bg-webColor200 justify-between items-end relative py-4">
+        <PersonalInScore />
+    </div>
       <div className='bg-webColor100 py-4 px-6 space-y-4 text-darkText'>
         <div
           className='py-2 flex justify-center items-center w-full uppercase text-lg desktop:text-2xl font-semibold shrink-0 '>Điểm trung bình qua từng năm
@@ -82,7 +69,7 @@ export default function PersonalScoreAllYear() {
           <Tooltip />
           <Legend />
           <CartesianGrid stroke="#f5f5f5" />
-          <Bar dataKey="score" barSize={20} fill="#413ea0" />
+          <Bar name='Điểm' dataKey="score" barSize={20} fill="#413ea0" />
         </ComposedChart>
       </div>
 
