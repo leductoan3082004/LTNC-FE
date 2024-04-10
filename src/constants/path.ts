@@ -20,6 +20,10 @@ export const classroomPath = {
   classroomScore: '/classrooms/:classroomId/score'
 } as const
 
+export const calendarPath = {
+  calendarListByYear: '/calendar/:year',
+  calendarDetail: '/calendar/:year/:courseId'
+} as const
 export const personalPath = {
   profile: '/personal/profile',
   account: '/personal/account',
@@ -28,6 +32,9 @@ export const personalPath = {
   scoreAllYear: '/personal/score/all'
 } as const
 
+export const ScorePath = {
+  ScoreByYear: '/score/:year'
+} as const
 
 //! ADMIN PATH
 export const adminPath = {
