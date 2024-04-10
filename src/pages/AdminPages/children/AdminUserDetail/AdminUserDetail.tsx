@@ -82,9 +82,9 @@ export default function AdminUserDetail() {
         {!joinedclassroomList && <LoadingSection />}
         {joinedclassroomList && (
           <div className='grid grid-cols-3 gap-4'>
-            {joinedclassroomList.map((classroom, index) => (
+            {joinedclassroomList.map((classroom) => (
               <div key={classroom.class._id} className='col-span-1'>
-                <AdminClassroomCard classroom={classroom.class} index={index} course={classroom.course} />
+                <AdminClassroomCard classroom={classroom.class} course={classroom.course} />
               </div>
             ))}
           </div>

@@ -59,9 +59,13 @@ export default function AdminStudentDetail() {
   }
 
   let averageScore = 0
-
-  if (currentStudent) {
-    averageScore = currentStudent.attendance + currentStudent.lab + currentStudent.midterm + currentStudent.final
+  if (currentCourse && currentStudent) {
+    averageScore =
+      (currentStudent.attendance * currentCourse.attendance_ratio +
+        currentStudent.lab * currentCourse.lab_ratio +
+        currentStudent.midterm * currentCourse.midterm_ratio +
+        currentStudent.final * currentCourse.final_ratio) /
+      100
   }
   const scoreQuality = checkScoreQuality(averageScore)
 

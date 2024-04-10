@@ -1,4 +1,4 @@
-import { Suspense, useContext } from 'react'
+import { Fragment, ReactNode, Suspense, useContext } from 'react'
 import { Navigate, Outlet, RouteObject } from 'react-router-dom'
 import LoadingPage from 'src/components/LoadingPage'
 import mainPath, { classroomPath } from 'src/constants/path'
@@ -35,6 +35,16 @@ function ClassroomDetailRoute() {
   )
 }
 
+function TeacherRoute({ children }: { children: ReactNode }) {
+  const { profile } = useContext(AppContext)
+  return profile?.role != 0 ? <Fragment>{children} </Fragment> : <Navigate to={classroomPath.classroomDetail} />
+}
+
+function StudentRoute({ children }: { children: ReactNode }) {
+  const { profile } = useContext(AppContext)
+  return profile?.role == 0 ? <Fragment>{children} </Fragment> : <Navigate to={classroomPath.classroomDetail} />
+}
+
 const ClassroomRoutes: RouteObject = {
   path: '',
   element: <ClassroomRoute />,
@@ -45,8 +55,22 @@ const ClassroomRoutes: RouteObject = {
       element: <ClassroomDetailRoute />,
       children: [
         { path: '', element: <ClassroomDetail /> },
-        { path: classroomPath.classroomMemberList, element: <ClassroomMemberListForTeacher /> },
-        { path: classroomPath.classroomScore, element: <ClassroomScoreForStudent /> }
+        {
+          path: classroomPath.classroomMemberList,
+          element: (
+            <TeacherRoute>
+              <ClassroomMemberListForTeacher />
+            </TeacherRoute>
+          )
+        },
+        {
+          path: classroomPath.classroomScore,
+          element: (
+            <StudentRoute>
+              <ClassroomScoreForStudent />
+            </StudentRoute>
+          )
+        }
       ]
     }
   ]

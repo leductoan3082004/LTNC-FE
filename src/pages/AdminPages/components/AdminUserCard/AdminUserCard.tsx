@@ -24,7 +24,7 @@ export default function AdminUserCard({
       info: user.name
     },
     {
-      name: 'MSSV',
+      name: user.role == 0 ? 'MSSV' : 'ID',
       info: generateID(user._id)
     }
   ]
@@ -52,8 +52,8 @@ export default function AdminUserCard({
 
       <div className='space-y-2'>
         {infos.map((info, index) => (
-          <div key={index} className='grid grid-cols-4 gap-2 text-left items-center'>
-            <span className='col-span-1 opacity-70 text-sm'>{info.name}</span>
+          <div key={index} className='grid grid-cols-4 gap-2 text-left items-center truncate'>
+            <span className='col-span-1 opacity-70 text-sm truncate'>{info.name}</span>
             <span className='col-span-3 '>{info.info}</span>
           </div>
         ))}
