@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { CalendarContext } from 'src/contexts/calendar.context'
 import mainPath from 'src/constants/path'
-import CalendarSortingtByYear from './components/CalendarSortingtByYear'
+import CalendarSortingByYear from './components/CalendarSortingByYear'
 import academicYears from 'src/constants/academicYears'
 
 export default function Calendar() {
@@ -14,7 +14,7 @@ export default function Calendar() {
   return (
     <div className='space-y-8'>
       {academicYears.map((year, index) => (
-        <CalendarSortingtByYear key={index} year={year} />
+        <CalendarSortingByYear key={index} year={year} />
       ))}
     </div>
   )
