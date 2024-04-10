@@ -13,7 +13,18 @@ import { generateNameId, getIdFromUrl } from 'src/utils/utils'
 import AdminTeacherSelector from '../../components/AdminTeacherSelector'
 
 function StudentCard({ student, index }: { student: DetailedMember; index: number }) {
-  const averageScore = student.attendance + student.lab + student.midterm + student.final
+  const { currentCourse } = useContext(AdminContext)
+
+  let averageScore = 0
+  if (currentCourse) {
+    averageScore =
+      (student.attendance * currentCourse.attendance_ratio +
+        student.lab * currentCourse.lab_ratio +
+        student.midterm * currentCourse.midterm_ratio +
+        student.final * currentCourse.final_ratio) /
+      100
+  }
+
   const weak = averageScore < 4.0
   const normal = averageScore >= 4.0 && averageScore < 6.0
   const fine = averageScore >= 6.0 && averageScore < 8.0
