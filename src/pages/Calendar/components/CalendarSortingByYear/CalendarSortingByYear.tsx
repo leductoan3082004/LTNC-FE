@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
+import classNames from 'classnames'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import authApi from 'src/apis/auth.api'
+import DaysInWeekEnum from 'src/constants/daysInWeek'
 import mainPath from 'src/constants/path'
 import { CalendarContext } from 'src/contexts/calendar.context'
 
@@ -26,7 +28,7 @@ export default function CalendarSortingByYear({ year }: Props) {
 
   const { data: joinedClassroomListData } = useQuery({
     queryKey: ['joined_classroom_list'],
-    queryFn: () => authApi.getJoinedClassroomList(),
+    queryFn: () => authApi.getJoinedClassroomList()
   })
   const joinedClassroomList = joinedClassroomListData?.data.data || []
 
@@ -40,14 +42,15 @@ export default function CalendarSortingByYear({ year }: Props) {
 
     const timetable: ClassroomTimetable = {
       course: classroom.course.course_name,
-      day: `${startTimestamp.getDate()}/${startTimestamp.getMonth() + 1}/${startTimestamp.getFullYear()}`,
+      day: DaysInWeekEnum[startTimestamp.getDay()],
       startTime: startTimestamp.getHours(),
       endTime: endTimestamp.getHours()
     }
     return timetable
   })
 
-
+  //! Styles
+  const cellStyle = 'py-2 flex items-center justify-center border border-black/40'
 
   return (
     <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
@@ -60,27 +63,24 @@ export default function CalendarSortingByYear({ year }: Props) {
       <div className='w-full flex justify-center'>
         <div className='border-t-2 border-primaryText w-6/12 desktop:w-4/12'></div>
       </div>
-      <div className='overflow-x-auto'>
-        <table className='table-auto w-full text-lg desktop:text-xl  text-darkText text-start'>
-          <thead>
-            <tr>
-              <th className='px-4 py-2 uppercase'>Mã MH</th>
-              <th className='px-4 py-2 uppercase'>Tên môn học</th>
-              <th className='px-4 py-2 uppercase'>Ngày Học</th>
-              <th className='px-4 py-2 uppercase'>Giờ học</th>
-            </tr>
-          </thead>
-          <tbody>
-            {studentTimetable.map((time, index) => (
-              <tr key={index}>
-                <td className='border border-black px-4 py-2 text-center text-lg'>{index + 1}</td>
-                <td className='border border-black px-4 py-2 text-center '>{time.course}</td>
-                <td className='border border-black px-4 py-2 text-center '>{time.day}</td>
-                <td className='border border-black px-4 py-2 text-center'>{time.startTime}h - {time.endTime}h</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className='w-full border border-black/40'>
+        <div className='w-full text-lg desktop:text-xl font-semibold uppercase bg-webColor300 grid grid-cols-12'>
+          <div className={classNames(cellStyle, 'col-span-2')}>Mã MH</div>
+          <div className={classNames(cellStyle, 'col-span-4')}>Tên môn học</div>
+          <div className={classNames(cellStyle, 'col-span-3')}>Ngày Học</div>
+          <div className={classNames(cellStyle, 'col-span-3')}>Giờ học</div>
+          <div className=''></div>
+        </div>
+        {studentTimetable.map((time, index) => (
+          <div key={index} className='w-full grid font-medium grid-cols-12 desktop:text-lg'>
+            <div className={classNames(cellStyle, 'col-span-2 text-lg')}>{index + 1}</div>
+            <div className={classNames(cellStyle, 'col-span-4 ')}>{time.course}</div>
+            <div className={classNames(cellStyle, 'col-span-3 ')}>{time.day}</div>
+            <div className={classNames(cellStyle, 'col-span-3 ')}>
+              {time.startTime}h - {time.endTime}h
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )

@@ -21,6 +21,7 @@ export default function CourseList() {
 
   //! SET PATH LIST
   useEffect(() => {
+    document.title = 'Khóa học'
     setCoursePathList([{ pathName: 'Khóa học', url: mainPath.courseList }])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

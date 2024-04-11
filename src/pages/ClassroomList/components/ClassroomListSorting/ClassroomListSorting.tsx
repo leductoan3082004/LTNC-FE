@@ -4,18 +4,21 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import academicYears from 'src/constants/academicYears'
 import mainPath from 'src/constants/path'
-import { CourseContext } from 'src/contexts/course.context'
-// import './CourseSorting.css'
+import { ClassroomContext } from 'src/contexts/classroom.context'
 
-export default function CourseSorting() {
-  const { academicYear, setAcademicYear } = useContext(CourseContext)
+export default function ClassroomListSorting() {
+  const { academicYear, setAcademicYear } = useContext(ClassroomContext)
 
   //! HANDLE SELECT YEAR
   const navigate = useNavigate()
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value: valueFromSelector } = event.target
-    setAcademicYear(valueFromSelector)
-    navigate({ pathname: `${mainPath.courseList}/${valueFromSelector}` })
+    if (valueFromSelector == 'all') {
+      navigate(mainPath.classroomList)
+    } else {
+      setAcademicYear(valueFromSelector)
+      navigate({ pathname: `${mainPath.classroomList}/${valueFromSelector}` })
+    }
   }
 
   return (
@@ -34,6 +37,9 @@ export default function CourseSorting() {
         >
           <option disabled className='text-lg font-semibold uppercase'>
             Năm học
+          </option>
+          <option value='all' key='all' className='text-darkText/80'>
+            Tất cả
           </option>
           {academicYears.map((year) => (
             <option value={year} key={year} className='text-darkText/80'>

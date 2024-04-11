@@ -5,7 +5,7 @@ import { LoginSchema, loginSchema } from 'src/rules/auth.rule'
 import { useMutation } from '@tanstack/react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretLeft } from '@fortawesome/free-solid-svg-icons'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { AppContext } from 'src/contexts/app.context'
 import { setProfileToLS } from 'src/utils/auth'
 import { Link, useNavigate } from 'react-router-dom'
@@ -22,6 +22,9 @@ type FormData = LoginSchema
 export default function LoginPage() {
   //! CONTEXT
   const { setIsAuthenticated, setProfile } = useContext(AppContext)
+  useEffect(() => {
+    document.title = 'Đăng nhập'
+  })
 
   //! LOGIN FORM
   const {

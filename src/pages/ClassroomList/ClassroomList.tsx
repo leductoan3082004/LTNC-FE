@@ -6,16 +6,20 @@ import { ClassroomContext } from 'src/contexts/classroom.context'
 import ClassroomCard from './components/ClassroomCard'
 import LoadingSection from 'src/components/LoadingSection'
 import { AppContext } from 'src/contexts/app.context'
+import { useLocation } from 'react-router-dom'
 
 export default function ClassroomList() {
   const { isAuthenticated } = useContext(AppContext)
-  const { setClassroomPathList } = useContext(ClassroomContext)
+  const { setClassroomPathList, setAcademicYear } = useContext(ClassroomContext)
+
+  const arr = useLocation().pathname.split('/')
+  const year = arr[arr.length - 1]
 
   useEffect(() => {
-    document.title = 'LTNC | Lớp học của tôi'
+    setAcademicYear('all')
     setClassroomPathList([{ pathName: 'lớp học', url: mainPath.classroomList }])
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [year])
 
   //! Get classroom list
   const { data: ClassRoomListData } = useQuery({

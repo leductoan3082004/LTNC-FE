@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCamera, faUser } from '@fortawesome/free-solid-svg-icons'
 import { AppContext } from 'src/contexts/app.context'
@@ -10,6 +10,10 @@ export default function PersonalProfile() {
   const handleClick = () => {
     setIsAvatar(!isAvatar)
   }
+
+  useEffect(() => {
+    document.title = 'Cá nhân'
+  })
 
   //! GET PROFILE
   const { profile } = useContext(AppContext)

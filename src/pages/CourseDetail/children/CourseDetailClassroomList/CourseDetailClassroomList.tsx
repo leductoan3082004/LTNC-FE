@@ -13,6 +13,7 @@ interface Props {
 
 export interface ClassroomTimetable {
   course: string
+  year: number
   day: number
   startTime: number
   endTime: number
@@ -51,6 +52,7 @@ export default function CourseDetailClassroomList({ course }: Props) {
 
     const timetable: ClassroomTimetable = {
       course: classroom.course.course_name,
+      year: startTimestamp.getFullYear(),
       day: startTimestamp.getDay(),
       startTime: startTimestamp.getHours(),
       endTime: endTimestamp.getHours()

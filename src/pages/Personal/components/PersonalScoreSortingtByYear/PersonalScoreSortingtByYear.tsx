@@ -19,7 +19,6 @@ export default function PersonalScoreSortingtByYear({ year }: Props) {
     navigate({ pathname: `${personalPath.score}/${year}` })
   }
   return (
-
     <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
       <button
         onClick={handleSelectYear}
@@ -42,7 +41,11 @@ export default function PersonalScoreSortingtByYear({ year }: Props) {
           </thead>
           <tbody>
             {joinedClassroomListByYear.map((classroom, index) => {
-              const score = classroom.member.attendance * classroom.course.attendance_ratio + classroom.member.lab * classroom.course.lab_ratio + classroom.member.midterm * classroom.course.midterm_ratio + classroom.member.final * classroom.course.final_ratio
+              const score =
+                classroom.member.attendance * classroom.course.attendance_ratio +
+                classroom.member.lab * classroom.course.lab_ratio +
+                classroom.member.midterm * classroom.course.midterm_ratio +
+                classroom.member.final * classroom.course.final_ratio
               return (
                 <tr key={classroom.class._id}>
                   <td className='border border-black px-4 py-2 text-center text-lg'>{index + 1}</td>

@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
+import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import authApi from 'src/apis/auth.api'
 import LoadingSection from 'src/components/LoadingSection'
+import DaysInWeekEnum from 'src/constants/daysInWeek'
 import mainPath from 'src/constants/path'
 import { CalendarContext } from 'src/contexts/calendar.context'
 
-const boo = false
 export interface ClassroomTimetable {
   course: string
   day: string
@@ -16,7 +17,6 @@ export interface ClassroomTimetable {
 export default function CalendarByYear() {
   const { academicYear, setCalendarPath, setAcademicYear } = useContext(CalendarContext)
 
-  
   const pathName = useLocation().pathname
   const arr = pathName.split('/')
   const year = arr[arr.length - 1]
@@ -25,9 +25,6 @@ export default function CalendarByYear() {
       setAcademicYear(year)
     }
   }, [academicYear, setAcademicYear, year])
-
- 
-
 
   //! SET PATH LIST
   useEffect(() => {
@@ -38,10 +35,9 @@ export default function CalendarByYear() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [academicYear])
 
-
-  const { data: joinedClassroomListData } = useQuery({
+  const { data: joinedClassroomListData, isFetched } = useQuery({
     queryKey: ['joined_classroom_list'],
-    queryFn: () => authApi.getJoinedClassroomList(),
+    queryFn: () => authApi.getJoinedClassroomList()
   })
   const joinedClassroomList = joinedClassroomListData?.data.data || []
 
@@ -49,26 +45,21 @@ export default function CalendarByYear() {
     return new Date(classroom.course.start_time).getFullYear() == parseInt(academicYear)
   })
 
-
-
   const studentTimetable = joinedClassroomListByYear.map((classroom) => {
-    console.log(classroom.class.time_table[0])
     const startTimestamp = new Date(classroom.class.time_table[0].lesson_start)
     const endTimestamp = new Date(classroom.class.time_table[0].lesson_end)
 
     const timetable: ClassroomTimetable = {
       course: classroom.course.course_name,
-      day: `${startTimestamp.getDate()}/${startTimestamp.getMonth() + 1}/${startTimestamp.getFullYear()}`,
+      day: DaysInWeekEnum[startTimestamp.getDay()],
       startTime: startTimestamp.getHours(),
       endTime: endTimestamp.getHours()
     }
     return timetable
   })
 
-
-
-
-
+  //! Styles
+  const cellStyle = 'py-2 flex items-center justify-center border border-black/40'
 
   return (
     <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
@@ -79,33 +70,28 @@ export default function CalendarByYear() {
         <div className='border-t-2 border-primaryText w-6/12 desktop:w-4/12'></div>
       </div>
       <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
-        {boo && <LoadingSection />}
-        {!boo &&
-          <div>
-            <div className='overflow-x-auto'>
-              <table className='table-auto w-full text-lg desktop:text-xl  text-darkText text-start'>
-                <thead>
-                  <tr>
-                    <th className='px-4 py-2 uppercase'>Mã MH</th>
-                    <th className='px-4 py-2 uppercase'>Tên môn học</th>
-                    <th className='px-4 py-2 uppercase'>Ngày Học</th>
-                    <th className='px-4 py-2 uppercase'>Giờ học</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {studentTimetable.map((time, index) => (
-                    <tr key={index}>
-                      <td className='border border-black px-4 py-2 text-center text-lg'>{index + 1}</td>
-                      <td className='border border-black px-4 py-2 text-center '>{time.course}</td>
-                      <td className='border border-black px-4 py-2 text-center '>{time.day}</td>
-                      <td className='border border-black px-4 py-2 text-center'>{time.startTime}h - {time.endTime}h</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+        {!isFetched && <LoadingSection />}
+        {isFetched && (
+          <div className='w-full border border-black/40'>
+            <div className='w-full text-lg desktop:text-xl font-semibold uppercase bg-webColor300 grid grid-cols-12'>
+              <div className={classNames(cellStyle, 'col-span-2')}>Mã MH</div>
+              <div className={classNames(cellStyle, 'col-span-4')}>Tên môn học</div>
+              <div className={classNames(cellStyle, 'col-span-3')}>Ngày Học</div>
+              <div className={classNames(cellStyle, 'col-span-3')}>Giờ học</div>
+              <div className=''></div>
             </div>
+            {studentTimetable.map((time, index) => (
+              <div key={index} className='w-full font-medium grid grid-cols-12 desktop:text-lg'>
+                <div className={classNames(cellStyle, 'col-span-2 text-lg')}>{index + 1}</div>
+                <div className={classNames(cellStyle, 'col-span-4 ')}>{time.course}</div>
+                <div className={classNames(cellStyle, 'col-span-3 ')}>{time.day}</div>
+                <div className={classNames(cellStyle, 'col-span-3 ')}>
+                  {time.startTime}h - {time.endTime}h
+                </div>
+              </div>
+            ))}
           </div>
-        }
+        )}
       </div>
     </div>
   )

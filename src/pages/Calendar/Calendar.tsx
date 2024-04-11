@@ -8,6 +8,7 @@ export default function Calendar() {
   const { setCalendarPath } = useContext(CalendarContext)
 
   useEffect(() => {
+    document.title = 'Thời khóa biểu'
     setCalendarPath([{ pathName: 'Thời khóa biểu', url: mainPath.calendar }])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

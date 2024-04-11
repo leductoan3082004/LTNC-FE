@@ -24,17 +24,7 @@ export default function PersonalNavBar() {
       >
         Hồ sơ
       </NavLink>
-      <div className='w-full border-t border-black/20' />
-      <NavLink
-        to={personalPath.account}
-        className={({ isActive }) =>
-          classNames(navlinkClassname, {
-            'text-primaryText': isActive
-          })
-        }
-      >
-        Tài khoản
-      </NavLink>
+
       <div className='w-full border-t border-black/20' />
       {!isTeacher && (
         <NavLink
@@ -48,6 +38,18 @@ export default function PersonalNavBar() {
           Điểm
         </NavLink>
       )}
+
+      <div className='w-full border-t border-black/20' />
+      <NavLink
+        to={personalPath.account}
+        className={({ isActive }) =>
+          classNames(navlinkClassname, {
+            'text-primaryText': isActive
+          })
+        }
+      >
+        Tài khoản
+      </NavLink>
     </div>
   )
 }

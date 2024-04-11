@@ -29,12 +29,6 @@ export function SlideShow({ images }: ImageSliderProps) {
 
   return (
     <section aria-label='Image Slider' style={{ width: '100%', height: '100%', position: 'relative' }}>
-      {/* <a
-        href='#after-image-slider-controls'
-        className='absolute w-1 h-1 p-0 m--1 overflow-hidden border-0 clip-rect(0, 0, 0, 0)
-        top-0 left-0 border-1 border-solid border-black bg-white p-2 w-auto h-auto m-0
-        clip-unset text-decoration-none text-black z-100'
-      ></a> */}
       <div className='w-full h-full flex overflow-hidden'>
         {images.map(({ url, alt }, index) => (
           <img
