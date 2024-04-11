@@ -52,6 +52,7 @@ export default function CalendarSortingByYear({ year }: Props) {
   //! Styles
   const cellStyle = 'py-2 flex items-center justify-center border border-black/40'
 
+  if (joinedClassroomListByYear.length == 0) return
   return (
     <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
       <button
