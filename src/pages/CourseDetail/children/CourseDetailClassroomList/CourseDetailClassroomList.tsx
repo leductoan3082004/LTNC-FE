@@ -23,8 +23,9 @@ export default function CourseDetailClassroomList({ course }: Props) {
   const { isAuthenticated, profile } = useContext(AppContext)
 
   const today = new Date()
+  const startDate = new Date(course.start_time)
   const endDate = new Date(course.end_time)
-  const inDate = today.getTime() <= endDate.getTime()
+  const inDate = today.getTime() <= endDate.getTime() && startDate.getTime() <= today.getTime()
 
   const canRegister = isAuthenticated && inDate && profile?.role == 0
 
