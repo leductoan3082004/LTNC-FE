@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query'
 import { useState, createContext } from 'react'
 import { User } from 'src/types/user.type'
 import { clearLS, getAccessTokenFromLS, getProfileFromLS } from 'src/utils/auth'
@@ -29,10 +30,12 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [loadingPage, setLoadingPage] = useState<boolean>(initialAppContext.loadingPage)
   const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
 
+  const queryClient = useQueryClient()
   const handleLogout = () => {
     setIsAuthenticated(false)
     setProfile(null)
     clearLS()
+    queryClient.invalidateQueries()
   }
 
   return (

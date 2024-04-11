@@ -26,7 +26,6 @@ export default function ClassroomCard({ classroomDetail }: Props) {
   }
 
   //! HANDLE GET TEACHER
-  //:: get current classroom
   const { data: memberListData } = useQuery({
     queryKey: ['classroom_member_list', classroomDetail.class._id],
     queryFn: () => classroomApi.getMemberListInClassromm({ classroom_id: classroomDetail.class._id })

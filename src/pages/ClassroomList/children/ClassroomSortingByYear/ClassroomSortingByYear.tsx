@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function ClassroomSortingByYear({ year }: Props) {
-  const { isAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, profile } = useContext(AppContext)
   const { setAcademicYear } = useContext(ClassroomContext)
 
   //! HANDLE CHOOSE YEAR
@@ -25,7 +25,7 @@ export default function ClassroomSortingByYear({ year }: Props) {
 
   //! Get classroom list
   const { data: joinedClassRoomListData, isFetched } = useQuery({
-    queryKey: ['classroom_list'],
+    queryKey: ['classroom_list', profile?._id],
     queryFn: () => authApi.getJoinedClassroomList(),
     enabled: isAuthenticated
   })

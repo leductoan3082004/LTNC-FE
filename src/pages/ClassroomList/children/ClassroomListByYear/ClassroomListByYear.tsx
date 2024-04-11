@@ -8,7 +8,7 @@ import ClassroomCard from '../../components/ClassroomCard'
 import { ClassroomContext } from 'src/contexts/classroom.context'
 
 export default function ClassroomListByYear() {
-  const { isAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, profile } = useContext(AppContext)
   const { setAcademicYear } = useContext(ClassroomContext)
 
   //! Get year from url
@@ -20,7 +20,7 @@ export default function ClassroomListByYear() {
 
   //! Get classroom list
   const { data: joinedClassRoomListData, isFetched } = useQuery({
-    queryKey: ['classroom_list'],
+    queryKey: ['classroom_list', profile?._id],
     queryFn: () => authApi.getJoinedClassroomList(),
     enabled: isAuthenticated
   })
