@@ -1,8 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
 import authApi from "src/apis/auth.api"
-import { generateID } from "src/utils/utils"
-import { useContext } from "react"
-import { AppContext } from "src/contexts/app.context"
 import { Bar, Tooltip, Legend, XAxis, YAxis, CartesianGrid, ComposedChart } from 'recharts'
 import { ScoreForYear } from "src/types/utils.type"
 import PersonalInScore from "../PersonalInScore"
@@ -15,8 +12,7 @@ interface ScoreAllYear {
 
 
 export default function PersonalScoreAllYear() {
-  const { profile } = useContext(AppContext)
-  
+
 
   const { data: joinedClassroomListData } = useQuery({
     queryKey: ['joined_classroom_list'],
@@ -45,9 +41,9 @@ export default function PersonalScoreAllYear() {
     }
   }
   const data: ScoreForYear[] = scoreAllYears.map((s) => {
-    return{
-      year : s.year,
-      score: s.allScore / s.allCredit      
+    return {
+      year: s.year,
+      score: s.allScore / s.allCredit
     }
   })
 
@@ -58,7 +54,7 @@ export default function PersonalScoreAllYear() {
     <div>
       <div className=" bg-webColor200 justify-between items-end relative py-4">
         <PersonalInScore />
-    </div>
+      </div>
       <div className='bg-webColor100 py-4 px-6 space-y-4 text-darkText'>
         <div
           className='py-2 flex justify-center items-center w-full uppercase text-lg desktop:text-2xl font-semibold shrink-0 '>Điểm trung bình qua từng năm

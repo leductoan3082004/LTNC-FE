@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import mainPath from 'src/constants/path'
+import mainPath, { adminPath } from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
 import PersonalPopover from './PersonalPopover'
 
 export default function MainHeader() {
-  const { isAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, profile } = useContext(AppContext)
 
   const menus = [
     {
@@ -16,16 +16,16 @@ export default function MainHeader() {
       path: mainPath.home
     },
     {
-      name: 'THỜI KHÓA BIỂU',
-      path: mainPath.calendar
-    },
-    {
       name: 'KHÓA HỌC',
       path: mainPath.courseList
     }
   ]
 
-  //! STYLES
+  const isAdmin = profile?.role == 2
+
+  //! Style
+  const titleClassname =
+    'text-lightText uppercase justify-center rounded-lg col-span-1 relative flex items-center font-medium desktop:text-lg px-6 hover:bg-hoveringBg'
 
   return (
     <div
@@ -45,31 +45,51 @@ export default function MainHeader() {
                 key={index}
                 to={menu.path}
                 className={({ isActive }) =>
-                  classNames(
-                    'text-lightText uppercase justify-center rounded-lg col-span-1 relative flex items-center font-medium desktop:text-lg px-6 hover:bg-hoveringBg',
-                    {
-                      'bg-hoveringBg': isActive
-                    }
-                  )
+                  classNames(titleClassname, {
+                    'bg-hoveringBg': isActive
+                  })
                 }
               >
                 {menu.name}
               </NavLink>
             ))}
 
-            {isAuthenticated && (
+            {isAuthenticated && !isAdmin && (
+              <NavLink
+                to={mainPath.calendar}
+                className={({ isActive }) =>
+                  classNames(titleClassname, {
+                    'bg-hoveringBg': isActive
+                  })
+                }
+              >
+                Thời khóa biểu
+              </NavLink>
+            )}
+
+            {isAuthenticated && !isAdmin && (
               <NavLink
                 to={mainPath.classroomList}
                 className={({ isActive }) =>
-                  classNames(
-                    'text-lightText uppercase justify-center rounded-lg col-span-1 relative flex items-center font-medium desktop:text-lg px-6 hover:bg-hoveringBg',
-                    {
-                      'bg-hoveringBg': isActive
-                    }
-                  )
+                  classNames(titleClassname, {
+                    'bg-hoveringBg': isActive
+                  })
                 }
               >
                 Lớp học
+              </NavLink>
+            )}
+
+            {isAdmin && (
+              <NavLink
+                to={adminPath.mainPage}
+                className={({ isActive }) =>
+                  classNames(titleClassname, {
+                    'bg-hoveringBg': isActive
+                  })
+                }
+              >
+                Quản lí
               </NavLink>
             )}
           </div>

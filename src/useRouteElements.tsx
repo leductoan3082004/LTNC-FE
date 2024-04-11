@@ -2,7 +2,6 @@ import { Suspense, useContext } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import LoadingPage from './components/LoadingPage'
 import { AppContext } from './contexts/app.context'
-import mainPath, { adminPath } from './constants/path'
 import MainLayout from './layouts/MainLayout'
 import NotFound from './components/NotFound'
 import HomePage from './pages/HomePage'
@@ -12,6 +11,8 @@ import AdminRoutes from './routes/adminRoute'
 import CourseRoutes from './routes/courseRoute'
 import PersonalRoutes from './routes/personalRoute'
 import ClassroomRoutes from './routes/classroomRoute'
+import mainPath, { adminPath } from './constants/path'
+import CalendarRoutes from './routes/calendarRoutes'
 
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -43,6 +44,15 @@ export default function useRouteElements() {
         </MainLayout>
       ),
       children: [CourseRoutes]
+    },
+    {
+      path: mainPath.calendar,
+      element: (
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      ),
+      children: [CalendarRoutes]
     },
     {
       path: mainPath.personal,

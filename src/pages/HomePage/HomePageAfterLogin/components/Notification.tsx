@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 
 export type Notification = {
   title: string
@@ -11,7 +10,7 @@ type Props = {
 }
 
 const borderStyle = {
-  nonActive: 'border border-solid border-[#dee2e6]',
+  nonActive: 'border border-solid border-black/40',
   active: 'border border-solid border-black'
 }
 
@@ -23,10 +22,10 @@ export default function NotificationsHomeLogged({ notifications }: Props) {
   }
 
   return (
-    <>
+    <div className='space-y-4'>
       {notifications.map((item, index) => (
         <button
-          className={`${selectedIndex === index ? borderStyle.active : borderStyle.nonActive} box-border rounded p-2 mb-2 relative max-w-full mt-0 mb-[1em] mx-0`}
+          className={`${selectedIndex === index ? borderStyle.active : borderStyle.nonActive} box-border rounded-xl p-6 mb-2 relative w-full`}
           onClick={() => handleClick(index)}
           key={index}
         >
@@ -41,7 +40,7 @@ export default function NotificationsHomeLogged({ notifications }: Props) {
               />
             </div>
             <div>
-              <div className='text-left font-bold text-[0.9375rem] leading-[1.2] text-[#044CC8] mb-0 pt-2.5 leading-normal'>
+              <div className='text-left font-bold text-[0.9375rem] text-[#044CC8] mb-0 pt-2.5 leading-normal'>
                 {item.title}
               </div>
               <div className='mb-3'>
@@ -53,13 +52,8 @@ export default function NotificationsHomeLogged({ notifications }: Props) {
             </div>
           </div>
           <div className='w-[60%] leading-normal mt-4 text-left'>{item.content}</div>
-          <div className='flex justify-end'>
-            <Link to={'/'} className='text-[#0388B4] no-underline bg-transparent hover:underline'>
-              Sửa đổi
-            </Link>
-          </div>
         </button>
       ))}
-    </>
+    </div>
   )
 }

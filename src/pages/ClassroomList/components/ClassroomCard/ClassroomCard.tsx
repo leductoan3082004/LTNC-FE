@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import classroomApi from 'src/apis/classroom.api'
-import mainPath from 'src/constants/path'
+import { classroomPath } from 'src/constants/path'
 import { ClassroomContext } from 'src/contexts/classroom.context'
 import { JoinedClassroom } from 'src/types/joinedClassroom.type'
 import { generateClassroomName } from 'src/utils/classroom.utils'
@@ -21,7 +21,7 @@ export default function ClassroomCard({ classroomDetail }: Props) {
     setSubject(classroomDetail.course.course_name)
     setCurrentClassroom(classroom)
     navigate({
-      pathname: `${mainPath.classroomList}/${generateNameId({ name: classroom.course.course_name, id: classroom.class._id })}`
+      pathname: `${classroomPath.classroom}/${generateNameId({ name: classroom.course.course_name, id: classroom.class._id })}`
     })
   }
 

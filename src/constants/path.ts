@@ -15,11 +15,17 @@ export const coursePath = {
 
 export const classroomPath = {
   classroomList: '/classrooms',
-  classroomDetail: '/classrooms/:classroomId',
-  classroomMemberList: '/classrooms/:classroomId/members',
-  classroomScore: '/classrooms/:classroomId/score'
+  classroomListByYear: '/classrooms/:year',
+  classroom: '/classrooms/class',
+  classroomDetail: '/classrooms/class/:classroomId',
+  classroomMemberList: '/classrooms/class/:classroomId/members',
+  classroomScore: '/classrooms/class/:classroomId/score'
 } as const
 
+export const calendarPath = {
+  calendarListByYear: '/calendar/:year',
+  calendarDetail: '/calendar/:year/:courseId'
+} as const
 export const personalPath = {
   profile: '/personal/profile',
   account: '/personal/account',
@@ -28,6 +34,9 @@ export const personalPath = {
   scoreAllYear: '/personal/score/all'
 } as const
 
+export const ScorePath = {
+  ScoreByYear: '/score/:year'
+} as const
 
 //! ADMIN PATH
 export const adminPath = {

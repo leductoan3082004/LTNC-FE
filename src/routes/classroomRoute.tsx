@@ -10,6 +10,7 @@ import ClassroomMemberListForTeacher from 'src/pages/ClassroomDetail/children/Cl
 import ClassroomScoreForStudent from 'src/pages/ClassroomDetail/children/ClassroomScoreForStudent'
 import ClassroomDetailLayout from 'src/pages/ClassroomDetail/layouts/ClassroomDetailLayout'
 import ClassroomListLayout from 'src/pages/ClassroomList/layouts/ClassroomListLayout'
+import ClassroomListByYear from 'src/pages/ClassroomList/children/ClassroomListByYear'
 
 function ClassroomRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -50,6 +51,7 @@ const ClassroomRoutes: RouteObject = {
   element: <ClassroomRoute />,
   children: [
     { path: '', element: <ClassroomList /> },
+    { path: classroomPath.classroomListByYear, element: <ClassroomListByYear /> },
     {
       path: classroomPath.classroomDetail,
       element: <ClassroomDetailRoute />,

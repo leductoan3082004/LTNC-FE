@@ -17,9 +17,7 @@ function PersonalRoute() {
     <PersonalLayout>
       <PersonalScoreProvider>
         <Suspense fallback={<LoadingPage />}>
-
           <Outlet />
-
         </Suspense>
       </PersonalScoreProvider>
     </PersonalLayout>

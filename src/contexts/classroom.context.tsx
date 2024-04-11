@@ -5,6 +5,8 @@ import { JoinedClassroom } from 'src/types/joinedClassroom.type'
 interface ClassroomContextInterface {
   subject: string
   setSubject: React.Dispatch<React.SetStateAction<string>>
+  academicYear: string
+  setAcademicYear: React.Dispatch<React.SetStateAction<string>>
   classroomPathList: PathElement[]
   setClassroomPathList: React.Dispatch<React.SetStateAction<PathElement[]>>
   currentClassroom: JoinedClassroom | null
@@ -16,6 +18,8 @@ interface ClassroomContextInterface {
 const initialClassroomContext: ClassroomContextInterface = {
   subject: '',
   setSubject: () => null,
+  academicYear: '',
+  setAcademicYear: () => null,
   classroomPathList: [],
   setClassroomPathList: () => null,
   currentClassroom: null,
@@ -33,6 +37,7 @@ export const ClassrroomProvider = ({ children }: { children: React.ReactNode }) 
     initialClassroomContext.currentClassroom
   )
   const [updatingStudentID, setUpdatingStudentID] = useState<string>(initialClassroomContext.updatingStudentID)
+  const [academicYear, setAcademicYear] = useState<string>(initialClassroomContext.subject)
 
   return (
     <ClassroomContext.Provider
@@ -44,7 +49,9 @@ export const ClassrroomProvider = ({ children }: { children: React.ReactNode }) 
         currentClassroom,
         setCurrentClassroom,
         updatingStudentID,
-        setUpdatingStudentID
+        setUpdatingStudentID,
+        academicYear,
+        setAcademicYear
       }}
     >
       {children}

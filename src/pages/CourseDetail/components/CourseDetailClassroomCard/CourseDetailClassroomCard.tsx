@@ -52,10 +52,12 @@ export default function CourseDetailClassroomCard({
   //! Handle registration
   const queryClient = useQueryClient()
   const registerMutation = useMutation({ mutationFn: memberApi.registerToClassroom })
+  const yearOfClassroom = new Date(classroom.time_table[0].lesson_start).getFullYear()
+  const joinedClassroomInTheSameYear = studentTimeTable.filter((t) => t.year == yearOfClassroom)
 
   //:: function to check valid timetable
   const validTimetable = () => {
-    for (const timetable of studentTimeTable) {
+    for (const timetable of joinedClassroomInTheSameYear) {
       if (timetable.day == day) {
         if (
           (timetable.startTime <= startTime && startTime <= timetable.endTime) ||

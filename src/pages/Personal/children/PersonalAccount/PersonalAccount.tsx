@@ -5,7 +5,7 @@ import LoadingRing from 'src/components/LoadingRing'
 import { AppContext } from 'src/contexts/app.context'
 import { formatDate } from 'src/utils/utils'
 
-export default function PersonalProfile() {
+export default function PersonalAccount() {
   const [isChangePassWord, setIsChangePassWord] = useState(false)
   const handlePasswordClick = () => {
     setIsChangePassWord(!isChangePassWord)

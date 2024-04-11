@@ -59,7 +59,6 @@ export default function PersonalChangePassword({ setIsChangePassWord }: Props) {
               message: 'Mật khẩu không chính xác',
               type: 'Server'
             })
-            // console.log('here')
           }
           if (errorKey === 'ErrNewPasswordIsInvalid') {
             setError('confirm_new_password', {
