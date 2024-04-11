@@ -17,29 +17,29 @@ export default function ClassroomScoreForStudent() {
         currentClassroom.member.lab * currentClassroom.course.lab_ratio +
         currentClassroom.member.midterm * currentClassroom.course.midterm_ratio +
         currentClassroom.member.final * currentClassroom.course.final_ratio) /
-      100
+      1000
   }
 
   const datas = currentClassroom
     ? [
         {
           Name: 'Chuyên cần',
-          Score: currentClassroom.member.attendance,
+          Score: currentClassroom.member.attendance / 10,
           contribution: currentClassroom.course.attendance_ratio
         },
         {
           Name: 'lab',
-          Score: currentClassroom.member.lab,
+          Score: currentClassroom.member.lab / 10,
           contribution: currentClassroom.course.lab_ratio
         },
         {
           Name: 'Giữa kỳ',
-          Score: currentClassroom.member.midterm,
+          Score: currentClassroom.member.midterm / 10,
           contribution: currentClassroom.course.midterm_ratio
         },
         {
           Name: 'Cuối kỳ',
-          Score: currentClassroom.member.final,
+          Score: currentClassroom.member.final / 10,
           contribution: currentClassroom.course.final_ratio
         },
         {

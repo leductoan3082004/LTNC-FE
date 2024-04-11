@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import academicYears from 'src/constants/academicYears'
-import {personalPath} from 'src/constants/path'
-import { PersonalscoreContext } from 'src/contexts/personalscore.context' 
+import { personalPath } from 'src/constants/path'
+import { PersonalscoreContext } from 'src/contexts/personalscore.context'
 
 export default function PersonalScoreSorting() {
   const { academicYear, setAcademicYear } = useContext(PersonalscoreContext)

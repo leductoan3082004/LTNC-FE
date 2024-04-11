@@ -32,7 +32,7 @@ export default function PersonalScoreByYear() {
         classroom.member.lab * classroom.course.lab_ratio +
         classroom.member.midterm * classroom.course.midterm_ratio +
         classroom.member.final * classroom.course.final_ratio) /
-      100
+      1000
     return {
       name: classroom.course.course_name,
       score: score
@@ -70,7 +70,7 @@ export default function PersonalScoreByYear() {
                       classroom.member.lab * classroom.course.lab_ratio +
                       classroom.member.midterm * classroom.course.midterm_ratio +
                       classroom.member.final * classroom.course.final_ratio) /
-                    100
+                    1000
                   return (
                     <tr key={classroom.class._id}>
                       <td className='border border-black px-4 py-2 text-center text-lg'>{index + 1}</td>

@@ -41,19 +41,19 @@ export default function AdminStudentDetail() {
       },
       {
         title: 'Điểm chuyên cần',
-        info: currentStudent.attendance
+        info: currentStudent.attendance / 10
       },
       {
         title: 'Điểm lab',
-        info: currentStudent.lab
+        info: currentStudent.lab / 10
       },
       {
         title: 'Điểm giữa kỳ',
-        info: currentStudent.midterm
+        info: currentStudent.midterm / 10
       },
       {
         title: 'Điểm cuối kỳ',
-        info: currentStudent.final
+        info: currentStudent.final / 10
       }
     ]
   }
@@ -65,7 +65,7 @@ export default function AdminStudentDetail() {
         currentStudent.lab * currentCourse.lab_ratio +
         currentStudent.midterm * currentCourse.midterm_ratio +
         currentStudent.final * currentCourse.final_ratio) /
-      100
+      1000
   }
   const scoreQuality = checkScoreQuality(averageScore)
 

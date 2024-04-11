@@ -42,16 +42,17 @@ export default function PersonalScoreSortingtByYear({ year }: Props) {
           <tbody>
             {joinedClassroomListByYear.map((classroom, index) => {
               const score =
-                classroom.member.attendance * classroom.course.attendance_ratio +
-                classroom.member.lab * classroom.course.lab_ratio +
-                classroom.member.midterm * classroom.course.midterm_ratio +
-                classroom.member.final * classroom.course.final_ratio
+                (classroom.member.attendance * classroom.course.attendance_ratio +
+                  classroom.member.lab * classroom.course.lab_ratio +
+                  classroom.member.midterm * classroom.course.midterm_ratio +
+                  classroom.member.final * classroom.course.final_ratio) /
+                1000
               return (
                 <tr key={classroom.class._id}>
                   <td className='border border-black px-4 py-2 text-center text-lg'>{index + 1}</td>
                   <td className='border border-black px-4 py-2 text-center '>{classroom.course.course_name}</td>
                   <td className='border border-black px-4 py-2 text-center'>{classroom.course.credit}</td>
-                  <td className='border border-black px-4 py-2 text-center'>{score / 100}</td>
+                  <td className='border border-black px-4 py-2 text-center'>{score}</td>
                 </tr>
               )
             })}

@@ -52,7 +52,7 @@ export default function ClassroomStudentCard({ student, classroom }: Props) {
       student.lab * course.lab_ratio +
       student.midterm * course.midterm_ratio +
       student.final * course.final_ratio) /
-    100
+    1000
 
   //! Use form
   const {
@@ -65,10 +65,10 @@ export default function ClassroomStudentCard({ student, classroom }: Props) {
     defaultValues: {
       classroom_id: classroom.class._id,
       user_id: student._id,
-      attendance: student.attendance,
-      lab: student.lab,
-      midterm: student.midterm,
-      final: student.final
+      attendance: student.attendance * 10,
+      lab: student.lab * 10,
+      midterm: student.midterm * 10,
+      final: student.final * 10
     },
     resolver: yupResolver(updateScoreSchema)
   })
@@ -167,10 +167,10 @@ export default function ClassroomStudentCard({ student, classroom }: Props) {
       {!updatingScore && (
         <div className='grid w-full grid-cols-10'>
           <p className={classNames(cellStyle, 'col-span-3')}>{student.name}</p>
-          <p className={classNames(cellStyle, 'col-span-1')}>{student.attendance}</p>
-          <p className={classNames(cellStyle, 'col-span-1')}>{student.lab}</p>
-          <p className={classNames(cellStyle, 'col-span-1')}>{student.midterm}</p>
-          <p className={classNames(cellStyle, 'col-span-1')}>{student.final}</p>
+          <p className={classNames(cellStyle, 'col-span-1')}>{student.attendance / 10}</p>
+          <p className={classNames(cellStyle, 'col-span-1')}>{student.lab / 10}</p>
+          <p className={classNames(cellStyle, 'col-span-1')}>{student.midterm / 10}</p>
+          <p className={classNames(cellStyle, 'col-span-1')}>{student.final / 10}</p>
           <p className={classNames(cellStyle, 'col-span-1 text-primaryText')}>{averageScore}</p>
           <div className={classNames(cellStyle, 'col-span-2')}>
             <button

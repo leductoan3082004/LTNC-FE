@@ -22,7 +22,7 @@ function StudentCard({ student, index }: { student: DetailedMember; index: numbe
         student.lab * currentCourse.lab_ratio +
         student.midterm * currentCourse.midterm_ratio +
         student.final * currentCourse.final_ratio) /
-      100
+      1000
   }
 
   const weak = averageScore < 4.0
