@@ -13,7 +13,7 @@ export default function PersonalPopover() {
   const isAdmin = profile?.role == 2
 
   //! STYLES
-  const itemStyle = 'py-2 px-4 flex items-center justify-start w-full select-none hover:bg-webColor200'
+  const itemStyle = 'py-2 px-4 flex items-center justify-start w-full select-none hover:bg-webColor300'
 
   return (
     <div className='rounded-lg border border-white/60 overflow-hidden flex items-center text-lightText'>
@@ -31,7 +31,7 @@ export default function PersonalPopover() {
           arrowClassname='invisible'
           placement='bottom-end'
           renderPopover={
-            <div className='py-2 desktop:text-lg space-y-2 text-darkText min-w-52 rounded-md shadow-lg bg-webColor100 overflow-hidden'>
+            <div className='py-2 desktop:text-lg space-y-2 border border-black/20 text-darkText min-w-52 rounded-md shadow-lg bg-webColor100 overflow-hidden'>
               <div className=''>
                 <NavLink to={mainPath.personal} className={itemStyle}>
                   Hồ sơ

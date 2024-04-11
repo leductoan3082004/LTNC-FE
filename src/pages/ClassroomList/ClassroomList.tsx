@@ -30,7 +30,7 @@ export default function ClassroomList() {
   const classroomList = ClassRoomListData?.data.data
 
   return (
-    <div className='container flex flex-col bg-webColor100 py-6 min-h-[100vh]'>
+    <div className='container flex flex-col bg-webColor100 py-6 min-h-[50vh]'>
       <div className='flex flex-col gap-2 pb-3 border-b title'>
         <h1 className='text-2xl uppercase font-semibold text-center tracking-wide'>Lớp học của tôi</h1>
       </div>

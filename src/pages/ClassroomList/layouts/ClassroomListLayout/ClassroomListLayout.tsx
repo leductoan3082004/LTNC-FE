@@ -18,7 +18,7 @@ export default function ClassroomListLayout({ children }: Props) {
     <div className='py-4 bg-mainBg desktop:py-8'>
       <div className='container bg-mainBg'>
         <PathBar pathList={classroomPathList} />
-        <div className='py-4 space-y-4'>
+        <div className='space-y-4'>
           <div className='flex justify-between'>
             <ClassroomListSorting />
           </div>

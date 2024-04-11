@@ -49,7 +49,7 @@ export default function CourseDescription({ course }: Props) {
   ]
 
   return (
-    <div className='space-y-8 h-[2000px]'>
+    <div className='space-y-8'>
       <p className='font-bold uppercase text-xl desktop:text-3xl text-primaryText w-full text-center tracking-widest'>
         {course.course_name}
       </p>

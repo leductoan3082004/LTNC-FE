@@ -8,46 +8,47 @@ import { getProfileFromLS } from 'src/utils/auth'
 const headerTable = ['Mục điểm', 'Điểm', 'Contribution to course total']
 const titleBody = ['Chuyên cần', 'Lab', 'Giữa kỳ', 'Cuối kỳ', 'Tổng kết']
 
-
 export default function ClassroomScoreForStudent() {
   const { currentClassroom } = useContext(ClassroomContext)
   let all_score = 0
   if (currentClassroom) {
-    all_score = (currentClassroom.member.attendance * currentClassroom.course.attendance_ratio + currentClassroom.member.lab * currentClassroom.course.lab_ratio + currentClassroom.member.midterm * currentClassroom.course.midterm_ratio + currentClassroom.member.final * currentClassroom.course.final_ratio) / 100
+    all_score =
+      (currentClassroom.member.attendance * currentClassroom.course.attendance_ratio +
+        currentClassroom.member.lab * currentClassroom.course.lab_ratio +
+        currentClassroom.member.midterm * currentClassroom.course.midterm_ratio +
+        currentClassroom.member.final * currentClassroom.course.final_ratio) /
+      100
   }
 
-
-  const datas = currentClassroom ?
-    [
-      {
-        Name: 'Chuyên cần',
-        Score: currentClassroom.member.attendance,
-        contribution: currentClassroom.course.attendance_ratio
-      },
-      {
-        Name: 'lab',
-        Score: currentClassroom.member.lab,
-        contribution: currentClassroom.course.lab_ratio
-      },
-      {
-        Name: 'Giữa kỳ',
-        Score: currentClassroom.member.midterm,
-        contribution: currentClassroom.course.midterm_ratio
-      },
-      {
-        Name: 'Cuối kỳ',
-        Score: currentClassroom.member.final,
-        contribution: currentClassroom.course.final_ratio
-      },
-      {
-        Name: 'Tổng kết',
-        Score: all_score,
-        contribution: 100
-      },
-    ] : []
-
-
-
+  const datas = currentClassroom
+    ? [
+        {
+          Name: 'Chuyên cần',
+          Score: currentClassroom.member.attendance,
+          contribution: currentClassroom.course.attendance_ratio
+        },
+        {
+          Name: 'lab',
+          Score: currentClassroom.member.lab,
+          contribution: currentClassroom.course.lab_ratio
+        },
+        {
+          Name: 'Giữa kỳ',
+          Score: currentClassroom.member.midterm,
+          contribution: currentClassroom.course.midterm_ratio
+        },
+        {
+          Name: 'Cuối kỳ',
+          Score: currentClassroom.member.final,
+          contribution: currentClassroom.course.final_ratio
+        },
+        {
+          Name: 'Tổng kết',
+          Score: all_score,
+          contribution: 100
+        }
+      ]
+    : []
 
   const profile: User = getProfileFromLS()
 
@@ -71,31 +72,33 @@ export default function ClassroomScoreForStudent() {
               {titleBody.map((title, index) => (
                 <div
                   key={index}
-                  className={`text-center p-3 mb-2 border-l-[#ccc] ${index === titleBody.length - 1 ? 'font-bold bg-[rgb(230_238_246)]' : 'bg-[white]'} border-l border-solid border-y-[#ccc] border-t border-solid border-b`}
+                  className={`text-center p-3 mb-2 border-l-[#ccc] ${index === titleBody.length - 1 ? 'font-bold bg-[rgb(230_238_246)]' : 'bg-[white]'} border-l border-solid border-y-[#ccc] border-t border-b`}
                 >
                   {title}
                 </div>
               ))}
             </div>
             <div>
-              {datas && datas?.map((data, index) => (
-                <div
-                  key={index}
-                  className={`p-3 text-center ${index === datas.length - 1 ? 'font-bold bg-[rgb(230_238_246)]' : 'bg-[white]'} mb-2  border-y-[#ccc] border-t border-solid border-b`}
-                >
-                  {data.Score}
-                </div>
-              ))}
+              {datas &&
+                datas?.map((data, index) => (
+                  <div
+                    key={index}
+                    className={`p-3 text-center ${index === datas.length - 1 ? 'font-bold bg-[rgb(230_238_246)]' : 'bg-[white]'} mb-2  border-y-[#ccc] border-t border-solid border-b`}
+                  >
+                    {data.Score}
+                  </div>
+                ))}
             </div>
             <div>
-              {datas && datas?.map((data, index) => (
-                <div
-                  key={index}
-                  className={`p-3 text-center ${index === datas.length - 1 ? 'font-bold bg-[rgb(230_238_246)]' : 'bg-[white]'} mb-2  border-y-[#ccc] border-t border-solid border-b`}
-                >
-                  {data.contribution} %
-                </div>
-              ))}
+              {datas &&
+                datas?.map((data, index) => (
+                  <div
+                    key={index}
+                    className={`p-3 text-center ${index === datas.length - 1 ? 'font-bold bg-[rgb(230_238_246)]' : 'bg-[white]'} mb-2  border-y-[#ccc] border-t border-solid border-b`}
+                  >
+                    {data.contribution} %
+                  </div>
+                ))}
             </div>
           </div>
         </div>
