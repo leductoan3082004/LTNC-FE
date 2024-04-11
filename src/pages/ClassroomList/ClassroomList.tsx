@@ -1,15 +1,12 @@
-import { useQuery } from '@tanstack/react-query'
 import { useContext, useEffect } from 'react'
-import authApi from 'src/apis/auth.api'
 import mainPath from 'src/constants/path'
 import { ClassroomContext } from 'src/contexts/classroom.context'
-import ClassroomCard from './components/ClassroomCard'
-import LoadingSection from 'src/components/LoadingSection'
-import { AppContext } from 'src/contexts/app.context'
+
 import { useLocation } from 'react-router-dom'
+import { reversedAcademicYears } from 'src/constants/academicYears'
+import ClassroomSortingByYear from './children/ClassroomSortingByYear'
 
 export default function ClassroomList() {
-  const { isAuthenticated } = useContext(AppContext)
   const { setClassroomPathList, setAcademicYear } = useContext(ClassroomContext)
 
   const arr = useLocation().pathname.split('/')
@@ -21,30 +18,17 @@ export default function ClassroomList() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [year])
 
-  //! Get classroom list
-  const { data: ClassRoomListData } = useQuery({
-    queryKey: ['classroom_list'],
-    queryFn: () => authApi.getJoinedClassroomList(),
-    enabled: isAuthenticated
-  })
-  const classroomList = ClassRoomListData?.data.data
-
   return (
-    <div className='container flex flex-col bg-webColor100 py-6 min-h-[50vh]'>
+    <div className='container flex flex-col py-6 min-h-[50vh]'>
       <div className='flex flex-col gap-2 pb-3 border-b title'>
         <h1 className='text-2xl uppercase font-semibold text-center tracking-wide'>Lớp học của tôi</h1>
       </div>
 
-      {!classroomList && <LoadingSection />}
-      {classroomList && (
-        <div className='grid grid-cols-3 gap-4'>
-          {classroomList.map((classroom) => (
-            <div className='col-span-1' key={classroom.class._id}>
-              <ClassroomCard classroomDetail={classroom} />
-            </div>
-          ))}
-        </div>
-      )}
+      <div className='space-y-8'>
+        {reversedAcademicYears.map((year, index) => (
+          <ClassroomSortingByYear key={index} year={year} />
+        ))}
+      </div>
     </div>
   )
 }

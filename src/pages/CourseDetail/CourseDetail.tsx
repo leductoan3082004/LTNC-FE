@@ -9,8 +9,10 @@ import { useQuery } from '@tanstack/react-query'
 import { getIdFromUrl } from 'src/utils/utils'
 import courseApi from 'src/apis/course.api'
 import CourseDetailClassroomList from './children/CourseDetailClassroomList'
+import { AppContext } from 'src/contexts/app.context'
 
 export default function CourseDetail() {
+  const { isAuthenticated } = useContext(AppContext)
   const { academicYear, setAcademicYear, setCoursePathList } = useContext(CourseContext)
 
   const url = useLocation().pathname
@@ -28,7 +30,8 @@ export default function CourseDetail() {
   const courseId = getIdFromUrl(url)
   const { data: courseDetailData } = useQuery({
     queryKey: ['course_detail', courseId],
-    queryFn: () => courseApi.getCourseById(courseId)
+    queryFn: () => courseApi.getCourseById(courseId),
+    enabled: isAuthenticated
   })
   const courseDetail = courseDetailData?.data.data
 

@@ -14,10 +14,6 @@ export default function MainHeader() {
     {
       name: 'TRANG CHỦ',
       path: mainPath.home
-    },
-    {
-      name: 'KHÓA HỌC',
-      path: mainPath.courseList
     }
   ]
 
@@ -53,6 +49,19 @@ export default function MainHeader() {
                 {menu.name}
               </NavLink>
             ))}
+
+            {isAuthenticated && (
+              <NavLink
+                to={mainPath.courseList}
+                className={({ isActive }) =>
+                  classNames(titleClassname, {
+                    'bg-hoveringBg': isActive
+                  })
+                }
+              >
+                Khóa học
+              </NavLink>
+            )}
 
             {isAuthenticated && !isAdmin && (
               <NavLink

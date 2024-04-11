@@ -70,8 +70,8 @@ export default function AdminUpdateCourse({ currentCourse, setEditingMode }: Pro
 
     const body = {
       ...data,
-      start_time: formatTimeToSeconds(data.start_time?.getTime() as number),
-      end_time: formatTimeToSeconds((data.end_time?.getTime() as number) + 86400000)
+      start_time: formatTimeToSeconds((data.start_time?.getTime() as number) + 1000 * 3600 * 24),
+      end_time: formatTimeToSeconds((data.end_time?.getTime() as number) + 1000 * 3600 * 24)
     }
 
     updateCourseMutation.mutate(body, {

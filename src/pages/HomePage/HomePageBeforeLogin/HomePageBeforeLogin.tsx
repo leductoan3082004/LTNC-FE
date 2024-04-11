@@ -26,7 +26,11 @@ export default function HomePageBeforeLogin() {
             </div>
           </div>
           <div className='col-span-1'>
-            <img className='w-full justify-between h-1/2' src='/images/Slide_1.jpg' alt='HCMUT' />
+            <img
+              className='w-full justify-between h-1/2'
+              src='https://vcdn1-vnexpress.vnecdn.net/2022/09/15/-4772-1663217379.jpg?w=500&h=300&q=100&dpr=2&fit=crop&s=BCGz6Qss-61UM6NuBhtQCg'
+              alt='HCMUT'
+            />
           </div>
         </div>
       </div>

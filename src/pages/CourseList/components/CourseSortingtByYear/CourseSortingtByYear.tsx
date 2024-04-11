@@ -52,6 +52,7 @@ export default function CourseSortingtByYear({ year }: Props) {
     navigate({ pathname: `${mainPath.courseList}/${year}` })
   }
 
+  if (currentCourseList.length == 0) return
   return (
     <div className='px-6 py-4 space-y-4 rounded-lg bg-webColor100 text-darkText'>
       <button

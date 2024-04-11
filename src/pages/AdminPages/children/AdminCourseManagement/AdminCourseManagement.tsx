@@ -16,6 +16,18 @@ export default function AdminCourseManagement() {
       </div>
 
       <AdminCourseListByYear year={2024} />
+
+      <div className='py-4 tablet:px-20 desktop:px-32 w-full'>
+        <div className='border-t border-white'></div>
+      </div>
+
+      <AdminCourseListByYear year={2025} />
+
+      <div className='py-4 tablet:px-20 desktop:px-32 w-full'>
+        <div className='border-t border-white'></div>
+      </div>
+
+      <AdminCourseListByYear year={2026} />
     </div>
   )
 }

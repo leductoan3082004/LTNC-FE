@@ -6,17 +6,19 @@ import { useEffect, useRef, useState } from 'react'
 
 const slides: SlideShow[] = [
   {
-    urlImage: '/images/Slide_1.jpg',
+    urlImage:
+      'https://vcdn1-vnexpress.vnecdn.net/2022/09/15/-4772-1663217379.jpg?w=500&h=300&q=100&dpr=2&fit=crop&s=BCGz6Qss-61UM6NuBhtQCg',
     title: 'Trang hồ sơ',
     urlToPage: mainPath.personal
   },
   {
-    urlImage: '/images/Slide_2.jpg',
+    urlImage: 'https://huongnghiepcdm.edu.vn/files/upload/images/bachkhoa-1577528142-7139-1577528151.jpg',
     title: 'Trang khóa học',
     urlToPage: mainPath.courseList
   },
   {
-    urlImage: '/images/Slide_3.png',
+    urlImage:
+      'https://lh5.googleusercontent.com/iw1LrpIRx7eXMfRpzyLOgxsEocfO85zG6YVtlwcxs6AhsIm5EZpw0Bt9G7vxtdrqU1SCqkt16SudSRb4f_7VQbaHBzUwb7ijqzlPGzBEuOI51hnDzk-mR6sRm2cf4hi7UFHNlXpL',
     title: 'Trang thông báo',
     urlToPage: ''
   }

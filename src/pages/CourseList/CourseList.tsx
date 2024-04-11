@@ -6,6 +6,7 @@ import useCourseListQueryConfig from 'src/hooks/useCourseListQueryConfig'
 import { useQuery } from '@tanstack/react-query'
 import courseApi from 'src/apis/course.api'
 import CourseCard from './components/CourseCard'
+import { reversedAcademicYears } from 'src/constants/academicYears'
 
 export default function CourseList() {
   const { setCoursePathList } = useContext(CourseContext)
@@ -43,8 +44,9 @@ export default function CourseList() {
       )}
       {(!query || query == '') && (
         <Fragment>
-          <CourseSortingtByYear year={2023} />
-          <CourseSortingtByYear year={2024} />
+          {reversedAcademicYears.map((year, index) => (
+            <CourseSortingtByYear key={index} year={year} />
+          ))}
         </Fragment>
       )}
     </div>

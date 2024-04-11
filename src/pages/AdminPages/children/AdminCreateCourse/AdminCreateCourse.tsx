@@ -67,8 +67,8 @@ export default function AdminCreateCourse() {
     try {
       const createBody = {
         ...data,
-        start_time: formatTimeToSeconds(data.start_time?.getTime() as number),
-        end_time: formatTimeToSeconds(data.end_time?.getTime() as number)
+        start_time: formatTimeToSeconds((data.start_time?.getTime() as number) + 1000 * 3600 * 24),
+        end_time: formatTimeToSeconds((data.end_time?.getTime() as number) + 1000 * 3600 * 24)
       }
 
       createUserMutation.mutate(createBody, {
