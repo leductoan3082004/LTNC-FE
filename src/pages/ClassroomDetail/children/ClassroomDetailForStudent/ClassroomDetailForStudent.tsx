@@ -37,7 +37,7 @@ export default function ClassroomDetailForStudent() {
 
   return (
     <div className='grid grid-cols-12 gap-2'>
-      <div className='col-span-2 font-semibold justify-between bg-slate-100 border border-black/20 rounded-lg'>
+      <div className='col-span-2 '>
         <ClassroomSideBar />
       </div>
       <div className='col-span-10'>

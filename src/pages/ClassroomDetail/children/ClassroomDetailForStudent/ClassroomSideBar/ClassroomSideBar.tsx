@@ -50,12 +50,12 @@ export default function ClassroomSideBar() {
     setExtending(false)
   }
   return (
-    <div className='space-y-2'>
+    <div className='space-y-2 justify-between bg-slate-100 border border-black/20 rounded-lg'>
       <button
         onClick={extending ? collapse : extend}
-        className='hover:text-primaryText w-full font-semibold text-lg text-center items-center justify-center flex space-x-4 py-2'
+        className='hover:text-primaryText w-full text-lg text-center items-center justify-center flex space-x-4 py-2'
       >
-        <p className='text-center'>Bài học</p>
+        <p className='text-center font-bold'>Bài học</p>
         {extending && <FontAwesomeIcon icon={faChevronUp} />}
         {!extending && <FontAwesomeIcon icon={faChevronDown} />}
       </button>
@@ -63,7 +63,7 @@ export default function ClassroomSideBar() {
         <div
           className={classNames('', {
             'max-h-0 overflow-hidden': !extending,
-            'h-full overflow-visible py-1 font-normal': extending
+            'h-full overflow-visible py-1 font-medium': extending
           })}
         >
           {extendedLessonList.map((lesson) => (
