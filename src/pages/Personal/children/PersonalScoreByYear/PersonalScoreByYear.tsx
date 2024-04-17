@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import authApi from 'src/apis/auth.api'
 import { useLocation } from 'react-router-dom'
 import PersonalScoreSorting from '../../components/PersonalScoreSorting'
+import PersonalChangeFormBtn from '../../components/PersonalChangeFormBtn'
 
 export default function PersonalScoreByYear() {
   const { form, setAcademicYear } = useContext(PersonalscoreContext)
@@ -40,10 +41,11 @@ export default function PersonalScoreByYear() {
   })
 
   return (
-    <div>
+    <div className='space-y-4'>
       <div className=' bg-webColor200 justify-between items-end relative py-4'>
         <PersonalScoreSorting />
         <PersonalInScore />
+        <PersonalChangeFormBtn />
       </div>
       {!form && (
         <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
