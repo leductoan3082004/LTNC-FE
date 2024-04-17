@@ -36,7 +36,7 @@ module.exports = {
 
         //? Score color
         weakColor: '#cc3300',
-        normalColor: '#ffcc00',
+        normalColor: '#ac9a14',
         fineColor: '#023E8A',
         goodColor: '#339900'
       }

@@ -11,6 +11,7 @@ import ClassroomScoreForStudent from 'src/pages/ClassroomDetail/children/Classro
 import ClassroomDetailLayout from 'src/pages/ClassroomDetail/layouts/ClassroomDetailLayout'
 import ClassroomListLayout from 'src/pages/ClassroomList/layouts/ClassroomListLayout'
 import ClassroomListByYear from 'src/pages/ClassroomList/children/ClassroomListByYear'
+import ClassroomScoreStatisticForTeacher from 'src/pages/ClassroomDetail/children/ClassroomScoreStatisticForTeacher'
 
 function ClassroomRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -62,6 +63,14 @@ const ClassroomRoutes: RouteObject = {
           element: (
             <TeacherRoute>
               <ClassroomMemberListForTeacher />
+            </TeacherRoute>
+          )
+        },
+        {
+          path: classroomPath.classroomScoreStatistic,
+          element: (
+            <TeacherRoute>
+              <ClassroomScoreStatisticForTeacher />
             </TeacherRoute>
           )
         },

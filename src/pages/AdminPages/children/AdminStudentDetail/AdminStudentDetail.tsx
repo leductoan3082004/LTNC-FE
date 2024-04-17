@@ -6,18 +6,24 @@ import { adminPath } from 'src/constants/path'
 import { ScoreQualityEnum } from 'src/constants/scoreQuality'
 import { AdminContext } from 'src/contexts/admin.context'
 import { InfomationField } from 'src/types/utils.type'
+import { getCourseFromLS } from 'src/utils/auth'
 import { checkScoreQuality } from 'src/utils/student.util'
 import { generateID } from 'src/utils/utils'
 
 export default function AdminStudentDetail() {
   const navigate = useNavigate()
   //! Get student detail
-  const { currentStudent, currentCourse } = useContext(AdminContext)
+  const currentCourse = getCourseFromLS()
+  const { currentStudent, setCurrentCourse } = useContext(AdminContext)
   useEffect(() => {
     if (!currentStudent || !currentCourse) {
       navigate({ pathname: adminPath.courses })
     }
-  }, [currentCourse, currentStudent, navigate])
+    if (currentCourse) {
+      setCurrentCourse(currentCourse)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentStudent])
 
   let infos: InfomationField[] = []
 

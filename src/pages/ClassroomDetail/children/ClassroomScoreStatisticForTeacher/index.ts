@@ -1,0 +1,3 @@
+import ClassroomScoreStatisticForTeacher from './ClassroomScoreStatisticForTeacher'
+
+export default ClassroomScoreStatisticForTeacher

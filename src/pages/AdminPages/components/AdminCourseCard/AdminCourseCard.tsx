@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { adminPath } from 'src/constants/path'
 import { AdminContext } from 'src/contexts/admin.context'
 import { Course } from 'src/types/course.type'
+import { setCourseToLS } from 'src/utils/auth'
 import { generateCourseId } from 'src/utils/course.utils'
 
 interface Props {
@@ -31,6 +32,7 @@ export default function AdminCourseCard({ course }: Props) {
   const navigate = useNavigate()
   const handleClickItem = () => {
     setCurrentCourse(course)
+    setCourseToLS(course)
     navigate({ pathname: `${adminPath.courses}/${generateCourseId({ course: course.course_name, id: course._id })}` })
   }
 
