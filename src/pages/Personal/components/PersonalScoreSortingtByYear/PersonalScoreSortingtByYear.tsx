@@ -18,6 +18,8 @@ export default function PersonalScoreSortingtByYear({ year }: Props) {
     setAcademicYear(year.toString())
     navigate({ pathname: `${personalPath.score}/${year}` })
   }
+
+  if (joinedClassroomListByYear.length == 0) return
   return (
     <div className='bg-webColor100 rounded-lg py-4 px-6 space-y-4 text-darkText'>
       <button

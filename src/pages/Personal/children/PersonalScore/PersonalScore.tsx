@@ -8,7 +8,7 @@ import PersonalInScore from '../../components/PersonalInScore'
 import { NavLink } from 'react-router-dom'
 import { personalPath } from 'src/constants/path'
 import PersonalScoreSorting from '../../components/PersonalScoreSorting'
-import academicYears from 'src/constants/academicYears'
+import { reversedAcademicYears } from 'src/constants/academicYears'
 
 export default function PersonalScore() {
   const { setJoinedClassroomList, form, setForm } = useContext(PersonalscoreContext)
@@ -40,14 +40,15 @@ export default function PersonalScore() {
 
       {!form && (
         <div className='space-y-4'>
-          {academicYears.map((year, index) => (
+          {reversedAcademicYears.map((year, index) => (
             <PersonalScoreSortingtByYear key={index} year={year} />
           ))}
         </div>
       )}
+
       {form && (
         <div>
-          {academicYears.map((year, index) => (
+          {reversedAcademicYears.map((year, index) => (
             <PersonalScoreSortingByYearColumn key={index} year={year} />
           ))}
           <div className='bg-webColor100 py-4 px-6 space-y-4 text-darkText'>

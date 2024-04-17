@@ -34,6 +34,8 @@ export default function PersonalScoreSortingByYearColumn({ year }: Props) {
     }
   })
 
+  if (joinedClassroomListByYear.length == 0) return
+
   return (
     <div className='bg-webColor100 py-4 px-6 space-y-4 text-darkText'>
       <button
