@@ -1,5 +1,5 @@
 import PersonalScoreSortingtByYear from '../../components/PersonalScoreSortingtByYear/PersonalScoreSortingtByYear'
-import { useContext, useEffect } from 'react'
+import { Fragment, useContext, useEffect } from 'react'
 import authApi from 'src/apis/auth.api'
 import { useQuery } from '@tanstack/react-query'
 import { PersonalscoreContext } from 'src/contexts/personalscore.context'
@@ -9,6 +9,7 @@ import { NavLink } from 'react-router-dom'
 import { personalPath } from 'src/constants/path'
 import PersonalScoreSorting from '../../components/PersonalScoreSorting'
 import { reversedAcademicYears } from 'src/constants/academicYears'
+import LoadingSection from 'src/components/LoadingSection'
 
 export default function PersonalScore() {
   const { setJoinedClassroomList, form, setForm } = useContext(PersonalscoreContext)
@@ -38,28 +39,34 @@ export default function PersonalScore() {
         </button>
       </div>
 
-      {!form && (
-        <div className='space-y-4'>
-          {reversedAcademicYears.map((year, index) => (
-            <PersonalScoreSortingtByYear key={index} year={year} />
-          ))}
-        </div>
-      )}
+      {!joinedClassroomListData && <LoadingSection />}
 
-      {form && (
-        <div>
-          {reversedAcademicYears.map((year, index) => (
-            <PersonalScoreSortingByYearColumn key={index} year={year} />
-          ))}
-          <div className='bg-webColor100 py-4 px-6 space-y-4 text-darkText'>
-            <NavLink
-              to={personalPath.scoreAllYear}
-              className='py-2 flex justify-end items-center w-full hover:text-primaryText text-lg font-semibold shrink-0 underline'
-            >
-              Thống kê điểm theo năm học
-            </NavLink>
-          </div>
-        </div>
+      {joinedClassroomListData && (
+        <Fragment>
+          {!form && (
+            <div className='space-y-4'>
+              {reversedAcademicYears.map((year, index) => (
+                <PersonalScoreSortingtByYear key={index} year={year} />
+              ))}
+            </div>
+          )}
+
+          {form && (
+            <div>
+              {reversedAcademicYears.map((year, index) => (
+                <PersonalScoreSortingByYearColumn key={index} year={year} />
+              ))}
+              <div className='bg-webColor100 py-4 px-6 space-y-4 text-darkText'>
+                <NavLink
+                  to={personalPath.scoreAllYear}
+                  className='py-2 flex justify-end items-center w-full hover:text-primaryText text-lg font-semibold shrink-0 underline'
+                >
+                  Thống kê điểm theo năm học
+                </NavLink>
+              </div>
+            </div>
+          )}
+        </Fragment>
       )}
     </div>
   )
