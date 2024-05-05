@@ -62,7 +62,7 @@ export default function PersonalProfile() {
             <FontAwesomeIcon className='h-9 w-9 absolute text-darkText cursor-pointer' icon={faCamera} />
           </div>
           {isAvatar && (
-            <div className='absolute -bottom-10 space-y-1  border items-center rounded-lg justify-center bg-gray-200 '>
+            <div className='absolute -bottom-10 space-y-1 z-10 border items-center rounded-lg justify-center bg-gray-200 '>
               <div className='pt-1 px-2'>
                 <div className='px-3 flex w-full py-2 hover:cursor-pointer rounded-lg hover:bg-gray-100'>
                   <FontAwesomeIcon className='pr-3' icon={faUser} />
@@ -79,11 +79,14 @@ export default function PersonalProfile() {
           )}
         </div>
         <div>
-          <img
+          <div className='rounded-full h-48 border-4 w-48 bg-gray-400 flex overflow-hidden items-center justify-center'>
+            <FontAwesomeIcon icon={faUser} className='text-white h-full' />
+          </div>
+          {/* <img
             className='rounded-full h-48 border-4'
             src='https://media.dolenglish.vn/PUBLIC/MEDIA/2b2f1391-7dcd-4d41-b1eb-2273c8cd00de.jpg'
             alt=''
-          ></img>
+          ></img> */}
         </div>
       </div>
       <div>
