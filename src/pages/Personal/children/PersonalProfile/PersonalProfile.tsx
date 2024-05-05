@@ -55,15 +55,15 @@ export default function PersonalProfile() {
       <div className='items-center justify-center flex pb-10 relative '>
         <div>
           <div
-            className=' h-14 w-14 absolute ml-36 mt-9 boder rounded-full border bg-gray-200 flex items-center justify-center '
+            className='h-14 w-14 absolute ml-36 mt-9 boder rounded-full border bg-gray-200 flex items-center justify-center '
             onClick={handleClick}
             aria-hidden='true'
           >
             <FontAwesomeIcon className='h-9 w-9 absolute text-darkText cursor-pointer' icon={faCamera} />
           </div>
           {isAvatar && (
-            <div className='absolute -bottom-10 space-y-1 z-10 border items-center rounded-lg justify-center bg-gray-200 '>
-              <div className='pt-1 px-2'>
+            <div className='absolute -bottom-12 space-y-1 py-1 z-10 border items-center rounded-lg justify-center bg-gray-200 '>
+              <div className='px-2'>
                 <div className='px-3 flex w-full py-2 hover:cursor-pointer rounded-lg hover:bg-gray-100'>
                   <FontAwesomeIcon className='pr-3' icon={faUser} />
                   <div className='pr-20'>Xem ảnh đại diện</div>

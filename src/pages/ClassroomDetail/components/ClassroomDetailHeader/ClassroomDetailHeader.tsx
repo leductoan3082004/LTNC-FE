@@ -28,7 +28,7 @@ export default function ClassroomDetailHeader() {
 
   const teacherRoute: { name: string; path: string }[] = [
     {
-      name: 'Thành viên',
+      name: 'Khóa học',
       path: `${classroomPath.classroom}/${generateNameId({ name: currentClassroom.course.course_name, id: currentClassroom.class._id })}`
     },
     {
