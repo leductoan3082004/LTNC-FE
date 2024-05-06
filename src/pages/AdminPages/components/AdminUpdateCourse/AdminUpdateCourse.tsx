@@ -80,7 +80,8 @@ export default function AdminUpdateCourse({ currentCourse, setEditingMode }: Pro
         reset()
         setStartTime(currentDate)
         setEndTime(currentDate)
-        queryClient.invalidateQueries({ queryKey: ['course_list'] })
+        queryClient.invalidateQueries({ queryKey: ['admin_course_list'] })
+        queryClient.invalidateQueries({ queryKey: ['admin_course_detail'] })
       },
       onError: (error) => {
         if (isAxiosBadRequestError<ErrorRespone>(error)) {
@@ -134,6 +135,7 @@ export default function AdminUpdateCourse({ currentCourse, setEditingMode }: Pro
         isOpen={excutingDialog}
         handleClose={() => {
           setExcutingDialog(false)
+          !error && setEditingMode(false)
         }}
       >
         <div className='w-full flex items-center justify-center'>

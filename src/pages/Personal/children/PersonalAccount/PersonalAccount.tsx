@@ -24,7 +24,7 @@ export default function PersonalAccount() {
   const Infos = [
     {
       name: 'Ngày tạo: ',
-      infor: formatDate(profile.updated_at)
+      infor: formatDate(profile.created_at)
     },
     {
       name: 'Ngày cập nhật: ',

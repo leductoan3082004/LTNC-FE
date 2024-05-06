@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { adminPath } from 'src/constants/path'
+import mainPath, { adminPath } from 'src/constants/path'
 
 interface Props {
   children?: React.ReactNode
@@ -75,6 +75,12 @@ export default function AdminLayout({ children }: Props) {
                 </NavLink>
               ))}
             </div>
+          </div>
+
+          <div className='w-full'>
+            <NavLink to={mainPath.home} className='font-medium pl-2 uppercase hover:text-primaryText'>
+              Về trang chủ
+            </NavLink>
           </div>
         </div>
       </div>
