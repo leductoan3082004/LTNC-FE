@@ -1,4 +1,6 @@
+import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
+import classroomApi from 'src/apis/classroom.api'
 import DaysInWeekEnum from 'src/constants/daysInWeek'
 import { adminPath } from 'src/constants/path'
 import { Classroom } from 'src/types/classroom.type'
@@ -55,14 +57,14 @@ export default function AdminClassroomCard({ classroom, course }: Props) {
         <span className=''>các tuần</span>
       </div>
 
-      <div className='flex space-x-2 items-center'>
+      {/* <div className='flex space-x-2 items-center'>
         <span className='opacity-60'>Thành viên: </span>
         <span className='text-primaryText font-medium flex space-x-0.5 items-center'>
           <span>{studentList.length}</span>
           <span className='text-xl'>/</span>
           <span>{classroom.limit + studentList.length}</span>
         </span>
-      </div>
+      </div> */}
 
       <div className='w-full flex justify-center'>
         <button onClick={handleClick} className='bg-unhoverBg hover:bg-hoveringBg rounded-md py-1.5 px-3'>
