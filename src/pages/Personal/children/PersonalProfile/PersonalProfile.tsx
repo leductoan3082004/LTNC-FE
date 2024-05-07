@@ -4,6 +4,7 @@ import { faCamera, faUser } from '@fortawesome/free-solid-svg-icons'
 import { AppContext } from 'src/contexts/app.context'
 import LoadingRing from 'src/components/LoadingRing'
 import { generateID } from 'src/utils/utils'
+import { userRoles } from 'src/constants/userRoles'
 
 export default function PersonalProfile() {
   const [isAvatar, setIsAvatar] = useState(false)
@@ -27,7 +28,7 @@ export default function PersonalProfile() {
 
   const Infos = [
     {
-      name: 'MSSV: ',
+      name: 'ID: ',
       infor: generateID(profile._id)
     },
     {
@@ -41,6 +42,10 @@ export default function PersonalProfile() {
     {
       name: 'Địa chỉ: ',
       infor: profile.address
+    },
+    {
+      name: 'Vai trò: ',
+      infor: userRoles[profile.role]
     }
   ]
 

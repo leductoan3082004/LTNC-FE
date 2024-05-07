@@ -55,7 +55,7 @@ function CourseCard({ course }: { course: Course }) {
       onClick={handleClickItem}
       className={classNames(
         'rounded-md w-full items-center justify-center p-4 space-y-4 bg-webColor100 hover:bg-webColor300 outline',
-        { 'outline-webColor400 outline-1': !isSelected, 'outline-webColor800': isSelected }
+        { 'outline-webColor400 outline-1': !isSelected, 'outline-webColor800  bg-webColor300': isSelected }
       )}
     >
       <div className='space-y-2'>

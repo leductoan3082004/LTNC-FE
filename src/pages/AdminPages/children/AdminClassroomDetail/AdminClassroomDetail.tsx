@@ -57,6 +57,7 @@ export default function AdminClassroomDetail() {
     setDialog(false)
     setConfirmMessage(false)
     deleteSuccess && navigate(-1)
+    setAddteacher(false)
   }
 
   const deleteClassroomMutation = useMutation({

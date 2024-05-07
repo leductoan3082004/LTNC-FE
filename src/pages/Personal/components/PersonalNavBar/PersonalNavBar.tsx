@@ -6,7 +6,7 @@ import { AppContext } from 'src/contexts/app.context'
 
 export default function PersonalNavBar() {
   const { profile } = useContext(AppContext)
-  const isTeacher = profile?.role == 1
+  const isStudent = profile?.role == 0
 
   //! STYLES
   const navlinkClassname = 'px-4 py-4 text-lg uppercase font-medium hover:text-primaryText'
@@ -26,7 +26,7 @@ export default function PersonalNavBar() {
       </NavLink>
 
       <div className='w-full border-t border-black/20' />
-      {!isTeacher && (
+      {isStudent && (
         <NavLink
           to={personalPath.score}
           className={({ isActive }) =>
