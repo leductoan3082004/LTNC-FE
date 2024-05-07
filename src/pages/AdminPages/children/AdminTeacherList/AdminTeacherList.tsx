@@ -3,8 +3,19 @@ import userApi from 'src/apis/user.api'
 import LoadingSection from 'src/components/LoadingSection'
 import useUserListQueryConfig from 'src/hooks/usePostListQueryConfig'
 import AdminUserCard from '../../components/AdminUserCard'
+import { User } from 'src/types/user.type'
+import { generateNameId } from 'src/utils/utils'
+import { adminPath } from 'src/constants/path'
+import { useContext } from 'react'
+import { AdminContext } from 'src/contexts/admin.context'
+import { useNavigate } from 'react-router-dom'
 
 export default function AdminTeacherList() {
+  const { setCurrentUser
+  } = useContext(AdminContext)
+
+  const navigate = useNavigate()
+
   //! Get teacher list
   const userListQueryConfig = useUserListQueryConfig()
   const config = { ...userListQueryConfig, role: 1 }
@@ -13,6 +24,12 @@ export default function AdminTeacherList() {
     queryFn: () => userApi.getUserList(config)
   })
   const userList = userListData?.data.data || null
+
+  //! Handle click
+  const handleClick = (user: User) => () => {
+    setCurrentUser(user)
+    navigate({ pathname: `${adminPath.users}/${generateNameId({ name: user.name, id: user._id })}` })
+  }
 
   return (
     <div>
@@ -33,7 +50,7 @@ export default function AdminTeacherList() {
           userList.length > 0 &&
           userList.map((user) => (
             <div key={user._id} className='col-span-1'>
-              <AdminUserCard user={user} />
+              <AdminUserCard user={user} handleClick={handleClick(user)} />
             </div>
           ))}
       </div>

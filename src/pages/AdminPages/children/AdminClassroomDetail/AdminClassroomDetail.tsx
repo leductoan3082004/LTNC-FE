@@ -6,14 +6,16 @@ import BackButton from 'src/components/BackButton'
 import DialogPopup from 'src/components/DialogPopup'
 import LoadingSection from 'src/components/LoadingSection'
 import { AdminContext } from 'src/contexts/admin.context'
-import { getIdFromUrl } from 'src/utils/utils'
+import { generateNameId, getIdFromUrl } from 'src/utils/utils'
 import AdminTeacherSelector from '../../components/AdminTeacherSelector'
 import { getCourseFromLS } from 'src/utils/auth'
 import AdminStudentCard from '../../components/AdminStudentCard'
 import AdminScoreStatistic from '../../components/AdminScoreStatistic'
+import { User } from 'src/types/user.type'
+import { adminPath } from 'src/constants/path'
 
 export default function AdminClassroomDetail() {
-  const { currentTeacherId } = useContext(AdminContext)
+  const { currentTeacherId, setCurrentUser } = useContext(AdminContext)
   const course = getCourseFromLS()
   const queryClient = useQueryClient()
   const navigate = useNavigate()
@@ -123,6 +125,12 @@ export default function AdminClassroomDetail() {
     addTeacher()
   }
 
+  //! Handle click
+  const handleClick = (user: User) => () => {
+    setCurrentUser(user)
+    navigate({ pathname: `${adminPath.users}/${generateNameId({ name: user.name, id: user._id })}` })
+  }
+
   return (
     <div className='space-y-8'>
       <div className='flex justify-between'>
@@ -154,7 +162,7 @@ export default function AdminClassroomDetail() {
               <div className='flex space-x-2 font-medium desktop:text-xl text-lg justify-center'>
                 <span className='font-medium opacity-60'>Giáo viên:</span>
                 {teacher ? (
-                  <span className='text-primaryText'>{teacher.name}</span>
+                  <button onClick={handleClick(teacher)} className='text-primaryTextUnHover hover:text-primaryText'>{teacher.name}</button>
                 ) : (
                   <div className='flex space-x-4'>
                     <span className='text-alertRed'>Chưa có giáo viên</span>
