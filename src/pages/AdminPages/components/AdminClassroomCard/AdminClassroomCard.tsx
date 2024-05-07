@@ -1,6 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
-import classroomApi from 'src/apis/classroom.api'
 import DaysInWeekEnum from 'src/constants/daysInWeek'
 import { adminPath } from 'src/constants/path'
 import { Classroom } from 'src/types/classroom.type'
@@ -27,11 +25,7 @@ export default function AdminClassroomCard({ classroom, course }: Props) {
     navigate({ pathname: `${adminPath.classrooms}/${generateClassroomId({ id: classroom._id })}` })
   }
 
-  //! Get student quantity
-  const memberList = classroom.members ? classroom.members : []
-  const studentList = memberList.filter((member) => {
-    return member.role == 0
-  })
+
 
   return (
     <div className='bg-webColor100 rounded-md border border-black/20 py-2 px-3 space-y-3'>
